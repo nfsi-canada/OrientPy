@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'OrientPy'
+project = ''
 copyright = '2020, Pascal Audet'
 author = 'Pascal Audet'
 
