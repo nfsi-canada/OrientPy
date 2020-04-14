@@ -44,7 +44,8 @@ after_success:
 notifications:
     email: false
 deploy:
-  provider: pages:git
+  provider: pages
+  # provider: pages:git
   # edge:
   #   branch: octokit-latest
   edge: true # opt in to dpl v2
