@@ -13,7 +13,7 @@ before_install:
   - source conda4travis.sh
   - conda config --add channels conda-forge
   - if [[ $DOCS == 1 ]]; then
-      DEP="sphinx sphinx_rtd_theme";
+      DEP="sphinx";
     else
       DEP="pytest-cov";
     fi
@@ -22,6 +22,9 @@ before_install:
   - conda activate testenv
   - conda list
 install:
+  - if [[ $DOCS == 1]]; then
+      pip install sphinx_rtd_theme
+    fi
   - pip install stdb
   - pip install geographiclib
   - pip install -v --no-deps .
