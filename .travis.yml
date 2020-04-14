@@ -29,7 +29,7 @@ script:
   - if [[ $DOCS == 1 ]]; then
       cd docs; make html; touch _build/html/.nojekyll; cd ..;
     else
-      mkdir empty; cd empty; pytest -v --cov=rfpy ../rfpy/tests/;
+      mkdir empty; cd empty; pytest -v --cov=orientpy ../orientpy/tests/;
     fi
 after_success:
   - if [[ $DOCS != 1 ]]; then
