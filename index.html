@@ -1,1 +1,289 @@
-My GH Page
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentation &mdash; OrientPy 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitHub Repositories" href="links.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> OrientPy
+          
+
+          
+            
+            <img src="_static/OrientPy_logo_small.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html#installation">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#modules">Modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">OrientPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="figure align-center">
+<img alt="_images/OrientPy_logo.png" src="_images/OrientPy_logo.png" />
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">OrientPy</span></code> is a package containing Python tools to estimate seismometer
+orientation using automated (and manual) processing of earthquake data. These
+methods are particularly useful for broadband ocean-bottom seismic stations,
+but are also applicable to broadband land stations or shorter period instruments
+(depending on the method selected). Currently the toolbox includes the following methods:</p>
+<ul class="simple">
+<li><p><strong>DL</strong> (Doran and Laske, 2017): Based on Rayleigh-wave polarization at a range of
+frequencies and for the two fundamental mode Rayleigh wave orbits.</p></li>
+<li><p><strong>BNG</strong> (Braunmiller, Nabelek and Ghods, 2020): Based on P-wave polarization of
+earthquakes at regional teleseismic distances.</p></li>
+<li><p><strong>LKSS</strong> (Lim et al., 2018): Based on a harmonic decomposition of radial and
+transverse receiver functions near zero lag times.</p></li>
+</ul>
+<p>Each method can be used independently to produce an estimate of station orientation, in
+terms of the azimuth of seismic component ‘1’ (or ‘N’). The code uses
+the <code class="docutils literal notranslate"><span class="pre">StDb</span></code> package for querying and building a station database
+used in command-line scripts. Tutorials are provided in the sections below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">DL</span></code> is heavily based on the code <code class="docutils literal notranslate"><span class="pre">DLOPy</span></code> by
+Doran and Laske (2017). The original code can be found
+<a class="reference external" href="https://igppweb.ucsd.edu/~adoran/DLOPy.html">here</a></p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html#installation">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="orientpy.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orientpy.html#conda-environment">Conda environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orientpy.html#installing-from-pypi">Installing from Pypi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orientpy.html#installing-from-source">Installing from source</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#orient">Orient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#bng">BNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#dl">DL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-orientpy.utils">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-orientpy.plotting">plotting</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Scripts &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#bng">BNG</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="links.html" class="btn btn-neutral float-right" title="GitHub Repositories" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pascal Audet
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

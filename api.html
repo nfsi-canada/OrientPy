@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Classes &mdash; OrientPy 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Scripts" href="scripts.html" />
+    <link rel="prev" title="Licence" href="orientpy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OrientPy
+          
+
+          
+            
+            <img src="_static/OrientPy_logo_small.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html#installation">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#orient">Orient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-meta">Class Meta</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bng">BNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dl">DL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-orientpy.utils">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-orientpy.plotting">plotting</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OrientPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="figure align-center">
+<img alt="_images/OrientPy_logo.png" src="_images/OrientPy_logo.png" />
+</div>
+<div class="section" id="classes">
+<h1>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h1>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">orientpy</span></code> defines the following base classes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#orientpy.classes.BNG" title="orientpy.classes.BNG"><code class="xref py py-class docutils literal notranslate"><span class="pre">BNG</span></code></a></p></li>
+<li><p><a class="reference internal" href="#orientpy.classes.DL" title="orientpy.classes.DL"><code class="xref py py-class docutils literal notranslate"><span class="pre">DL</span></code></a></p></li>
+</ul>
+<div class="section" id="orient">
+<h2>Orient<a class="headerlink" href="#orient" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="orientpy.classes.Orient">
+<em class="property">class </em><code class="sig-prename descclassname">orientpy.classes.</code><code class="sig-name descname">Orient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Orient object contains Class attributes that associate
+station information with a single event (i.e., earthquake)
+metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The object is initialized with the <code class="docutils literal notranslate"><span class="pre">sta</span></code> field only, and
+other attributes are added to the object as the analysis proceeds.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sta</strong> (<em>object</em>) – Object containing station information - from <code class="xref py py-mod docutils literal notranslate"><span class="pre">stdb</span></code> database.</p></li>
+<li><p><strong>meta</strong> (<a class="reference internal" href="#orientpy.classes.Meta" title="orientpy.classes.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a>) – Object of metadata information for single event (initially set to None)</p></li>
+<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream object containing the three-component seismograms</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="orientpy.classes.Orient.add_event">
+<code class="sig-name descname">add_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span></em>, <em class="sig-param"><span class="n">gacmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gacmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depmax</span><span class="o">=</span><span class="default_value">1000.0</span></em>, <em class="sig-param"><span class="n">returned</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient.add_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds event metadata to Orient object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">event</span></code>) – Event XML object</p></li>
+<li><p><strong>gacmin</strong> (<em>float</em>) – Minimum great-arc circle distance to consider (deg)</p></li>
+<li><p><strong>gacmax</strong> (<em>float</em>) – Maximum great-arc circle distance to consider (deg)</p></li>
+<li><p><strong>depmax</strong> (<em>float</em>) – Maximum event depth to consider (km)</p></li>
+<li><p><strong>returned</strong> (<em>bool</em>) – Whether or not to return the <code class="docutils literal notranslate"><span class="pre">accept</span></code> attribute</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>accept</strong> – Whether or not the object is accepted for further analysis</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="orientpy.classes.Orient.meta">
+<code class="sig-name descname">meta</code><a class="headerlink" href="#orientpy.classes.Orient.meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Meta data object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#orientpy.classes.Meta" title="orientpy.classes.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt id="orientpy.classes.Orient.download_data">
+<code class="sig-name descname">download_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">stdata</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">ndval</span><span class="o">=</span><span class="default_value">nan</span></em>, <em class="sig-param"><span class="n">new_sr</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t1</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t2</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">returned</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient.download_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads seismograms based on a time interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code>) – Client object</p></li>
+<li><p><strong>ndval</strong> (<em>float</em>) – Fill in value for missing data</p></li>
+<li><p><strong>new_sr</strong> (<em>float</em>) – New sampling rate (Hz)</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Start time to consider (sec). Can be float or
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code> object.</p></li>
+<li><p><strong>t2</strong> (<em>float</em>) – End time to consider (sec). Can be float or
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code> object.</p></li>
+<li><p><strong>stdata</strong> (<em>List</em>) – Station list</p></li>
+<li><p><strong>returned</strong> (<em>bool</em>) – Whether or not to return the <code class="docutils literal notranslate"><span class="pre">accept</span></code> attribute</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>accept</strong> – Whether or not the object is accepted for further analysis</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="orientpy.classes.Orient.data">
+<code class="sig-name descname">data</code><a class="headerlink" href="#orientpy.classes.Orient.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stream containing <code class="xref py py-class docutils literal notranslate"><span class="pre">Trace</span></code> objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="class-meta">
+<h3>Class Meta<a class="headerlink" href="#class-meta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="orientpy.classes.Meta">
+<em class="property">class </em><code class="sig-prename descclassname">orientpy.classes.</code><code class="sig-name descname">Meta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sta</span></em>, <em class="sig-param"><span class="n">event</span></em>, <em class="sig-param"><span class="n">gacmin</span><span class="o">=</span><span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">gacmax</span><span class="o">=</span><span class="default_value">30.0</span></em>, <em class="sig-param"><span class="n">depmax</span><span class="o">=</span><span class="default_value">1000.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Meta object contains attributes associated with the metadata
+for a single earthquake event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code>) – Origin time of earthquake</p></li>
+<li><p><strong>dep</strong> (<em>float</em>) – Depth of hypocenter (km)</p></li>
+<li><p><strong>lon</strong> (<em>float</em>) – Longitude coordinate of epicenter</p></li>
+<li><p><strong>lat</strong> (<em>float</em>) – Latitude coordinate of epicenter</p></li>
+<li><p><strong>mag</strong> (<em>float</em>) – Magnitude of earthquake</p></li>
+<li><p><strong>gac</strong> (<em>float</em>) – Great arc circle between station and epicenter (degrees)</p></li>
+<li><p><strong>epi_dist</strong> (<em>float</em>) – Epicentral distance between station and epicenter (km)</p></li>
+<li><p><strong>baz</strong> (<em>float</em>) – Back-azimuth - pointing to earthquake from station (degrees)</p></li>
+<li><p><strong>az</strong> (<em>float</em>) – Azimuth - pointing to station from earthquake (degrees)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="bng">
+<h2>BNG<a class="headerlink" href="#bng" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="orientpy.classes.BNG">
+<em class="property">class </em><code class="sig-prename descclassname">orientpy.classes.</code><code class="sig-name descname">BNG</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.BNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>A BNG object inherits from <a class="reference internal" href="#orientpy.classes.Orient" title="orientpy.classes.Orient"><code class="xref py py-class docutils literal notranslate"><span class="pre">Orient</span></code></a>.
+This object contains a method to estimate station orientation
+based on P-wave particle motion.</p>
+<p class="rubric">Notes</p>
+<p>This class is designed after the method developed by Braunmiller,
+Nabelek and Ghods (2020) <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. It is slightly more flexible, however,
+in that it can handle either regional or teleseismic P-wave data
+and provides additional quality-control mesures (e.g., SNR, 1-R/Z).</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Braunmiller, J., Nabelek, J., and Ghods, A., 2020, Sensor orientation
+of Iranian broadband seismic stations from P-wave particle motion,
+<em>Seismological Research Letters</em>, doi:10.1785/0220200019.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sta</strong> (<em>object</em>) – Object containing station information - from <code class="xref py py-mod docutils literal notranslate"><span class="pre">stdb</span></code> database.</p></li>
+<li><p><strong>meta</strong> (<a class="reference internal" href="#orientpy.classes.Meta" title="orientpy.classes.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a>) – Object of metadata information for single event (initially set to None)</p></li>
+<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream object containing the three-component seismograms</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="orientpy.classes.BNG.calc">
+<code class="sig-name descname">calc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dphi</span></em>, <em class="sig-param"><span class="n">dts</span></em>, <em class="sig-param"><span class="n">tt</span></em>, <em class="sig-param"><span class="n">bp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showplot</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.BNG.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to estimate azimuth of component <cite>?H1</cite> (or <cite>?HN</cite>). This
+method minimizes the energy (RMS) of the transverse component of
+P-wave data within some bandwidth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dphi</strong> (<em>float</em>) – Azimuth increment for search (deg)</p></li>
+<li><p><strong>dts</strong> (<em>float</em>) – Length of time window on either side of
+predicted P-wave arrival time (sec)</p></li>
+<li><p><strong>tt</strong> (<em>list</em>) – List of two floats containing the time picks relative
+to P-wave time, within which to perform the estimation of
+station orientation (sec)</p></li>
+<li><p><strong>bp</strong> (<em>list</em>) – List of two floats containing the low- and high-frequency
+corners of a bandpass filter (Hz)</p></li>
+<li><p><strong>showplot</strong> (<em>bool</em>) – Whether or not to plot waveforms.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="orientpy.classes.BNG.meta.phi">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">phi</code><a class="headerlink" href="#orientpy.classes.BNG.meta.phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azimuth of H1 (or HN) component (deg)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.BNG.meta.cc">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">cc</code><a class="headerlink" href="#orientpy.classes.BNG.meta.cc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-correlation coefficient between
+vertical and radial component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.BNG.meta.snr">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">snr</code><a class="headerlink" href="#orientpy.classes.BNG.meta.snr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal-to-noise ratio of P-wave measured on the
+vertical seismogram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.BNG.meta.TR">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">TR</code><a class="headerlink" href="#orientpy.classes.BNG.meta.TR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure of the transverse to radial ratio. In reality
+this is 1 - T/R</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.BNG.meta.RZ">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">RZ</code><a class="headerlink" href="#orientpy.classes.BNG.meta.RZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure of the radial to vertical ratio. In reality
+this is 1 - R/Z</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dl">
+<h2>DL<a class="headerlink" href="#dl" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="orientpy.classes.DL">
+<em class="property">class </em><code class="sig-prename descclassname">orientpy.classes.</code><code class="sig-name descname">DL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.DL" title="Permalink to this definition">¶</a></dt>
+<dd><p>A DL object inherits from <a class="reference internal" href="#orientpy.classes.Orient" title="orientpy.classes.Orient"><code class="xref py py-class docutils literal notranslate"><span class="pre">Orient</span></code></a>. This object
+contains a method to estimate station orientation based on Rayleigh-wave
+particle motion.</p>
+<p class="rubric">Notes</p>
+<p>This algorithm is heavily based on the code <cite>DLOPy</cite> by
+Doran and Laske (2017) <a class="footnote-reference brackets" href="#id4" id="id3">2</a>. The original code can be found here:
+<a class="reference external" href="https://igppweb.ucsd.edu/~adoran/DLOPy.html">https://igppweb.ucsd.edu/~adoran/DLOPy.html</a></p>
+<p>There are also a couple of versions available on GitHub:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/kschramm-usgs/DLOPy">https://github.com/kschramm-usgs/DLOPy</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jbrussell/DLOPy_v1.0">https://github.com/jbrussell/DLOPy_v1.0</a></p></li>
+</ul>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer instrument
+orientations via automated Rayleigh-wave arrival-angle measurements,
+<em>Bulletin of the Seismological Society of America</em>, 107(2),
+doi:10.1785/0120160165.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sta</strong> (<em>object</em>) – Object containing station information - from <code class="xref py py-mod docutils literal notranslate"><span class="pre">stdb</span></code> database.</p></li>
+<li><p><strong>meta</strong> (<a class="reference internal" href="#orientpy.classes.Meta" title="orientpy.classes.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a>) – Object of metadata information for single event (initially set to None)</p></li>
+<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream object containing the three-component seismograms</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="orientpy.classes.DL.calc">
+<code class="sig-name descname">calc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">showplot</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.DL.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to estimate azimuth of component <cite>?H1</cite> (or <cite>?HN</cite>). This
+method maximizes the normalized covariance between the Hilbert-transformed
+vertical component and the radial component of Rayleigh-wave data measured
+at multiple periods. This is done for the shortest (R1) and longest (R2)
+orbits of fundamental-mode Rayleigh waves. Window selection is done based on
+average group velocity extracted from a global model of Rayleigh-wave
+dispersion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>showplot</strong> (<em>bool</em>) – Whether or not to plot waveforms.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="orientpy.classes.DL.meta.R1phi">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">R1phi</code><a class="headerlink" href="#orientpy.classes.DL.meta.R1phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of azimuth of H1 (or HN) component (deg) based on R1, measured
+at different periods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.DL.meta.R1cc">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">R1cc</code><a class="headerlink" href="#orientpy.classes.DL.meta.R1cc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-correlation coefficient between hilbert-transformed vertical and
+radial component for R1, measured at different periods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.DL.meta.R2phi">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">R2phi</code><a class="headerlink" href="#orientpy.classes.DL.meta.R2phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of azimuth of H1 (or HN) component (deg) based on R2, measured
+at different periods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="orientpy.classes.DL.meta.R2cc">
+<code class="sig-prename descclassname">meta.</code><code class="sig-name descname">R2cc</code><a class="headerlink" href="#orientpy.classes.DL.meta.R2cc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross-correlation coefficient between hilbert-transformed vertical and
+radial component for R2, measured at different periods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-orientpy.utils">
+<span id="utils"></span><h2>utils<a class="headerlink" href="#module-orientpy.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="orientpy.utils.catclean">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">catclean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.catclean" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function looks for repeat events in a catalogue of
+earthquakes.</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cat</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code>) – Catalogue XML object, container for Event objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reps</strong> – Array of ID of repeat events in catalogue.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.checklen">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">checklen</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">hrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.checklen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check if there is enough downloaded data to run program</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>st</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream containing waveforms</p></li>
+<li><p><strong>hrs</strong> (<em>float</em>) – Amount of time (hours) that should be available for analysis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether or not the check is successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.resiz">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">resiz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x1</span></em>, <em class="sig-param"><span class="n">x2</span></em>, <em class="sig-param"><span class="n">x3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.resiz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to resize arrays to all identical shapes</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x*</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array for which to check length (here it’s trace.data)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x*</strong> – Array trimmed to shortest segment</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.getf">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">getf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">freq</span></em>, <em class="sig-param"><span class="n">A</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.getf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract frequency in array.</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freq</strong> (<em>float</em>) – Frequency of interest (Hz)</p></li>
+<li><p><strong>A</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of frequencies obtained from global dispersion maps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>v</strong> – Nearest frequency in A</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.nv">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">nv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.nv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to find nearest value in an np.array.</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p></li>
+<li><p><strong>v</strong> (<em>float</em>) – Value to compare within array</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x[idx]</strong> – Nearest value to v in x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.rms">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">rms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.rms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate root-mean-square of array</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rms</strong> – Root-Mean-Square value of <cite>x</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.mad">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">mad</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.mad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate Median Absolute Deviation</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mad</strong> – Median Absolute deviation of <cite>x</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.outlier">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">outlier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">lim</span><span class="o">=</span><span class="default_value">5.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.outlier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to remove outliers based on MAD threshold</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – Shortened array where MAD is lower than <cite>lim</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.boot">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">boot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">bootnum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.boot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate directional mean value from bootstrap</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p></li>
+<li><p><strong>bootnum</strong> (<em>int</em>) – Number of bootstrap estimates to produce</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>m</strong> – Array of directional mean values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.centerat">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">centerat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.centerat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to re-center azimuth array to the mean value</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array</p></li>
+<li><p><strong>m</strong> (<em>float</em>) – Value around which to center the azimuth</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>phinew</strong> – Re-centered azimuth array</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.pathvels">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">pathvels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat1</span></em>, <em class="sig-param"><span class="n">lon1</span></em>, <em class="sig-param"><span class="n">lat2</span></em>, <em class="sig-param"><span class="n">lon2</span></em>, <em class="sig-param"><span class="n">map10</span></em>, <em class="sig-param"><span class="n">map15</span></em>, <em class="sig-param"><span class="n">map20</span></em>, <em class="sig-param"><span class="n">map25</span></em>, <em class="sig-param"><span class="n">map30</span></em>, <em class="sig-param"><span class="n">map35</span></em>, <em class="sig-param"><span class="n">map40</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.pathvels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overall function to get path-averaged group velocity.</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat1</strong> (<em>float</em>) – Latitude of origin point (deg)</p></li>
+<li><p><strong>lon1</strong> (<em>float</em>) – Longitude of origin point (deg)</p></li>
+<li><p><strong>lat2</strong> (<em>float</em>) – Latitude of end point (deg)</p></li>
+<li><p><strong>lon2</strong> (<em>float</em>) – Longitude of end point (deg)</p></li>
+<li><p><strong>map*</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – maps of Rayleigh-wave dispersion at various frequencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>R1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – R1 velocity path</p></li>
+<li><p><strong>R2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – R2 velocity path</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.DLcalc">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">DLcalc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stream</span></em>, <em class="sig-param"><span class="n">Rf</span></em>, <em class="sig-param"><span class="n">LPF</span></em>, <em class="sig-param"><span class="n">HPF</span></em>, <em class="sig-param"><span class="n">epi</span></em>, <em class="sig-param"><span class="n">baz</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">winlen</span><span class="o">=</span><span class="default_value">10.0</span></em>, <em class="sig-param"><span class="n">ptype</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.DLcalc" title="Permalink to this definition">¶</a></dt>
+<dd><p>DORAN-LASKE calculation for one freq, one orbit of surface wave</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>float</em>) – Latitude of origin point (deg)</p></li>
+<li><p><strong>lon1</strong> (<em>float</em>) – Longitude of origin point (deg)</p></li>
+<li><p><strong>lat2</strong> (<em>float</em>) – Latitude of end point (deg)</p></li>
+<li><p><strong>lon2</strong> (<em>float</em>) – Longitude of end point (deg)</p></li>
+<li><p><strong>map*</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – maps of Rayleigh-wave dispersion at various frequencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>R1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – R1 velocity path</p></li>
+<li><p><strong>R2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – R2 velocity path</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.utils.estimate">
+<code class="sig-prename descclassname">orientpy.utils.</code><code class="sig-name descname">estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">ind</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to estimate final azimuth from</p>
+<p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
+RELEASED APRIL 2017</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Input array of estimated azimuth</p></li>
+<li><p><strong>ind</strong> (<em>list</em>) – List of index values that satisfy some QC condition
+for phi</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>m</strong> (<em>float</em>) – Mean value of robust, bootstrapped estimates</p></li>
+<li><p><strong>s</strong> (<em>float</em>) – 2 Standard deviations of robust, bootstrapped estimates</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-orientpy.plotting">
+<span id="plotting"></span><h2>plotting<a class="headerlink" href="#module-orientpy.plotting" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="orientpy.html" class="btn btn-neutral float-left" title="Licence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pascal Audet
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
