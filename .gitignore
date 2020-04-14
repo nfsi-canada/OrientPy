@@ -14,5 +14,4 @@ build
 dist
 
 _build
-Make*
 make*
