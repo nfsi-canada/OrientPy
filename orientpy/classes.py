@@ -178,6 +178,8 @@ class Orient(object):
         ----------
         client : :class:`~obspy.client.fdsn.Client`
             Client object
+        stdata : List
+            Station list
         ndval : float
             Fill in value for missing data
         new_sr : float
@@ -188,8 +190,6 @@ class Orient(object):
         t2 : float
             End time to consider (sec). Can be float or 
             :class:`~obspy.core.UTCDateTime` object.
-        stdata : List
-            Station list
         returned : bool
             Whether or not to return the ``accept`` attribute
 

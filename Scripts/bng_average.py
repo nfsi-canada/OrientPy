@@ -92,10 +92,10 @@ def main():
         mag = np.array(mag)
 
         # Set conditions for good result
-        snrp = snr>5.
-        ccp = cc>0.5
-        TRp = TR>0.5
-        RZp = RZ>-1.
+        snrp = snr>args.snr
+        ccp = cc>args.cc
+        TRp = TR>args.TR
+        RZp = RZ>args.RZ
 
         # Indices where conditions are met
         ind = snrp*ccp*TRp*RZp

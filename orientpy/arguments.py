@@ -54,7 +54,7 @@ def get_bng_calc_arguments():
         dest="constsave",
         help="Do not save progress during processing.")
 
-    # -- Use local data directory
+    # Use local data directory
     Dtparm = parser.add_argument_group(
         title="Local Data Settings",
         description="Settings associated with defining and using a " +
@@ -86,7 +86,7 @@ def get_bng_calc_arguments():
         "for a station may disagree with that in the filename. " +
         "[Default Network used]")
 
-    # -- Server Settings
+    # Server Settings
     Svparm = parser.add_argument_group(
         title="Server Settings",
         description="Settings associated with which datacenter to log into.")
@@ -121,7 +121,7 @@ def get_bng_calc_arguments():
         "waveform server (--User-Auth='username:authpassword') to access " +
         "and download restricted data. [Default no user and password]")
 
-    # -- Station Selection Parameters
+    # Station Selection Parameters
     stparm = parser.add_argument_group(
         title="Station Selection Parameters",
         description="Parameters to select a specific station.")
@@ -176,7 +176,7 @@ def get_bng_calc_arguments():
         "arrival time in seconds. Negative values imply start of window "+
         "before P wave arrival. [Default -2., 5.]")
 
-    # -- EQ Specifications
+    # EQ Specifications
     Eqparm = parser.add_argument_group(
         title="Earthquake Selection Criteria",
         description="Parameters associated with selecing the subset of " +
@@ -222,7 +222,7 @@ def get_bng_calc_arguments():
         action="store_false",
         help="Specify to discard the eq catalogue after processing.")
 
-    # -- Processing Specifications
+    # Processing Specifications
     Procparm = parser.add_argument_group(
         title="Processing Parameters",
         description="Parameters associated with BNG processing.")
@@ -253,20 +253,20 @@ def get_bng_calc_arguments():
         help="Show processing step including raw and rotated waveforms. "+
         "[Default doesn't show plot]")
 
-    # -- Parse Arguments
+    # Parse Arguments
     args = parser.parse_args()
 
-    # -- Check inputs
+    # Check inputs
     #if len(args) != 1: parser.error("Need station database file")
     # indb=args[0]
     if not exist(args.indb):
         parser.error("Input file " + args.indb + " does not exist")
 
-    # -- create station key list
+    # create station key list
     if len(args.stkeys) > 0:
         args.stkeys = args.stkeys.split(',')
 
-    # -- construct start time
+    # construct start time
     if len(args.startT) > 0:
         try:
             args.startT = UTCDateTime(args.startT)
@@ -276,7 +276,7 @@ def get_bng_calc_arguments():
     else:
         args.startT = None
 
-    # -- construct end time
+    # construct end time
     if len(args.endT) > 0:
         try:
             args.endT = UTCDateTime(args.endT)
@@ -286,7 +286,7 @@ def get_bng_calc_arguments():
     else:
         args.endT = None
 
-    # -- Parse User Authentification
+    # Parse User Authentification
     if not len(args.UserAuth) == 0:
         tt = args.UserAuth.split(':')
         if not len(tt) == 2:
@@ -303,13 +303,13 @@ def get_bng_calc_arguments():
     # opts.skip=False
     # opts.ovr=False
 
-    # -- Parse Local Data directories
+    # Parse Local Data directories
     if len(args.localdata) > 0:
         args.localdata = args.localdata.split(',')
     else:
         args.localdata = []
 
-    # -- Check NoData Value
+    # Check NoData Value
     if args.ndval:
         args.ndval = 0.0
     else:
@@ -387,14 +387,8 @@ def get_bng_average_arguments():
         type=str,
         help="Specify format of figure. Can be any one of the valid" +
         "matplotlib formats: 'png', 'jpg', 'eps', 'pdf'. [Default 'png']")
-    # parser.add_argument(
-    #     "--cc",
-    #     default=0.8,
-    #     type=float,
-    #     dest="cc",
-    #     help="Cross-correlation threshold for final estimate. [Default 0.8]")
 
-    # -- Station Selection Parameters
+    # Station Selection Parameters
     stparm = parser.add_argument_group(
         title="Station Selection Parameters",
         description="Parameters to select a specific station.")
@@ -405,16 +399,51 @@ def get_bng_average_arguments():
         default="",
         help="Specify list of Station Keys in the database to process.")
 
-    # -- Parse Arguments
+    # Select QC criteria
+    qcparm = parser.add_argument_group(
+        title="Quality control parameters",
+        description="Quality control parameters on the estimates for "+
+        "calculating the average.")
+    qcparm.add_argument(
+        "--cc",
+        dest="cc",
+        type=float,
+        default=0.5,
+        help="Threshold for cross-correlation betwen vertical and radial "+
+        "components. [Default 0.5]")
+    qcparm.add_argument(
+        "--snr",
+        dest="snr",
+        type=float,
+        default=5.,
+        help="Threshold for signal-to-noise ratio on vertical component, "+
+        "in dB. [Default 5.]")
+    qcparm.add_argument(
+        "--TR",
+        dest="TR",
+        type=float,
+        default=0.5,
+        help="Threshold for transverse to radial ratio (1 - T/R). "+
+        "[Default 0.5]")
+    qcparm.add_argument(
+        "--RZ",
+        dest="RZ",
+        type=float,
+        default=-1.,
+        help="Threshold for radial to vertical ratio (1 - R/Z). "+
+        "[Default -1.]")
+
+
+    # Parse Arguments
     args = parser.parse_args()
 
-    # -- Check inputs
+    # Check inputs
     #if len(args) != 1: parser.error("Need station database file")
     # indb=args[0]
     if not exist(args.indb):
         parser.error("Input file " + args.indb + " does not exist")
 
-    # -- create station key list
+    # create station key list
     if len(args.stkeys) > 0:
         args.stkeys = args.stkeys.split(',')
 
