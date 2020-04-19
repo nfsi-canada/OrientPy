@@ -59,3 +59,4 @@ used in command-line scripts. Tutorials are provided in the sections below.
    :caption: Scripts & Tutorials
 
    scripts
+   tutorials
