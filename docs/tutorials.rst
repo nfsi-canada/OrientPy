@@ -1,8 +1,8 @@
 Tutorials
 =========
 
-0. Creating the ``StDb`` Database
-+++++++++++++++++++++++++++++++++
+Creating the ``StDb`` Database
+++++++++++++++++++++++++++++++
 
 All the scripts provided require a ``StDb`` database containing station
 information and metadata. Let's first create this database for station
