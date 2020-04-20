@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
     <link rel="prev" title="Classes" href="api.html" /> 
 </head>
 
@@ -106,10 +107,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#bng-average-py"><code class="docutils literal notranslate"><span class="pre">bng_average.py</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Usage</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 </ul>
 
             
@@ -319,6 +326,61 @@ Processing Parameters:
 </div>
 </div>
 </div>
+<div class="section" id="bng-average-py">
+<h3><code class="docutils literal notranslate"><span class="pre">bng_average.py</span></code><a class="headerlink" href="#bng-average-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Collects the estimated azimuths previously calculated and calculates the
+mean value after some quality control thresholding based on the rotated
+waveforms. The error is obtained from a bootstrap analysis of robust estimates.</p>
+</div>
+<div class="section" id="id2">
+<h4>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_average.py -h
+usage: bng_average.py [options] &lt;Station Database&gt;
+
+Program to average the orientations of the seismometer in a station database.
+
+positional arguments:
+  indb                  Station Database to process from.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v VERB, --verbose VERB
+                        Enable Level of verbose output during processing. (0)
+                        No Output; (1) Output Event Analysis counter; (2)
+                        Counter and results. Default 2
+  --load-location LOADLOC
+                        Specify Load destination. Default is DLOPY_RESULTS
+                        (and sub-directories based on Station Name).
+  --plot                Plot results at end (Default False)
+  --save                Set this option if you wish to save the figure.
+                        [Default does not save figure]
+  --format FMT          Specify format of figure. Can be any one of the
+                        validmatplotlib formats: &#39;png&#39;, &#39;jpg&#39;, &#39;eps&#39;, &#39;pdf&#39;.
+                        [Default &#39;png&#39;]
+
+Station Selection Parameters:
+  Parameters to select a specific station.
+
+  --keys STKEYS         Specify list of Station Keys in the database to
+                        process.
+
+Quality control parameters:
+  Quality control parameters on the estimates for calculating the average.
+
+  --cc CC               Threshold for cross-correlation betwen vertical and
+                        radial components. [Default 0.5]
+  --snr SNR             Threshold for signal-to-noise ratio on vertical
+                        component, in dB. [Default 5.]
+  --TR TR               Threshold for transverse to radial ratio (1 - T/R).
+                        [Default 0.5]
+  --RZ RZ               Threshold for radial to vertical ratio (1 - R/Z).
+                        [Default -1.]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -329,6 +391,8 @@ Processing Parameters:
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api.html" class="btn btn-neutral float-left" title="Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

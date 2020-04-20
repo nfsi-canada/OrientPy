@@ -149,3 +149,62 @@ Usage
                             floats. [Default 0.7,5.0]
       --plot                Show processing step including raw and rotated
                             waveforms. [Default doesn't show plot]
+
+
+``bng_average.py``
+******************
+
+Description
+-----------
+
+Collects the estimated azimuths previously calculated and calculates the
+mean value after some quality control thresholding based on the rotated 
+waveforms. The error is obtained from a bootstrap analysis of robust estimates.
+
+Usage
+-----
+
+.. code-block::
+
+    $ bng_average.py -h
+    usage: bng_average.py [options] <Station Database>
+
+    Program to average the orientations of the seismometer in a station database.
+
+    positional arguments:
+      indb                  Station Database to process from.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v VERB, --verbose VERB
+                            Enable Level of verbose output during processing. (0)
+                            No Output; (1) Output Event Analysis counter; (2)
+                            Counter and results. Default 2
+      --load-location LOADLOC
+                            Specify Load destination. Default is DLOPY_RESULTS
+                            (and sub-directories based on Station Name).
+      --plot                Plot results at end (Default False)
+      --save                Set this option if you wish to save the figure.
+                            [Default does not save figure]
+      --format FMT          Specify format of figure. Can be any one of the
+                            validmatplotlib formats: 'png', 'jpg', 'eps', 'pdf'.
+                            [Default 'png']
+
+    Station Selection Parameters:
+      Parameters to select a specific station.
+
+      --keys STKEYS         Specify list of Station Keys in the database to
+                            process.
+
+    Quality control parameters:
+      Quality control parameters on the estimates for calculating the average.
+
+      --cc CC               Threshold for cross-correlation betwen vertical and
+                            radial components. [Default 0.5]
+      --snr SNR             Threshold for signal-to-noise ratio on vertical
+                            component, in dB. [Default 5.]
+      --TR TR               Threshold for transverse to radial ratio (1 - T/R).
+                            [Default 0.5]
+      --RZ RZ               Threshold for radial to vertical ratio (1 - R/Z).
+                            [Default -1.]
+
