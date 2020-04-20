@@ -36,6 +36,11 @@ used in command-line scripts. Tutorials are provided in the sections below.
    Doran and Laske (2017). The original code can be found 
    `here <https://igppweb.ucsd.edu/~adoran/DLOPy.html>`_
 
+.. warning::
+
+   The method ``LKSS`` is part of the package but has not been fully tested
+   yet and has no accompanying documentation. We don't recommend its usage at this time.
+
 .. toctree::
    :maxdepth: 1
    :caption: Quick Links
