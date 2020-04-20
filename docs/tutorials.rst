@@ -185,3 +185,124 @@ The second figure displays the estimates according to three parameters:
 .. figure:: ../orientpy/examples/picture/Figure_BNG_results.png
    :align: center
 
+
+DL analysis
++++++++++++
+
+1. Automated analysis
+---------------------
+
+We wish to use the entire deployment time of station LOBS3 to calculate the
+station orientation using Rayleigh-wave polarization data. Following the previous
+example, since the file ``YH_list.pkl`` contains only one station, it is not 
+necessary to specify a key. Here we use all default parameters, except for the
+minimum earthquake magnitude, which we set to 6.
+
+.. code-block::
+
+    $ dl_calc.py --min-mag=6. YH_list.pkl
+
+An example log printed on the terminal will look like:
+
+.. code-block::
+
+       Establishing Catalogue Client...
+          Done
+       Establishing Waveform Client...
+          Done
+     
+    |==============================================|
+    |                      LOBS3                   |
+    |==============================================|
+    |  Station: YH.LOBS3                           |
+    |      Channel: HH; Locations: --              |
+    |      Lon:  179.15; Lat: -38.79               |
+    |      Start time: 2014-05-15 00:00:00         |
+    |      End time:   2015-06-23 23:59:59         |
+    | Output Directory:  DL_RESULTS
+    | Save Progress:  True
+    |----------------------------------------------|
+    | Searching Possible events:                   |
+    |   Start: 2014-05-15 00:00:00                 |
+    |   End:   2015-06-23 23:59:59                 |
+    |   Mag:   >{0:3.1f} 6.0                       |
+    |   Min Distance:  5.0
+    |   Max Distance:  175.0
+    |   Max Depth:     150.0
+    |   Request Event Catalogue...                 |
+    | ...                                          |
+    |   Retrieved 178 events 
+
+     
+    **************************************************
+    * (3/178):  20150620_021007 YH.LOBS3
+    *   Origin Time: 2015-06-20 02:10:07
+    *   Lat: -36.33;        Lon:  -73.67
+    *   Dep:  17.40 km;     Mag: 6.4
+    *   Dist: 8837.94 km;   Epi dist:  79.48 deg
+    *   Baz:  128.47 deg;   Az: 229.25 deg
+    * Requesting Waveforms: 
+    *    Startime: 2015-06-20 02:10:07
+    *    Endtime:  2015-06-20 06:10:07
+    *     LOBS3.HH - ZNE:
+    *          HH[ZNE].-- - Checking Network
+    *          HH[Z12].-- - Checking Network
+    *              - Z12 Data Downloaded
+    * Start times are not all close to true start: 
+    *   HH1 2015-06-20T02:10:07.650900Z 2015-06-20T06:10:07.638703Z
+    *   HH2 2015-06-20T02:10:07.651100Z 2015-06-20T06:10:07.638903Z
+    *   HHZ 2015-06-20T02:10:07.659300Z 2015-06-20T06:10:07.637103Z
+    *   True start: 2015-06-20T02:10:07.650000Z
+    * -> Shifting traces to true start
+    * Sampling rate is not an integer value:  100.00001525878906
+    * -> Resampling
+    * Waveforms Retrieved...
+    * R1PHI: [ 108.2734219  117.2734219  125.0734219  126.8734219  112.5734219
+      101.3734219  121.3734219]
+    * R2PHI: [ 120.3734219  114.6734219  114.8734219    9.3734219    4.4734219
+      319.2734219   88.3734219]
+    * R1CC: [ 0.3929253   0.63498115  0.79618113  0.76866093  0.52087365  0.28555018
+      0.27791771]
+    * R2CC: [ 0.27178087  0.07950989  0.16644224  0.51027084  0.24789322  0.04376891
+      0.03245475]
+
+    ...
+
+And so on until all waveforms have been downloaded and processed. You will
+notice that a folder called ``DL_RESULTS/YH.LOBS3/`` has been created.
+This is where all processed files will be stored on disk. 
+
+2. Averaging
+------------
+
+Now that all events have been processed, we wish to produce an average value
+of station orientation. However, not all estimates have equal weight in the
+final average. In particular, Doran and Laske have shown how to specify a 
+threshold cross-correlation (CC) value to exclude waveforms for which the CC
+between the radial and Hilbert-transformed vertical component is low. Here we use
+the default CC threshold of 0.8 and produce a final plot with the estimate. 
+
+.. code-block:: 
+
+    $ dl_average.py --plot YH_list.pkl
+
+An example log printed on the terminal will look like:
+
+.. code-block::
+
+    |==============================================|
+    |                      LOBS3                   |
+    |==============================================|
+    |  Station: YH.LOBS3                           |
+    |      Channel: HH; Locations: --              |
+    |      Lon:  179.15; Lat: -38.79               |
+    | Input Directory:  DL_RESULTS
+    | Plot Results:  True
+    |
+    |    D-L mean, error, data included: 122.95, 3.99, 284
+    |    D-L CC level: 0.8
+
+The figure displays the estimates according to the CC value:
+
+.. figure:: ../orientpy/examples/picture/Figure_DL_results.png
+   :align: center
