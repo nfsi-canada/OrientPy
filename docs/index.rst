@@ -48,6 +48,12 @@ used in command-line scripts. Tutorials are provided in the sections below.
    links
 
 .. toctree::
+   :maxdepth: 1
+   :caption: Disclaimer
+
+   disclaimer
+
+.. toctree::
    :maxdepth: 2
    :caption: Getting Started
 
