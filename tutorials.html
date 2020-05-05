@@ -221,16 +221,17 @@ contains only one station, it is not necessary to specify a
 key. This option would be useful if the database contained several stations
 and we were only interested in downloading data for LOBS3. In this case, we would
 specify <code class="docutils literal notranslate"><span class="pre">--keys=LOBS3</span></code> or <code class="docutils literal notranslate"><span class="pre">--keys=YH.LOBS3</span></code>. We could use all the default
-paramaters to do automated processing. However, since we wish to analyze teleseismic
-data, we will edit a few of them to include more data around the predicted P-wave
+paramaters to do automated processing for regional events.
+However, since we wish to analyze teleseismic data, we will edit a few of them to
+include more waveform data around the predicted P-wave
 arrival time. We also consider all earthquakes between 30 and 175 degrees, as the
 program will automatically use either the P or PP waves to extract the waveforms.</p>
 <p>The parameters to edit in this case are:
-* <code class="docutils literal notranslate"><span class="pre">--times=-5.,15.</span></code> to extract data from -5 to 15 seconds following P-wave arrival
-* <code class="docutils literal notranslate"><span class="pre">--window=60.</span></code> to include 60 seconds of data,
-* <code class="docutils literal notranslate"><span class="pre">--minmax=6.</span></code> to limit the number of events to consider,
-* <code class="docutils literal notranslate"><span class="pre">--mindist=30.</span></code> for the minimum epicentral distance for teleseismic P, and
-* <code class="docutils literal notranslate"><span class="pre">--bp=0.04,0.1</span></code> to focus on the long-period P waves</p>
+<code class="docutils literal notranslate"><span class="pre">--times=-5.,15.</span></code> to extract data from -5 to 15 seconds following P-wave arrival;
+<code class="docutils literal notranslate"><span class="pre">--window=60.</span></code> to include 60 seconds of data;
+<code class="docutils literal notranslate"><span class="pre">--minmax=6.</span></code> to limit the number of events to consider;
+<code class="docutils literal notranslate"><span class="pre">--mindist=30.</span></code> for the minimum epicentral distance for teleseismic P; and
+<code class="docutils literal notranslate"><span class="pre">--bp=0.04,0.1</span></code> to focus on the long-period P waves</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto.py --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 </pre></div>
 </div>
