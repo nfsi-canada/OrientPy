@@ -43,17 +43,18 @@ contains only one station, it is not necessary to specify a
 key. This option would be useful if the database contained several stations
 and we were only interested in downloading data for LOBS3. In this case, we would
 specify ``--keys=LOBS3`` or ``--keys=YH.LOBS3``. We could use all the default 
-paramaters to do automated processing. However, since we wish to analyze teleseismic
-data, we will edit a few of them to include more data around the predicted P-wave
+paramaters to do automated processing for regional events. 
+However, since we wish to analyze teleseismic data, we will edit a few of them to 
+include more waveform data around the predicted P-wave
 arrival time. We also consider all earthquakes between 30 and 175 degrees, as the
 program will automatically use either the P or PP waves to extract the waveforms.
 
 The parameters to edit in this case are:
-* ``--times=-5.,15.`` to extract data from -5 to 15 seconds following P-wave arrival
-* ``--window=60.`` to include 60 seconds of data, 
-* ``--minmax=6.`` to limit the number of events to consider, 
-* ``--mindist=30.`` for the minimum epicentral distance for teleseismic P, and
-* ``--bp=0.04,0.1`` to focus on the long-period P waves
+``--times=-5.,15.`` to extract data from -5 to 15 seconds following P-wave arrival;
+``--window=60.`` to include 60 seconds of data; 
+``--minmax=6.`` to limit the number of events to consider;
+``--mindist=30.`` for the minimum epicentral distance for teleseismic P; and
+``--bp=0.04,0.1`` to focus on the long-period P waves
 
 .. code-block::
 
