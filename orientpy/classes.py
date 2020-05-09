@@ -544,13 +544,13 @@ class DL(Orient):
 
         # Load group velocity maps
         gvpath = Path('../orientpy/dispmaps')
-        map10 = np.loadtxt(gvpath, 'R.gv.10.txt')
-        map15 = np.loadtxt(gvpath, 'R.gv.15.txt')
-        map20 = np.loadtxt(gvpath, 'R.gv.20.txt')
-        map25 = np.loadtxt(gvpath, 'R.gv.25.txt')
-        map30 = np.loadtxt(gvpath, 'R.gv.30.txt')
-        map35 = np.loadtxt(gvpath, 'R.gv.35.txt')
-        map40 = np.loadtxt(gvpath, 'R.gv.40.txt')
+        map10 = np.loadtxt(gvpath / 'R.gv.10.txt')
+        map15 = np.loadtxt(gvpath / 'R.gv.15.txt')
+        map20 = np.loadtxt(gvpath / 'R.gv.20.txt')
+        map25 = np.loadtxt(gvpath / 'R.gv.25.txt')
+        map30 = np.loadtxt(gvpath / 'R.gv.30.txt')
+        map35 = np.loadtxt(gvpath / 'R.gv.35.txt')
+        map40 = np.loadtxt(gvpath / 'R.gv.40.txt')
 
         # map10 = np.loadtxt(os.path.join(
         #     os.path.dirname(__file__), gvpath, 'R.gv.10.txt'))
