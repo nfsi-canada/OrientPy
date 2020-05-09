@@ -31,7 +31,7 @@ from scipy.stats import circstd as cstd
 from scipy.stats import hmean as hm
 from orientpy import io, utils, plotting
 from obspy.signal.rotate import rotate_rt_ne, rotate_ne_rt
-from pathlib import Path
+from pkg_resources import resource_filename
 
 
 class Meta(object):
@@ -543,29 +543,20 @@ class DL(Orient):
         R2cc = np.zeros(nper)
 
         # Load group velocity maps
-        gvpath = Path('../orientpy/dispmaps')
-        map10 = np.loadtxt(gvpath / 'R.gv.10.txt')
-        map15 = np.loadtxt(gvpath / 'R.gv.15.txt')
-        map20 = np.loadtxt(gvpath / 'R.gv.20.txt')
-        map25 = np.loadtxt(gvpath / 'R.gv.25.txt')
-        map30 = np.loadtxt(gvpath / 'R.gv.30.txt')
-        map35 = np.loadtxt(gvpath / 'R.gv.35.txt')
-        map40 = np.loadtxt(gvpath / 'R.gv.40.txt')
-
-        # map10 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.10.txt'))
-        # map15 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.15.txt'))
-        # map20 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.20.txt'))
-        # map25 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.25.txt'))
-        # map30 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.30.txt'))
-        # map35 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.35.txt'))
-        # map40 = np.loadtxt(os.path.join(
-        #     os.path.dirname(__file__), gvpath, 'R.gv.40.txt'))
+        map10 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.10.txt'))
+        map15 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.15.txt'))
+        map20 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.20.txt'))
+        map25 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.25.txt'))
+        map30 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.30.txt'))
+        map35 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.35.txt'))
+        map40 = np.loadtxt(resource_filename('orientpy',
+                                'dispmaps/R.gv.40.txt'))
 
         # Get parameters for R2
         Rearth = 6371.25
