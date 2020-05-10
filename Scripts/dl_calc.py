@@ -4,7 +4,6 @@
 
 import stdb
 import pickle
-import os.path
 import numpy as np
 from obspy.clients.fdsn import Client
 from orientpy import DL, arguments, utils
