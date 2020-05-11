@@ -1,7 +1,7 @@
 import stdb
 import numpy as np
 from pkg_resources import resource_filename
-from orientpy import BNG
+from orientpy import BNG, utils
 from obspy.clients.fdsn import Client
 from obspy.taup import TauPyModel
 from . import get_meta
@@ -69,3 +69,31 @@ def test_calc():
     assert bng.meta.cc is not None
     assert bng.meta.TR is not None
     assert bng.meta.RZ is not None
+    return bng.meta
+
+def test_average():
+
+    phi = []; cc = []; snr = []; TR = []; RZ = []; baz = []; mag = []
+    meta = test_calc()
+    phi = np.array([meta.phi])
+    snr = np.array([meta.snr])
+    cc = np.array([meta.cc])
+    TR = np.array([meta.TR])
+    RZ = np.array([meta.RZ])
+    baz = np.array([meta.baz])
+    mag = np.array([meta.mag])
+
+    # Set conditions for good result
+    snrp = snr>-10.
+    ccp = cc>-1.
+    TRp = TR>-1.e3
+    RZp = RZ>-1.e3
+
+    # Indices where conditions are met
+    ind = snrp*ccp*TRp*RZp
+
+    # Get estimate and uncertainty
+    val, err = utils.estimate(phi, ind)
+
+
+

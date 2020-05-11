@@ -72,3 +72,22 @@ def test_calc():
     assert dl.meta.R2phi is not None, 'R2phi is None'
     assert dl.meta.R1cc is not None, 'R1cc is None'
     assert dl.meta.R2cc is not None, 'R2cc is None'
+    return dl.meta
+
+def test_average():
+
+    R1phi = []; R1cc = []; R2phi = []; R2cc = []
+    meta = test_calc()
+
+    R1phi = np.array([meta.R1phi])
+    R1cc = np.array([meta.R1cc])
+    R2phi = np.array([meta.R2phi])
+    R2cc = np.array([meta.R2cc])
+
+    phi = np.concatenate((R1phi, R2phi), axis=None)
+    cc = np.concatenate((R1cc, R2cc), axis=None)
+    ind = cc > 0.
+
+    val, err = utils.estimate(phi, ind)
+
+
