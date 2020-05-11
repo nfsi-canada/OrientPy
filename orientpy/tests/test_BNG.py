@@ -1,9 +1,11 @@
 import stdb
 import numpy as np
 from pkg_resources import resource_filename
-from orientpy import BNG, utils
+from orientpy import BNG, utils, plotting
 from obspy.clients.fdsn import Client
+from obspy.signal.rotate import rotate_rt_ne, rotate_ne_rt
 from obspy.taup import TauPyModel
+from obspy import Stream
 from . import get_meta
 
 
@@ -62,7 +64,7 @@ def test_add_data():
 def test_calc():
 
     bng = test_add_data()
-    bng.calc(1., 15., [-2.,5.], showplot=False)
+    bng.calc(1., 15., [-2.,5.])
 
     assert bng.meta.phi is not None
     assert bng.meta.snr is not None
@@ -70,6 +72,35 @@ def test_calc():
     assert bng.meta.TR is not None
     assert bng.meta.RZ is not None
     return bng.meta
+
+def test_bng_waveforms():
+
+    bng = test_add_data()
+    bng.calc(1., 15., [-2.,5.])
+    stream = bng.data.copy()
+    stream.filter('bandpass', freqmin=0.01,
+        freqmax=0.04, zerophase=True)
+    trN = stream.select(component='1')[0].copy()
+    trE = stream.select(component='2')[0].copy()
+    azim = bng.meta.phi
+
+    N, E = rotate_rt_ne(trN.data, trE.data, azim)
+    trN.data = -1.*N
+    trE.data = -1.*E
+
+    # Update stats of streams
+    trN.stats.channel = trN.stats.channel[:-1] + 'N'
+    trE.stats.channel = trE.stats.channel[:-1] + 'E'
+
+    # Store corrected traces in new stream and rotate to
+    # R, T using back-azimuth
+    stcorr = Stream(traces=[trN, trE])
+    stcorr.rotate('NE->RT', back_azimuth=bng.meta.baz)
+
+    # Merge original and corrected streams
+    st = stream + stcorr
+    plot = plotting.plot_bng_waveforms(bng, st, 15., [-2.,5.])
+
 
 def test_average():
 
