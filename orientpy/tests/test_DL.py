@@ -1,7 +1,7 @@
 import stdb
 import numpy as np
 from pkg_resources import resource_filename
-from orientpy import DL
+from orientpy import DL, utils
 from obspy.clients.fdsn import Client
 from . import get_meta
 
