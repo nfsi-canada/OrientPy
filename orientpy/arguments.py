@@ -10,7 +10,7 @@ from obspy import UTCDateTime
 from numpy import nan
 
 
-def get_bng_calc_arguments():
+def get_bng_calc_arguments(argv=None):
     """
     Get Options from :class:`~optparse.OptionParser` objects.
 
@@ -254,7 +254,7 @@ def get_bng_calc_arguments():
         "[Default doesn't show plot]")
 
     # Parse Arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     # Check inputs
     #if len(args) != 1: parser.error("Need station database file")
@@ -336,7 +336,7 @@ def get_bng_calc_arguments():
     return args
 
 
-def get_bng_average_arguments():
+def get_bng_average_arguments(argv=None):
     """
     Get Options from :class:`~optparse.OptionParser` objects.
 
@@ -435,7 +435,7 @@ def get_bng_average_arguments():
 
 
     # Parse Arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     # Check inputs
     #if len(args) != 1: parser.error("Need station database file")
@@ -450,7 +450,7 @@ def get_bng_average_arguments():
     return args
 
 
-def get_dl_calc_arguments():
+def get_dl_calc_arguments(argv=None):
     """
     Get Options from :class:`~optparse.OptionParser` objects.
 
@@ -650,7 +650,7 @@ def get_dl_calc_arguments():
         help="Specify to discard the eq catalogue after processing.")
 
     # Parse Arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     # Check inputs
     #if len(args) != 1: parser.error("Need station database file")
@@ -714,7 +714,7 @@ def get_dl_calc_arguments():
     return args
 
 
-def get_dl_average_arguments():
+def get_dl_average_arguments(argv=None):
     """
     Get Options from :class:`~optparse.OptionParser` objects.
 
@@ -770,7 +770,7 @@ def get_dl_average_arguments():
         help="Specify list of Station Keys in the database to process.")
 
     # Parse Arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     # Check inputs
     #if len(args) != 1: parser.error("Need station database file")

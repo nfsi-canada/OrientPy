@@ -4,10 +4,10 @@
 
 import stdb
 import pickle
-import os.path
 import numpy as np
 from obspy.clients.fdsn import Client
 from orientpy import DL, arguments, utils
+from pathlib import Path
 
 
 def main():
@@ -37,9 +37,9 @@ def main():
         sta = db[stkey]
 
         # Output directory
-        outdir = os.path.join(args.saveloc, stkey.upper())
-        if not os.path.isdir(outdir):
-            os.makedirs(outdir)
+        outdir = Path(args.saveloc) / Path(stkey.upper())
+        if not outdir.exists():
+            outdir.mkdir()
 
         # Establish client for catalogue
         if args.verb > 1:
@@ -176,11 +176,13 @@ def main():
 
                 # Event Folder
                 timekey = dldata.meta.time.strftime("%Y%m%d_%H%M%S")
-                evtdir = outdir + "/" + timekey
+                evtdir = outdir / timekey
+                evtdata = evtdir / 'Raw_data.pkl'
+                evtmeta = evtdir / 'Meta_data.pkl'
 
                 # Check if DL data already exist and overwrite has been set
-                if os.path.isdir(evtdir):
-                    if os.path.isfile(evtdir+"/Raw_Data.pkl"):
+                if evtdir.exists():
+                    if evtdata.exists():
                         if not args.ovr:
                             continue
 
@@ -196,12 +198,11 @@ def main():
                     continue
 
                 # Create Folder if it doesn't exist
-                if not os.path.isdir(evtdir):
-                    os.makedirs(evtdir)
+                if not evtdir.exists():
+                    evtdir.mkdir()
 
                 # Save raw Traces
-                pickle.dump(dldata.data, open(
-                    evtdir + "/Raw_Data.pkl", "wb"))
+                pickle.dump(dldata.data, open(evtdata, "wb"))
 
                 # Calculate DL orientation
                 dldata.calc(showplot=False)
@@ -213,8 +214,7 @@ def main():
                     print("* R2CC: {}".format(dldata.meta.R2cc))
 
                 # Save event meta data
-                pickle.dump(dldata.meta, open(
-                    evtdir + "/Meta_Data.pkl", "wb"))
+                pickle.dump(dldata.meta, open(evtmeta, "wb"))
 
 
 if __name__ == "__main__":
