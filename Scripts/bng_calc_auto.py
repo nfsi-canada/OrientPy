@@ -9,6 +9,7 @@ import numpy as np
 from obspy.clients.fdsn import Client
 from obspy.taup import TauPyModel
 from orientpy import BNG, arguments
+from pathlib import Path
 
 
 def main():
@@ -38,20 +39,29 @@ def main():
         sta = db[stkey]
 
         # Output directory
-        outdir = os.path.join(args.saveloc, stkey.upper())
-        if not os.path.isdir(outdir):
-            os.makedirs(outdir)
+        outdir = Path(args.saveloc) / Path(stkey.upper())
+        if not outdir.exists():
+            outdir.mkdir()
+
+        # Establish client for catalogue
+        if args.verb > 1:
+            print("   Establishing Catalogue Client...")
+        cat_client = Client(args.cat_client)
+        if args.verb > 1:
+            print("      Done")
 
         # Establish client for waveforms
+        if args.verb > 1:
+            print("   Establishing Waveform Client...")
         if len(args.UserAuth) == 0:
             wf_client = Client(args.wf_client)
         else:
             wf_client = Client(args.wf_client,
                                user=args.UserAuth[0],
                                password=args.UserAuth[1])
-
-        # Establish client for catalogue
-        cat_client = Client(args.cat_client)
+        if args.verb > 1:
+            print("      Done")
+            print(" ")
 
         # Get catalogue search start time
         if args.startT is None:
@@ -179,11 +189,13 @@ def main():
 
                 # Event Folder
                 timekey = bngdata.meta.time.strftime("%Y%m%d_%H%M%S")
-                evtdir = outdir + "/" + timekey
+                evtdir = outdir / timekey
+                evtdata = evtdir / 'Raw_data.pkl'
+                evtmeta = evtdir / 'Meta_data.pkl'
 
                 # Check if BNG data already exist and overwrite has been set
-                if os.path.isdir(evtdir):
-                    if os.path.isfile(evtdir+"/Raw_Data.pkl"):
+                if evtdir.exists():
+                    if evtdata.exists():
                         if not args.ovr:
                             continue
 
@@ -199,12 +211,11 @@ def main():
                     continue
 
                 # Create Folder if it doesn't exist
-                if not os.path.isdir(evtdir):
-                    os.makedirs(evtdir)
+                if not evtdir.exists():
+                    evtdir.mkdir()
 
                 # Save raw Traces
-                pickle.dump(bngdata.data, open(
-                    evtdir + "/Raw_Data.pkl", "wb"))
+                pickle.dump(bngdata.data, open(evtdata, "wb"))
 
                 # Calculate BNG orientation
                 bngdata.calc(args.dphi, args.wlen, args.tt, 
@@ -218,8 +229,7 @@ def main():
                     print("* 1-R/Z: {}".format(bngdata.meta.RZ))
 
                 # Save event meta data
-                pickle.dump(bngdata.meta, open(
-                    evtdir + "/Meta_Data.pkl", "wb"))
+                pickle.dump(bngdata.meta, open(evtmeta, "wb"))
 
 
 if __name__ == "__main__":
