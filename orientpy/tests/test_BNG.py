@@ -18,7 +18,7 @@ def test_init_BNG():
     return bng
 
 
-def test_add_cat(ind=0):
+def test_add_event(ind=0):
 
     bng = test_init_BNG()
     cat = get_meta.get_cat()
@@ -32,7 +32,7 @@ def test_add_cat(ind=0):
 
 def test_add_data(ind=0):
 
-    bng = test_add_cat(ind)
+    bng = test_add_event(ind)
 
     # Get travel time info
     tpmodel = TauPyModel(model='iasp91')
@@ -111,7 +111,7 @@ def test_bng_waveforms(ind=0):
 def test_average():
 
     phi = []; cc = []; snr = []; TR = []; RZ = []; baz = []; mag = []
-    for ind in range(10):
+    for ind in range(20):
         meta = test_calc(ind)
         if meta is None:
             continue
