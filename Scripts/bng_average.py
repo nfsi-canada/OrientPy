@@ -113,13 +113,22 @@ def main():
 
         if args.showplot or args.saveplot:
 
-            loc = None
+            plot = plotting.plot_bng_conditions(stkey, snr, cc, TR, RZ, ind)
+
+            # save figure
             if args.saveplot:
-                loc = indir
-            plotting.plot_bng_conditions(stkey, snr, cc, TR, RZ, ind,
-                fmt=args.fmt, loc=loc)
-            plotting.plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                ind, val, err, fmt=args.fmt, loc=loc)
+                plot.savefig(indir / 'conditions.'+args.fmt, fmt=args.fmt)
+            if args.showplot:
+                plot.show()
+
+            plot = plotting.plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
+                ind, val, err)
+
+            # save figure
+            if args.saveplot:
+                plot.savefig(indir / 'results.'+args.fmt, fmt=args.fmt)
+            if args.showplot:
+                plot.show()
 
 
 

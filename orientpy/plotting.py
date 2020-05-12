@@ -43,11 +43,11 @@ def plot_bng_waveforms(bng, stream, dts, tt):
             bng.meta.TR, bng.meta.RZ)
     plt.suptitle(text, fontsize=10)
     plt.subplots_adjust(hspace=0.05)
-    plt.show()
+
+    return plt
 
 
-def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind,
-                    fmt='png', loc=None):
+def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
 
     f = plt.figure(figsize=(7.5, 5))
     gs = gridspec.GridSpec(2, 3)
@@ -100,15 +100,11 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind,
     plt.suptitle(text, fontsize=12)
     # gs.tight_layout(f, rect=[0, 0, 1, 0.95])
 
-    # save figure
-    if loc:
-        plt.savefig(loc+'conditions.'+fmt, fmt=fmt)
-
-    plt.show()
+    return plt
 
 
 def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                 ind, val, err, fmt='png', loc=None):
+                 ind, val, err):
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -171,11 +167,7 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
     # plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.subplots_adjust(hspace=0.27, wspace=0.3)
 
-    # save figure
-    if loc:
-        plt.savefig(loc+'results.'+fmt, fmt=fmt)
-
-    plt.show()
+    return plt
 
 
 def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
@@ -231,8 +223,5 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     plt.suptitle(text, fontsize=12)
     gs.tight_layout(f, rect=[0, 0, 1, 0.95])
 
-    # save figure
-    if loc:
-        plt.savefig(loc+'results.'+fmt, fmt=fmt)
-
-    plt.show()
+    return plt
+    

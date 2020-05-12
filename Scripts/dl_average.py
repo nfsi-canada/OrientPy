@@ -100,9 +100,16 @@ def main():
         if np.sum(np.isnan(np.array([val, err])))>0:
             continue
 
-        if args.showplot:
-            plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, 
-                val, err, phi, cc, args.cc, loc=indir)
+        if args.showplot or args.saveplot:
+            
+            plot = plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, 
+                val, err, phi, cc, args.cc)
+
+            # save figure
+            if args.saveplot:
+                plt.savefig(indir+'results.'+args.fmt, fmt=args.fmt)
+            if args.showplot:
+                plot.show()
 
 
 if __name__ == "__main__":

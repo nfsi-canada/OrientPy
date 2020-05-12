@@ -453,7 +453,8 @@ class BNG(Orient):
             st = stream + stcorr
 
             # Plot
-            plotting.plot_bng_waveforms(self, st, dts, tt)
+            plot = plotting.plot_bng_waveforms(self, st, dts, tt)
+            plot.show()
 
         return
 

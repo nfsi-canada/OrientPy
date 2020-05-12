@@ -13,14 +13,14 @@ command-line scripts.Currently the toolbox includes the following methods:
 - **DL** (Doran and Laske, 2017): Based on Rayleigh-wave polarization at a range of
   frequencies and for the two fundamental mode Rayleigh wave orbits. 
 
-- **BNG** (Braunmiller, Nabelek and Ghods, 2020): Based on P-wave polarization of 
-  earthquakes at regional teleseismic distances.  
+- **BNG** (Braunmiller, Nabelek and Ghods, 2020): Based on P-wave polarization from 
+  regional and teleseismic earthquakes.  
 
-- **LKSS** (Lim et al., 2018): Based on a harmonic decomposition of radial and 
+- **LKSS** (Lim et al., 2018): Based on the harmonic decomposition of radial and 
   transverse receiver functions near zero lag times.
 
 Each method can be used independently to produce an estimate of station orientation, in
-terms of the azimuth of seismic component '1' (or 'N').
+terms of the azimuth of seismic component `1` (or `N`).
 
 [![Build Status](https://travis-ci.com/nfsi-canada/OrientPy.svg?branch=master)](https://travis-ci.com/nfsi-canada/OrientPy)
 [![codecov](https://codecov.io/gh/nfsi-canada/OrientPy/branch/master/graph/badge.svg)](https://codecov.io/gh/nfsi-canada/OrientPy)
