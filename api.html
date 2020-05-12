@@ -823,6 +823,157 @@ for phi</p></li>
 </div>
 <div class="section" id="module-orientpy.plotting">
 <span id="plotting"></span><h2>plotting<a class="headerlink" href="#module-orientpy.plotting" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="orientpy.plotting.density_estimate">
+<code class="sig-prename descclassname">orientpy.plotting.</code><code class="sig-name descname">density_estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">values</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.plotting.density_estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function estimates the KDE, mode of distribution, and
+95% confidence intervals for the <code class="docutils literal notranslate"><span class="pre">values</span></code> variables
+evaluated at locations <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of values for which to estimate KDE</p></li>
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of locations at which to evaluate the KDE</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Significance level (alpha=0.05 means 95% confidence)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>kde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">gaussian_kde</span></code>) – KDE object for data <code class="docutils literal notranslate"><span class="pre">values</span></code> evaluated at <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><strong>x_max</strong> (<em>float</em>) – Value at which the KDE is maximum</p></li>
+<li><p><strong>CI_min</strong> (<em>float</em>) – Lower bound of confidence interval</p></li>
+<li><p><strong>CI_max</strong> (<em>float</em>) – Upper bound of confidence interval</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.plotting.plot_bng_waveforms">
+<code class="sig-prename descclassname">orientpy.plotting.</code><code class="sig-name descname">plot_bng_waveforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bng</span></em>, <em class="sig-param"><span class="n">stream</span></em>, <em class="sig-param"><span class="n">dts</span></em>, <em class="sig-param"><span class="n">tt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.plotting.plot_bng_waveforms" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function plots the original and rotated waveforms
+following the BNG processing for quality control.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bng</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BNG</span></code>) – BNG object for a single event</p></li>
+<li><p><strong>stream</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream of un-rotated and rotated waveforms</p></li>
+<li><p><strong>dts</strong> (<em>float</em>) – Length of time window over which to plot waveforms</p></li>
+<li><p><strong>tt</strong> (<em>list</em>) – Zoomed in time window over which processing is done</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>plt</strong> – Handle to final plot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pyplot</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.plotting.plot_bng_conditions">
+<code class="sig-prename descclassname">orientpy.plotting.</code><code class="sig-name descname">plot_bng_conditions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stkey</span></em>, <em class="sig-param"><span class="n">snr</span></em>, <em class="sig-param"><span class="n">cc</span></em>, <em class="sig-param"><span class="n">TR</span></em>, <em class="sig-param"><span class="n">RZ</span></em>, <em class="sig-param"><span class="n">ind</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.plotting.plot_bng_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function plots all parameters and the threshold condition for
+contributing to the final estimate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stkey</strong> (<em>str</em>) – Station key</p></li>
+<li><p><strong>snr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of signal-to-noise ratio values for each earthquake</p></li>
+<li><p><strong>cc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of cross-correlation values between rotated radial
+and vertical components</p></li>
+<li><p><strong>TR</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of transverse-to-radial component ratios for rotated
+components</p></li>
+<li><p><strong>RZ</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of radial-to-vertical component ratios for rotated
+components</p></li>
+<li><p><strong>ind</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of boolean (index) values where conditions on previous
+parameters are examined</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>plt</strong> – Handle to final plot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pyplot</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.plotting.plot_bng_results">
+<code class="sig-prename descclassname">orientpy.plotting.</code><code class="sig-name descname">plot_bng_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stkey</span></em>, <em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">snr</span></em>, <em class="sig-param"><span class="n">cc</span></em>, <em class="sig-param"><span class="n">TR</span></em>, <em class="sig-param"><span class="n">RZ</span></em>, <em class="sig-param"><span class="n">baz</span></em>, <em class="sig-param"><span class="n">mag</span></em>, <em class="sig-param"><span class="n">ind</span></em>, <em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="n">err</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.plotting.plot_bng_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function plots the results of all BNG estimates with final
+estimates from those that pass the conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stkey</strong> (<em>str</em>) – Station key</p></li>
+<li><p><strong>phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of estimated azimuth for each earthquake</p></li>
+<li><p><strong>snr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of signal-to-noise ratio values for each earthquake</p></li>
+<li><p><strong>cc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of cross-correlation values between rotated radial
+and vertical components</p></li>
+<li><p><strong>TR</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of transverse-to-radial component ratios for rotated
+components</p></li>
+<li><p><strong>RZ</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of radial-to-vertical component ratios for rotated
+components</p></li>
+<li><p><strong>baz</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of back-azimuth values corresponding to each earthquake</p></li>
+<li><p><strong>mag</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of magnitude values corresponding to each earthquake</p></li>
+<li><p><strong>ind</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of boolean values where conditions on previous parameters
+are examined</p></li>
+<li><p><strong>val</strong> (<em>float</em>) – Final estimated azimuth for station orientation</p></li>
+<li><p><strong>err</strong> (<em>float</em>) – Final error estimate on azimuth</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Significance level (alpha=0.05 means 95% confidence)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>plt</strong> – Handle to final plot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pyplot</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="orientpy.plotting.plot_dl_results">
+<code class="sig-prename descclassname">orientpy.plotting.</code><code class="sig-name descname">plot_dl_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stkey</span></em>, <em class="sig-param"><span class="n">R1phi</span></em>, <em class="sig-param"><span class="n">R1cc</span></em>, <em class="sig-param"><span class="n">R2phi</span></em>, <em class="sig-param"><span class="n">R2cc</span></em>, <em class="sig-param"><span class="n">ind</span></em>, <em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="n">err</span></em>, <em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">cc</span></em>, <em class="sig-param"><span class="n">cc0</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.plotting.plot_dl_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function plots the results of all DL estimates with final
+estimates from those that pass the conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stkey</strong> (<em>str</em>) – Station key</p></li>
+<li><p><strong>R1phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of azimuth values from each estimate for direct
+Rayleigh-wave pass</p></li>
+<li><p><strong>R1cc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of cross-correlation values between rotated radial
+and vertical components for direct Rayleigh-wave pass</p></li>
+<li><p><strong>R2phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of azimuth values from each estimate for complementary
+Rayleigh-wave pass</p></li>
+<li><p><strong>R2cc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of cross-correlation values between rotated radial
+and vertical components for complementary Rayleigh-wave pass</p></li>
+<li><p><strong>ind</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Array of boolean values where conditions on previous parameters
+are examined</p></li>
+<li><p><strong>val</strong> (<em>float</em>) – Final estimated azimuth for station orientation</p></li>
+<li><p><strong>err</strong> (<em>float</em>) – Final error estimate on azimuth</p></li>
+<li><p><strong>phi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – All azimuth estimates from both R1 (direct pass) and R2
+(complementary pass)</p></li>
+<li><p><strong>cc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – All cross-correlation estimates from both R1 (direct pass) and
+R2 (complementary pass)</p></li>
+<li><p><strong>cc0</strong> (<em>float</em>) – Threshold cross-correlation value</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Significance level (alpha=0.05 means 95% confidence)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>plt</strong> – Handle to final plot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pyplot</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 
