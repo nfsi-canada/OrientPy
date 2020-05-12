@@ -39,11 +39,11 @@ def test_init_DL():
     return dl
 
 
-def test_add_cat():
+def test_add_event(ind=0):
 
     dl = test_init_DL()
     cat = get_meta.get_cat()
-    for ev in cat[0:3]:
+    for ev in [cat[ind]]:
         accept = dl.add_event(
             ev, gacmin=0., gacmax=180.,
             depmax=40., returned=True)
@@ -51,43 +51,55 @@ def test_add_cat():
     return dl
 
 
-def test_add_data():
+def test_add_data(ind=0):
 
-    dl = test_add_cat()
+    dl = test_add_event(ind)
     t1 = 0.
     t2 = 4.*60.*60.
     has_data = dl.download_data(
         client=Client(), stdata=[],
         ndval=0., new_sr=2., t1=t1, t2=t2,
         returned=True, verbose=False)
-    assert has_data, 'no data'
-    return dl
+    return has_data, dl
 
 
-def test_calc():
+def test_calc(ind=0):
 
-    dl = test_add_data()
-    dl.calc(showplot=False)
-    assert dl.meta.R1phi is not None, 'R1phi is None'
-    assert dl.meta.R2phi is not None, 'R2phi is None'
-    assert dl.meta.R1cc is not None, 'R1cc is None'
-    assert dl.meta.R2cc is not None, 'R2cc is None'
-    return dl.meta
+    has_data, dl = test_add_data(ind)
+    if not has_data:
+        return None
+    else:
+        dl.calc(showplot=False)
+        assert dl.meta.R1phi is not None, 'R1phi is None'
+        assert dl.meta.R2phi is not None, 'R2phi is None'
+        assert dl.meta.R1cc is not None, 'R1cc is None'
+        assert dl.meta.R2cc is not None, 'R2cc is None'
+        return dl.meta
 
-def test_average():
+def test_average(ind=0):
 
     R1phi = []; R1cc = []; R2phi = []; R2cc = []
-    meta = test_calc()
+    for ind in range(4):
+        meta = test_calc(ind)
+        if meta is None:
+            continue
+        R1phi.append(meta.R1phi)
+        R2phi.append(meta.R2phi)
+        R1cc.append(meta.R1cc)
+        R2cc.append(meta.R2cc)
 
-    R1phi = np.array([meta.R1phi])
-    R1cc = np.array([meta.R1cc])
-    R2phi = np.array([meta.R2phi])
-    R2cc = np.array([meta.R2cc])
+    R1phi = np.array(R1phi).flatten()
+    R1cc = np.array(R1cc).flatten()
+    R2phi = np.array(R2phi).flatten()
+    R2cc = np.array(R2cc).flatten()
 
     phi = np.concatenate((R1phi, R2phi), axis=None)
     cc = np.concatenate((R1cc, R2cc), axis=None)
-    ind = cc > 0.
+    ind = cc > args.cc
 
     val, err = utils.estimate(phi, ind)
+
+    plot = plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, 
+                val, err, phi, cc, 0.5)
 
 
