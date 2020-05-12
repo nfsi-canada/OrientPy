@@ -119,8 +119,8 @@ def plot_bng_waveforms(bng, stream, dts, tt):
 
 def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
     """ 
-    This function plots the original and rotated waveforms
-    following the BNG processing for quality control.
+    This function plots all parameters and the threshold condition for
+    contributing to the final estimate.
 
     Parameters
     ----------
@@ -212,6 +212,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
     ----------
     stkey : str
         Station key
+    phi : :class:`~numpy.ndarray`
+        Array of estimated azimuth for each earthquake
     snr : :class:`~numpy.ndarray`
         Array of signal-to-noise ratio values for each earthquake
     cc : :class:`~numpy.ndarray`
@@ -223,9 +225,19 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
     RZ : :class:`~numpy.ndarray`
         Array of radial-to-vertical component ratios for rotated
         components
+    baz : :class:`~numpy.ndarray`
+        Array of back-azimuth values corresponding to each earthquake
+    mag : :class:`~numpy.ndarray`
+        Array of magnitude values corresponding to each earthquake
     ind : :class:`~numpy.ndarray`
         Array of boolean values where conditions on previous parameters
         are examined
+    val : float
+        Final estimated azimuth for station orientation
+    err : float
+        Final error estimate on azimuth
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
 
     Returns
     -------
@@ -300,6 +312,50 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
 def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
                  err, phi, cc, cc0, alpha=0.05):
+    """ 
+    This function plots the results of all DL estimates with final
+    estimates from those that pass the conditions.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    R1phi : :class:`~numpy.ndarray`
+        Array of azimuth values from each estimate for direct 
+        Rayleigh-wave pass
+    R1cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components for direct Rayleigh-wave pass
+    R2phi : :class:`~numpy.ndarray`
+        Array of azimuth values from each estimate for complementary 
+        Rayleigh-wave pass
+    R2cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components for complementary Rayleigh-wave pass
+    ind : :class:`~numpy.ndarray`
+        Array of boolean values where conditions on previous parameters
+        are examined
+    val : float
+        Final estimated azimuth for station orientation
+    err : float
+        Final error estimate on azimuth
+    phi : :class:`~numpy.ndarray`
+        All azimuth estimates from both R1 (direct pass) and R2 
+        (complementary pass)
+    cc : :class:`~numpy.ndarray`
+        All cross-correlation estimates from both R1 (direct pass) and 
+        R2 (complementary pass)
+    cc0 : float
+        Threshold cross-correlation value
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -330,6 +386,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     # KDE plot
     y = np.arange(val-180., val+180., 0.01)
 
+    # Apply outlier analysis
     phip = utils.outlier(allphi, 5.)
     phipp = utils.outlier(goodphi, 5.)
 
@@ -346,6 +403,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
         ax2.yaxis.tick_right()
         ax2.legend()
 
+    # Add text as title
     text = "Station "+stkey + \
         ": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
     plt.suptitle(text, fontsize=12)
