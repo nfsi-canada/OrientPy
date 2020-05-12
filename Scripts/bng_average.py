@@ -7,6 +7,7 @@ import pickle
 import os.path
 import numpy as np
 from orientpy import utils, arguments, plotting
+from pathlib import Path
 
 
 def main():
@@ -36,8 +37,8 @@ def main():
         sta = db[stkey]
 
         # Input directory
-        indir = os.path.join(args.loadloc, stkey.upper()) + '/'
-        if not os.path.isdir(indir):
+        indir = Path(args.loadloc) / stkey.upper()
+        if not indir.exists():
             raise(Exception("Directory does not exist: ", indir, ", aborting"))
 
         # Temporary print locations
@@ -70,8 +71,8 @@ def main():
         for folder in os.listdir(indir):
 
             # Load meta data
-            filename = indir+"/"+folder+"/Meta_Data.pkl"
-            if not os.path.isfile(filename):
+            filename = indir / folder / "Meta_Data.pkl"
+            if not filename.is_file():
                 continue
             meta = pickle.load(open(filename, 'rb'))
 
@@ -117,7 +118,8 @@ def main():
 
             # save figure
             if args.saveplot:
-                plot.savefig(indir / 'conditions.'+args.fmt, fmt=args.fmt)
+                figname = 'conditions.'+args.fmt
+                plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
 
@@ -126,7 +128,8 @@ def main():
 
             # save figure
             if args.saveplot:
-                plot.savefig(indir / 'results.'+args.fmt, fmt=args.fmt)
+                figname = 'results.'+args.fmt
+                plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
 
