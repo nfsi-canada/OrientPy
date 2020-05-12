@@ -113,6 +113,7 @@ def test_average():
     RZ = np.array([meta.RZ])
     baz = np.array([meta.baz])
     mag = np.array([meta.mag])
+    stkey = meta.sta.station
 
     # Set conditions for good result
     snrp = snr>-10.
@@ -125,6 +126,13 @@ def test_average():
 
     # Get estimate and uncertainty
     val, err = utils.estimate(phi, ind)
+
+    plot = plotting.plot_bng_conditions(stkey, snr, cc, TR, RZ, ind)
+
+
+    plot = plotting.plot_bng_results(stkey, phi, snr, cc, 
+        TR, RZ, baz, mag, ind, val, err)
+
 
 
 
