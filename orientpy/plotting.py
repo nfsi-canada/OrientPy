@@ -1,23 +1,72 @@
+# Copyright 2019 Pascal Audet
+#
+# This file is part of OrientPy.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
+# -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from orientpy import utils
 import numpy as np
 from scipy.stats import gaussian_kde
 
-# Density estimation
-def density_estimate(values, x):
+def density_estimate(values, x, alpha):
+    """ 
+    This function estimates the KDE, mode of distribution, and
+    95% confidence intervals for the ``values`` variables
+    evaluated at locations ``x``
+
+    Parameters
+    ----------
+    values : :class:`~numpy.ndarray`
+        Array of values for which to estimate KDE
+    x : :class:`~numpy.ndarray`
+        Array of locations at which to evaluate the KDE
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
+
+    Returns
+    -------
+    kde : :class:`~scipy.stats.gaussian_kde`
+        KDE object for data ``values`` evaluated at ``x``
+    x_max : float
+        Value at which the KDE is maximum
+    CI_min : float
+        Lower bound of confidence interval
+    CI_max : float
+        Upper bound of confidence interval
+    
+    """
+    alpha /= 2.
     kernel = gaussian_kde(values)
     kde = kernel.evaluate(x)
     dx = x[1] - x[0]
     cdf = np.cumsum(kernel.evaluate(x)*dx)
     k_map = np.mean(x[kernel(x) == np.max(kernel(x))])
-    CI_min = x[cdf < 0.05][-1]
+    CI_min = x[cdf < alpha][-1]
     try:
-        CI_max = x[cdf > 0.95][0]
+        CI_max = x[cdf > (1.-alpha)][0]
     except:
         CI_max = np.max(x)
-    return kde, k_map, CI_min, CI_max
+
+    return kde, x_max, CI_min, CI_max
 
 
 def plot_bng_waveforms(bng, stream, dts, tt):
@@ -104,7 +153,7 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
 
 
 def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                 ind, val, err):
+                 ind, val, err, alpha=0.05):
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -149,8 +198,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
     if len(phip) > 0 and len(phipp) > 0:
 
-        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y)
-        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y)
+        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y, alpha)
+        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y, alpha)
 
         ax = fig.add_subplot(gs1[0], sharey=fig.axes[2])
         ax.plot(k1, y)
@@ -171,7 +220,7 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
 
 def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
-                 err, phi, cc, cc0, loc=None, fmt='png'):
+                 err, phi, cc, cc0, alpha=0.05):
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -207,8 +256,8 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
 
     if len(phip) > 0 and len(phipp) > 0:
 
-        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y)
-        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y)
+        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y, alpha)
+        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y, alpha)
 
         ax2 = f.add_subplot(gs[1], sharey=ax1)
         ax2.plot(k1, y, label='All')
