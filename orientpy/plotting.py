@@ -1,26 +1,96 @@
+# Copyright 2019 Pascal Audet
+#
+# This file is part of OrientPy.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
+# -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from orientpy import utils
 import numpy as np
 from scipy.stats import gaussian_kde
 
-# Density estimation
-def density_estimate(values, x):
+def density_estimate(values, x, alpha):
+    """ 
+    This function estimates the KDE, mode of distribution, and
+    95% confidence intervals for the ``values`` variables
+    evaluated at locations ``x``
+
+    Parameters
+    ----------
+    values : :class:`~numpy.ndarray`
+        Array of values for which to estimate KDE
+    x : :class:`~numpy.ndarray`
+        Array of locations at which to evaluate the KDE
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
+
+    Returns
+    -------
+    kde : :class:`~scipy.stats.gaussian_kde`
+        KDE object for data ``values`` evaluated at ``x``
+    x_max : float
+        Value at which the KDE is maximum
+    CI_min : float
+        Lower bound of confidence interval
+    CI_max : float
+        Upper bound of confidence interval
+    
+    """
+    alpha /= 2.
     kernel = gaussian_kde(values)
     kde = kernel.evaluate(x)
     dx = x[1] - x[0]
     cdf = np.cumsum(kernel.evaluate(x)*dx)
-    k_map = np.mean(x[kernel(x) == np.max(kernel(x))])
-    CI_min = x[cdf < 0.05][-1]
+    x_max = np.mean(x[kernel(x) == np.max(kernel(x))])
+    CI_min = x[cdf < alpha][-1]
     try:
-        CI_max = x[cdf > 0.95][0]
+        CI_max = x[cdf > (1.-alpha)][0]
     except:
         CI_max = np.max(x)
-    return kde, k_map, CI_min, CI_max
+
+    return kde, x_max, CI_min, CI_max
 
 
 def plot_bng_waveforms(bng, stream, dts, tt):
+    """ 
+    This function plots the original and rotated waveforms
+    following the BNG processing for quality control.
+
+    Parameters
+    ----------
+    bng : :class:`~orientpy.BNG`
+        BNG object for a single event
+    stream : :class:`~obspy.core.Stream`
+        Stream of un-rotated and rotated waveforms
+    dts : float
+        Length of time window over which to plot waveforms
+    tt : list
+        Zoomed in time window over which processing is done
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     fig, ax = plt.subplots(5, 1, sharey=True)
     cmpts = ['Z', 'R', 'T', '1', '2']
@@ -48,6 +118,35 @@ def plot_bng_waveforms(bng, stream, dts, tt):
 
 
 def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
+    """ 
+    This function plots all parameters and the threshold condition for
+    contributing to the final estimate.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    snr : :class:`~numpy.ndarray`
+        Array of signal-to-noise ratio values for each earthquake
+    cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components
+    TR : :class:`~numpy.ndarray`
+        Array of transverse-to-radial component ratios for rotated
+        components
+    RZ : :class:`~numpy.ndarray`
+        Array of radial-to-vertical component ratios for rotated
+        components
+    ind : :class:`~numpy.ndarray`
+        Array of boolean (index) values where conditions on previous 
+        parameters are examined
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     f = plt.figure(figsize=(7.5, 5))
     gs = gridspec.GridSpec(2, 3)
@@ -104,7 +203,48 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
 
 
 def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                 ind, val, err):
+                 ind, val, err, alpha=0.05):
+    """ 
+    This function plots the results of all BNG estimates with final
+    estimates from those that pass the conditions.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    phi : :class:`~numpy.ndarray`
+        Array of estimated azimuth for each earthquake
+    snr : :class:`~numpy.ndarray`
+        Array of signal-to-noise ratio values for each earthquake
+    cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components
+    TR : :class:`~numpy.ndarray`
+        Array of transverse-to-radial component ratios for rotated
+        components
+    RZ : :class:`~numpy.ndarray`
+        Array of radial-to-vertical component ratios for rotated
+        components
+    baz : :class:`~numpy.ndarray`
+        Array of back-azimuth values corresponding to each earthquake
+    mag : :class:`~numpy.ndarray`
+        Array of magnitude values corresponding to each earthquake
+    ind : :class:`~numpy.ndarray`
+        Array of boolean values where conditions on previous parameters
+        are examined
+    val : float
+        Final estimated azimuth for station orientation
+    err : float
+        Final error estimate on azimuth
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -149,8 +289,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
     if len(phip) > 0 and len(phipp) > 0:
 
-        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y)
-        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y)
+        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y, alpha)
+        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y, alpha)
 
         ax = fig.add_subplot(gs1[0], sharey=fig.axes[2])
         ax.plot(k1, y)
@@ -171,7 +311,51 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
 
 def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
-                 err, phi, cc, cc0, loc=None, fmt='png'):
+                 err, phi, cc, cc0, alpha=0.05):
+    """ 
+    This function plots the results of all DL estimates with final
+    estimates from those that pass the conditions.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    R1phi : :class:`~numpy.ndarray`
+        Array of azimuth values from each estimate for direct 
+        Rayleigh-wave pass
+    R1cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components for direct Rayleigh-wave pass
+    R2phi : :class:`~numpy.ndarray`
+        Array of azimuth values from each estimate for complementary 
+        Rayleigh-wave pass
+    R2cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components for complementary Rayleigh-wave pass
+    ind : :class:`~numpy.ndarray`
+        Array of boolean values where conditions on previous parameters
+        are examined
+    val : float
+        Final estimated azimuth for station orientation
+    err : float
+        Final error estimate on azimuth
+    phi : :class:`~numpy.ndarray`
+        All azimuth estimates from both R1 (direct pass) and R2 
+        (complementary pass)
+    cc : :class:`~numpy.ndarray`
+        All cross-correlation estimates from both R1 (direct pass) and 
+        R2 (complementary pass)
+    cc0 : float
+        Threshold cross-correlation value
+    alpha : float
+        Significance level (alpha=0.05 means 95% confidence)
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)
@@ -202,13 +386,14 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     # KDE plot
     y = np.arange(val-180., val+180., 0.01)
 
+    # Apply outlier analysis
     phip = utils.outlier(allphi, 5.)
     phipp = utils.outlier(goodphi, 5.)
 
     if len(phip) > 0 and len(phipp) > 0:
 
-        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y)
-        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y)
+        k1, k1_map, CI1_min, CI1_max = density_estimate(phip, y, alpha)
+        k2, k2_map, CI2_min, CI2_max = density_estimate(phipp, y, alpha)
 
         ax2 = f.add_subplot(gs[1], sharey=ax1)
         ax2.plot(k1, y, label='All')
@@ -218,6 +403,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
         ax2.yaxis.tick_right()
         ax2.legend()
 
+    # Add text as title
     text = "Station "+stkey + \
         ": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
     plt.suptitle(text, fontsize=12)

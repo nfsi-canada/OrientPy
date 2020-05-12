@@ -108,7 +108,7 @@ def main():
 
             # save figure
             if args.saveplot:
-                figname = 'results.'+args.fmt
+                figname = 'results.' + args.fmt
                 plt.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
