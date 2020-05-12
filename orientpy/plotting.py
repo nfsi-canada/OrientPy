@@ -59,7 +59,7 @@ def density_estimate(values, x, alpha):
     kde = kernel.evaluate(x)
     dx = x[1] - x[0]
     cdf = np.cumsum(kernel.evaluate(x)*dx)
-    k_map = np.mean(x[kernel(x) == np.max(kernel(x))])
+    x_max = np.mean(x[kernel(x) == np.max(kernel(x))])
     CI_min = x[cdf < alpha][-1]
     try:
         CI_max = x[cdf > (1.-alpha)][0]
@@ -70,6 +70,27 @@ def density_estimate(values, x, alpha):
 
 
 def plot_bng_waveforms(bng, stream, dts, tt):
+    """ 
+    This function plots the original and rotated waveforms
+    following the BNG processing for quality control.
+
+    Parameters
+    ----------
+    bng : :class:`~orientpy.BNG`
+        BNG object for a single event
+    stream : :class:`~obspy.core.Stream`
+        Stream of un-rotated and rotated waveforms
+    dts : float
+        Length of time window over which to plot waveforms
+    tt : list
+        Zoomed in time window over which processing is done
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     fig, ax = plt.subplots(5, 1, sharey=True)
     cmpts = ['Z', 'R', 'T', '1', '2']
@@ -97,6 +118,35 @@ def plot_bng_waveforms(bng, stream, dts, tt):
 
 
 def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
+    """ 
+    This function plots the original and rotated waveforms
+    following the BNG processing for quality control.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    snr : :class:`~numpy.ndarray`
+        Array of signal-to-noise ratio values for each earthquake
+    cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components
+    TR : :class:`~numpy.ndarray`
+        Array of transverse-to-radial component ratios for rotated
+        components
+    RZ : :class:`~numpy.ndarray`
+        Array of radial-to-vertical component ratios for rotated
+        components
+    ind : :class:`~numpy.ndarray`
+        Array of boolean (index) values where conditions on previous 
+        parameters are examined
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     f = plt.figure(figsize=(7.5, 5))
     gs = gridspec.GridSpec(2, 3)
@@ -154,6 +204,35 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
 
 def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
                  ind, val, err, alpha=0.05):
+    """ 
+    This function plots the results of all BNG estimates with final
+    estimates from those that pass the conditions.
+
+    Parameters
+    ----------
+    stkey : str
+        Station key
+    snr : :class:`~numpy.ndarray`
+        Array of signal-to-noise ratio values for each earthquake
+    cc : :class:`~numpy.ndarray`
+        Array of cross-correlation values between rotated radial 
+        and vertical components
+    TR : :class:`~numpy.ndarray`
+        Array of transverse-to-radial component ratios for rotated
+        components
+    RZ : :class:`~numpy.ndarray`
+        Array of radial-to-vertical component ratios for rotated
+        components
+    ind : :class:`~numpy.ndarray`
+        Array of boolean values where conditions on previous parameters
+        are examined
+
+    Returns
+    -------
+    plt : :class:`~matplotlib.pyplot`
+        Handle to final plot
+
+    """
 
     # Re-center phi values and extract ones that meet condition
     allphi = utils.centerat(phi, m=val)

@@ -106,7 +106,7 @@ def main():
 
         # output results to termianl
         print("|    B-N-G mean, error, data included: " +
-              "{0:.2f}, {1:.2f}, {2}".format(val, err, np.sum(ind)))
+              "{0:.1f}, {1:.1f}, {2}".format(val, err, np.sum(ind)))
         print()
 
         if np.sum(np.isnan(np.array([val, err])))>0:
@@ -118,7 +118,7 @@ def main():
 
             # save figure
             if args.saveplot:
-                figname = 'conditions.'+args.fmt
+                figname = 'conditions.' + args.fmt
                 plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
@@ -128,7 +128,7 @@ def main():
 
             # save figure
             if args.saveplot:
-                figname = 'results.'+args.fmt
+                figname = 'results.' + args.fmt
                 plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
