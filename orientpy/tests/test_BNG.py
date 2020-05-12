@@ -6,6 +6,7 @@ from obspy.clients.fdsn import Client
 from obspy.signal.rotate import rotate_rt_ne, rotate_ne_rt
 from obspy.taup import TauPyModel
 from obspy import Stream
+from obspy.core.event.event import Event
 from . import get_meta
 
 
@@ -17,21 +18,21 @@ def test_init_BNG():
     return bng
 
 
-def test_add_cat():
+def test_add_cat(ind=0):
 
     bng = test_init_BNG()
     cat = get_meta.get_cat()
-    for ev in [cat[0]]:
+    for ev in [cat[ind]]:
         accept = bng.add_event(
             ev, gacmin=30., gacmax=90.,
             depmax=40., returned=True)
-        assert accept, 'Event not accepted'
+        assert isinstance(ev, Event)
     return bng
 
 
-def test_add_data():
+def test_add_data(ind=0):
 
-    bng = test_add_cat()
+    bng = test_add_cat(ind)
 
     # Get travel time info
     tpmodel = TauPyModel(model='iasp91')
@@ -57,25 +58,30 @@ def test_add_data():
         ndval=0., new_sr=2., t1=t1, t2=t2, 
         returned=True, verbose=False)
 
-    assert has_data, 'No data'
-    return bng
+    # assert has_data, 'No data'
+    return has_data, bng
 
 
-def test_calc():
+def test_calc(ind=0):
 
-    bng = test_add_data()
-    bng.calc(1., 15., [-2.,5.])
+    has_data, bng = test_add_data(ind)
+    if not has_data:
+        return None
+    else:
+        bng.calc(1., 15., [-2.,5.])
+        assert bng.meta.phi is not None
+        assert bng.meta.snr is not None
+        assert bng.meta.cc is not None
+        assert bng.meta.TR is not None
+        assert bng.meta.RZ is not None
+        return bng.meta
 
-    assert bng.meta.phi is not None
-    assert bng.meta.snr is not None
-    assert bng.meta.cc is not None
-    assert bng.meta.TR is not None
-    assert bng.meta.RZ is not None
-    return bng.meta
+def test_bng_waveforms(ind=0):
 
-def test_bng_waveforms():
+    has_data, bng = test_add_data(ind)
+    if not has_data:
+        pass
 
-    bng = test_add_data()
     bng.calc(1., 15., [-2.,5.])
     stream = bng.data.copy()
     stream.filter('bandpass', freqmin=0.01,
@@ -105,21 +111,33 @@ def test_bng_waveforms():
 def test_average():
 
     phi = []; cc = []; snr = []; TR = []; RZ = []; baz = []; mag = []
-    meta = test_calc()
-    phi = np.array([meta.phi])
-    snr = np.array([meta.snr])
-    cc = np.array([meta.cc])
-    TR = np.array([meta.TR])
-    RZ = np.array([meta.RZ])
-    baz = np.array([meta.baz])
-    mag = np.array([meta.mag])
-    stkey = meta.sta.station
+    for ind in range(10):
+        meta = test_calc(ind)
+        if meta is None:
+            continue
+        phi.append(meta.phi)
+        snr.append(meta.snr)
+        cc.append(np.abs(meta.cc))
+        TR.append(meta.TR)
+        RZ.append(meta.RZ)
+        baz.append(meta.baz)
+        mag.append(meta.mag)
+
+    phi = np.array(phi)
+    cc = np.array(cc)
+    snr = np.array(snr)
+    TR = np.array(TR)
+    RZ = np.array(RZ)
+    baz = np.array(baz)
+    mag = np.array(mag)
+
+    stkey = ''
 
     # Set conditions for good result
-    snrp = snr>-10.
+    snrp = snr>-1.
     ccp = cc>-1.
-    TRp = TR>-1.e3
-    RZp = RZ>-1.e3
+    TRp = TR>-1.
+    RZp = RZ>-1.
 
     # Indices where conditions are met
     ind = snrp*ccp*TRp*RZp

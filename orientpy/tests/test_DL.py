@@ -43,7 +43,7 @@ def test_add_cat():
 
     dl = test_init_DL()
     cat = get_meta.get_cat()
-    for ev in [cat[0]]:
+    for ev in cat[0:3]:
         accept = dl.add_event(
             ev, gacmin=0., gacmax=180.,
             depmax=40., returned=True)
