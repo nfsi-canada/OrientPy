@@ -1,7 +1,7 @@
 import stdb
 import numpy as np
 from pkg_resources import resource_filename
-from orientpy import DL, utils
+from orientpy import DL, utils, plotting
 from obspy.clients.fdsn import Client
 from . import get_meta
 
@@ -93,9 +93,11 @@ def test_average(ind=0):
     R2phi = np.array(R2phi).flatten()
     R2cc = np.array(R2cc).flatten()
 
+    stkey = ''
+
     phi = np.concatenate((R1phi, R2phi), axis=None)
     cc = np.concatenate((R1cc, R2cc), axis=None)
-    ind = cc > args.cc
+    ind = cc > 0.5
 
     val, err = utils.estimate(phi, ind)
 
