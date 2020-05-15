@@ -25,7 +25,7 @@ setup(
     author_email='pascal.audet@uottawa.ca',
     maintainer='Pascal Audet',
     maintainer_email='pascal.audet@uottawa.ca',
-    url='https://github.com/nfsi-canada/OBStools',
+    url='https://github.com/nfsi-canada/OrientPy',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',

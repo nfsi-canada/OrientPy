@@ -6,7 +6,7 @@ from obspy.clients.fdsn import Client
 
 
 def get_stdb():
-    dbfile = resource_filename('obstools',
+    dbfile = resource_filename('orientpy',
                                'examples/data/LOBS3.pkl')
     db = stdb.io.load_db(dbfile)
     return db['YH.LOBS3']
