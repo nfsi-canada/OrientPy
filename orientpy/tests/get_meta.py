@@ -7,9 +7,9 @@ from obspy.clients.fdsn import Client
 
 def get_stdb():
     dbfile = resource_filename('obstools',
-                               'examples/meta/M08A.pkl')
+                               'examples/data/LOBS3.pkl')
     db = stdb.io.load_db(dbfile)
-    return db['7D.M08A']
+    return db['YH.LOBS3']
 
 
 def get_cat():
