@@ -2,6 +2,7 @@ import os.path
 from os import listdir
 import re
 from numpy.distutils.core import setup
+from pathlib import Path
 
 def find_version(*paths):
     fname = os.path.join(os.path.dirname(__file__), *paths)
@@ -12,7 +13,7 @@ def find_version(*paths):
         return match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-scripts = ['Scripts/' + i for i in listdir('Scripts/')]
+scripts = [str(x) for x in Path('Scripts').iterdir() if x.is_dir()]
 
 setup(
     name='orientpy',
