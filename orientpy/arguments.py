@@ -36,7 +36,7 @@ def get_bng_calc_arguments(argv=None):
     """
 
     parser = ArgumentParser(
-        usage="%(prog)s [options] <Station Database>",
+        usage="%(prog)s [arguments] <Station Database>",
         description="Program to compute the orientation of the components " +
         "of a station based on those in a station database.")
     parser.add_argument(
@@ -362,7 +362,7 @@ def get_bng_average_arguments(argv=None):
     """
 
     parser = ArgumentParser(
-        usage="%(prog)s [options] <Station Database>",
+        usage="%(prog)s [arguments] <Station Database>",
         description="Program to average the orientations of the seismometer " +
         "in a station database.")
     parser.add_argument(
@@ -476,7 +476,7 @@ def get_dl_calc_arguments(argv=None):
     """
 
     parser = ArgumentParser(
-        usage="%(prog)s [options] <Station Database>",
+        usage="%(prog)s [arguments] <Station Database>",
         description="Program to compute the orientation of the components " +
         "of a station based on those in a station database.")
     parser.add_argument(
@@ -740,7 +740,7 @@ def get_dl_average_arguments(argv=None):
     """
 
     parser = ArgumentParser(
-        usage="%(prog)s [options] <Station Database>",
+        usage="%(prog)s [arguments] <Station Database>",
         description="Program to average the orientations of the seismometer " +
         "in a station database.")
     parser.add_argument(
