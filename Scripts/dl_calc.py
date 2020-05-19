@@ -39,7 +39,7 @@ def main():
         # Output directory
         outdir = Path(args.saveloc) / Path(stkey.upper())
         if not outdir.exists():
-            outdir.mkdir()
+            outdir.mkdir(parents=True)
 
         # Establish client for catalogue
         if args.verb > 1:
@@ -199,7 +199,7 @@ def main():
 
                 # Create Folder if it doesn't exist
                 if not evtdir.exists():
-                    evtdir.mkdir()
+                    evtdir.mkdir(parents=True)
 
                 # Save raw Traces
                 pickle.dump(dldata.data, open(evtdata, "wb"))
