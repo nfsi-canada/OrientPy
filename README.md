@@ -8,7 +8,7 @@ processing of earthquake data. These methods are particularly useful for broadba
 ocean-bottom seismic stations, but are also applicable to broadband land stations
 or shorter period instruments (depending on the method selected). The code uses the 
 ``StDb`` package for querying and building a station database and can be used through 
-command-line scripts.Currently the toolbox includes the following methods: 
+command-line scripts. Currently the toolbox includes the following methods: 
 
 - **DL** (Doran and Laske, 2017): Based on Rayleigh-wave polarization at a range of
   frequencies and for the two fundamental mode Rayleigh wave orbits. 
@@ -27,6 +27,12 @@ terms of the azimuth of seismic component `1` (or `N`).
 
 Installation, Usage, API documentation and scripts are described at 
 https://nfsi-canada.github.io/OrientPy/.
+
+Author: [`Pascal Audet`](https://www.uogeophysics.com/authors/admin/) (Developer and Maintainer)
+
+##### Note
+
+The toolbox **DL** is heavily based on the software [`DLOPy`](https://igppweb.ucsd.edu/~adoran/DLOPy.html) written by [`A. Doran.`](https://igppweb.ucsd.edu/~adoran/)
 
 #### Contributing
 
