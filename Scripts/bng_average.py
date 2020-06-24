@@ -118,7 +118,7 @@ def main():
 
             # save figure
             if args.saveplot:
-                figname = 'conditions.' + args.fmt
+                figname = indir / ('conditions.' + args.fmt)
                 plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()
@@ -128,7 +128,7 @@ def main():
 
             # save figure
             if args.saveplot:
-                figname = 'results.' + args.fmt
+                figname = indir / ('results.' + args.fmt)
                 plot.savefig(figname, fmt=args.fmt)
             if args.showplot:
                 plot.show()

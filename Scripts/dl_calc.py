@@ -197,6 +197,11 @@ def main():
                 if not has_data:
                     continue
 
+                # Check data length
+                if utils.checklen(dldata.data, 4.*60.*60.):
+                    print("      Error: Length Incorrect")
+                    continue
+
                 # Create Folder if it doesn't exist
                 if not evtdir.exists():
                     evtdir.mkdir(parents=True)
