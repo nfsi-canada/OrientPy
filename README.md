@@ -22,6 +22,7 @@ command-line scripts. Currently the toolbox includes the following methods:
 Each method can be used independently to produce an estimate of station orientation, in
 terms of the azimuth of seismic component `1` (or `N`).
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3905404.svg)](https://doi.org/10.5281/zenodo.3905404)
 [![Build Status](https://travis-ci.com/nfsi-canada/OrientPy.svg?branch=master)](https://travis-ci.com/nfsi-canada/OrientPy)
 [![codecov](https://codecov.io/gh/nfsi-canada/OrientPy/branch/master/graph/badge.svg)](https://codecov.io/gh/nfsi-canada/OrientPy)
 
