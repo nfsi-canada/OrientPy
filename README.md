@@ -16,8 +16,8 @@ command-line scripts. Currently the toolbox includes the following methods:
 - **BNG** (Braunmiller, Nabelek and Ghods, 2020): Based on P-wave polarization from 
   regional and teleseismic earthquakes.  
 
-- **LKSS** (Lim et al., 2018): Based on the harmonic decomposition of radial and 
-  transverse receiver functions near zero lag times.
+<!-- - **LKSS** (Lim et al., 2018): Based on the harmonic decomposition of radial and 
+  transverse receiver functions near zero lag times. -->
 
 Each method can be used independently to produce an estimate of station orientation, in
 terms of the azimuth of seismic component `1` (or `N`).
@@ -50,8 +50,9 @@ Examples of straightforward contributions include editing the documentation or a
   via automated Rayleigh-wave arrival-angle measurements, *Bull. Seism. Soc. Am.*,
   107, 691-708.
 
-- Lim, H., Kim, Y., Song, T.-R. A., and Shen, Z., 2018, Measurement of 
+<!-- - Lim, H., Kim, Y., Song, T.-R. A., and Shen, Z., 2018, Measurement of 
   seismometer orientation using the tangential P-wave
   receiver function based on harmonic decomposition, *Geophys. J. Int.*, 212,
   1747-1765.
 
+ -->
