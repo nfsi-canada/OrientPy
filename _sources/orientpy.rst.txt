@@ -35,7 +35,6 @@ The current version has been tested using **Python3.6 and 3.7** \
 Also, the following packages are required:
 
 - `stdb <https://github.com/schaefferaj/StDb>`_
-- `rfpy <https://github.com/paudetseis/RfPy>`_
 - `geographiclib <https://geographiclib.sourceforge.io/html/python/>`_
 
 Other required packages (e.g., ``obspy``)
@@ -63,14 +62,6 @@ Install remaining dependencies using ``pip`` inside the ``orient`` environment:
 
    pip install stdb
    pip install geographiclib
-
-Finally, Install ``rfpy`` from source:
-
-.. sourcecode:: bash
-
-   git clone https://github.com/paudetseis/RfPy.git
-   cd RfPy
-   pip install .
 
 
 Installing from Pypi

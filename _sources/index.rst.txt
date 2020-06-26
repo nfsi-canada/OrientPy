@@ -17,9 +17,6 @@ but are also applicable to broadband land stations or shorter period instruments
 - **BNG** (Braunmiller, Nabelek and Ghods, 2020): Based on P-wave polarization of 
   earthquakes at regional teleseismic distances.  
 
-- **LKSS** (Lim et al., 2018): Based on a harmonic decomposition of radial and 
-  transverse receiver functions near zero lag times.
-
 Each method can be used independently to produce an estimate of station orientation, in
 terms of the azimuth of seismic component '1' (or 'N'). The code uses 
 the ``StDb`` package for querying and building a station database 
@@ -37,11 +34,6 @@ used in command-line scripts. Tutorials are provided in the sections below.
    The method ``DL`` is heavily based on the code ``DLOPy`` by
    Doran and Laske (2017). The original code can be found 
    `here <https://igppweb.ucsd.edu/~adoran/DLOPy.html>`_
-
-.. warning::
-
-   The method ``LKSS`` is part of the package but has not been fully tested
-   yet and has no accompanying documentation. We don't recommend its usage at this time.
 
 .. toctree::
    :maxdepth: 1
