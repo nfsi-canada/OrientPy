@@ -7,7 +7,6 @@ GitHub Repositories
 
 * `OrientPy <https://github.com/nfsi-canada/OrientPy>`_
 * `StDb <https://github.com/schaefferaj/StDb>`_
-* `RfPy <https://github.com/paudetseis/RfPy>`_
 * `DLOPy_kschramm <https://github.com/kschramm-usgs/DLOPy>`_
 * `DLOPy_jbrussell <https://github.com/jbrussell/DLOPy_v1.0>`_
 
