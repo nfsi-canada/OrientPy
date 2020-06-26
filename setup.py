@@ -35,4 +35,8 @@ setup(
     install_requires=['numpy', 'obspy', 'stdb', 'geographiclib'],
     python_requires='>=3.6',
     packages=['orientpy'],
+    package_data={
+        'orientpy': [
+            'dispmaps/R*txt']
+    },
     scripts=scripts)
