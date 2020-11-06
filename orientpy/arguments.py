@@ -494,7 +494,7 @@ def get_dl_calc_arguments(argv=None):
     parser.add_argument(
         "-O", "--overwrite",
         default=False,
-        action="store_false",
+        action="store_true",
         dest="ovr",
         help="Overwrite existing data on disk. [Default False]")
     parser.add_argument(
@@ -768,6 +768,20 @@ def get_dl_average_arguments(argv=None):
         action="store_true",
         dest="showplot",
         help="Plot results at end (Default False)")
+    parser.add_argument(
+        "--save",
+        action="store_true",
+        dest="saveplot",
+        default=False,
+        help="Set this option if you wish to save the figure. [Default " +
+        "does not save figure]")
+    parser.add_argument(
+        "--format",
+        default="png",
+        dest="fmt",
+        type=str,
+        help="Specify format of figure. Can be any one of the valid" +
+        "matplotlib formats: 'png', 'jpg', 'eps', 'pdf'. [Default 'png']")
     parser.add_argument(
         "--cc",
         default=0.8,
