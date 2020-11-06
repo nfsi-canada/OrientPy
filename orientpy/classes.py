@@ -361,6 +361,27 @@ class BNG(Orient):
         # Work on a copy of the waveform data
         stream = self.data.copy()
 
+        #-- Identify components in Stream
+        comps_id = [tr.stats.channel[2] for tr in stream]
+        test_sets = {
+                        'ZNE':{'Z', 'N', 'E'}, 
+                        'Z12':{'Z', '1', '2'},
+                        'Z23':{'Z', '2', '3'}, 
+                        '123':{'1', '2', '3'}  # probably should raise an exception if this is the case,
+                    }                          # as no correction is estimated for the vertical component
+        for test_key in test_sets:
+            test_set = test_sets[test_key]
+            if test_set.issubset(set(comps_id)):  # use sets to avoid sorting complications
+                comps_codes = list(test_key) 
+                break
+                
+        #-- temporarily modify channel codes, assuming that N/E are not oriented properly
+        channel_code_prefix = stream[0].stats.channel[:2]  # prefix should be the same for all
+                                                           # 3 components by now
+        stream.select(component=comps_codes[1])[0].stats.channel = channel_code_prefix + '1'
+        stream.select(component=comps_codes[2])[0].stats.channel = channel_code_prefix + '2'
+        stream.select(component=comps_codes[0])[0].stats.channel = channel_code_prefix + 'Z'
+
         # Filter if specified
         if bp:
             stream.filter('bandpass', freqmin=bp[0],
