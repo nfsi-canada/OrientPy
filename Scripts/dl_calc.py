@@ -16,20 +16,7 @@ def main():
     args = arguments.get_dl_calc_arguments()
 
     # Load Database
-    db = stdb.io.load_db(fname=args.indb)
-
-    # Construct station key loop
-    allkeys = db.keys()
-    sorted(allkeys)
-
-    # Extract key subset
-    if len(args.stkeys) > 0:
-        stkeys = []
-        for skey in args.stkeys:
-            stkeys.extend([s for s in allkeys if skey in s])
-    else:
-        stkeys = db.keys()
-        sorted(stkeys)
+    db, stkeys = stdb.io.load_db(fname=args.indb, keys=args.stkeys)
 
     # Loop over station keys
     for stkey in list(stkeys):
@@ -191,7 +178,7 @@ def main():
                 t2 = 4.*60.*60.
                 has_data = dldata.download_data(
                     client=wf_client, stdata=args.localdata,
-                    ndval=args.ndval, new_sr=2., t1=t1, t2=t2, 
+                    ndval=args.ndval, new_sr=2., t1=t1, t2=t2,
                     returned=True, verbose=args.verb)
 
                 if not has_data:

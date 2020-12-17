@@ -16,20 +16,7 @@ def main():
     args = arguments.get_dl_average_arguments()
 
     # Load Database
-    db = stdb.io.load_db(fname=args.indb)
-
-    # Construct station key loop
-    allkeys = db.keys()
-    sorted(allkeys)
-
-    # Extract key subset
-    if len(args.stkeys) > 0:
-        stkeys = []
-        for skey in args.stkeys:
-            stkeys.extend([s for s in allkeys if skey in s])
-    else:
-        stkeys = db.keys()
-        sorted(stkeys)
+    db, stkeys = stdb.io.load_db(fname=args.indb, keys=args.stkeys)
 
     # Loop over station keys
     for stkey in list(stkeys):
@@ -102,8 +89,8 @@ def main():
             continue
 
         if args.showplot or args.saveplot:
-            
-            plot = plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, 
+
+            plot = plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind,
                 val, err, phi, cc, args.cc)
 
             # save figure
