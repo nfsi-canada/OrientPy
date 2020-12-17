@@ -24,8 +24,8 @@ used in command-line scripts. Tutorials are provided in the sections below.
 
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3905404.svg
    :target: https://doi.org/10.5281/zenodo.3905404
-.. image:: https://travis-ci.com/nfsi-canada/OrientPy.svg?branch=master
-    :target: https://travis-ci.com/nfsi-canada/OrientPy
+.. image:: https://github.com/nfsi-canada/OrientPy/workflows/Build/badge.svg
+   :target: https://github.com/nfsi-canada/OrientPy/actions
 .. image:: https://codecov.io/gh/nfsi-canada/OrientPy/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/nfsi-canada/OrientPy
 
