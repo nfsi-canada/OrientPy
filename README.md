@@ -23,7 +23,7 @@ Each method can be used independently to produce an estimate of station orientat
 terms of the azimuth of seismic component `1` (or `N`).
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3905404.svg)](https://doi.org/10.5281/zenodo.3905404)
-[![Build Status](https://travis-ci.com/nfsi-canada/OrientPy.svg?branch=master)](https://travis-ci.com/nfsi-canada/OrientPy)
+[![build](https://github.com/nfsi-canada/OrientPy/workflows/Build/badge.svg)](https://github.com/nfsi-canada/OrientPy/actions)
 [![codecov](https://codecov.io/gh/nfsi-canada/OrientPy/branch/master/graph/badge.svg)](https://codecov.io/gh/nfsi-canada/OrientPy)
 
 Installation, Usage, API documentation and scripts are described at 
