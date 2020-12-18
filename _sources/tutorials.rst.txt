@@ -58,7 +58,7 @@ The parameters to edit in this case are:
 
 .. code-block::
 
-    $ bng_calc_auto.py --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
+    $ bng_calc_auto --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 
 An example log printed on the terminal will look like:
 
@@ -153,7 +153,7 @@ in the script and specify arguments to plot and save final figures.
 
 .. code-block:: 
 
-    $ bng_average.py --plot --save YH_list.pkl
+    $ bng_average --plot --save YH_list.pkl
 
 An example log printed on the terminal will look like:
 
@@ -201,7 +201,7 @@ minimum earthquake magnitude, which we set to 6.
 
 .. code-block::
 
-    $ dl_calc.py --min-mag=6. YH_list.pkl
+    $ dl_calc --min-mag=6. YH_list.pkl
 
 An example log printed on the terminal will look like:
 
@@ -285,7 +285,7 @@ the default CC threshold of 0.8 and produce a final plot with the estimate.
 
 .. code-block:: 
 
-    $ dl_average.py --plot YH_list.pkl
+    $ dl_average --plot YH_list.pkl
 
 An example log printed on the terminal will look like:
 

@@ -109,12 +109,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Scripts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bng">BNG</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bng-calc-auto-py"><code class="docutils literal notranslate"><span class="pre">bng_calc_auto.py</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bng-calc-auto"><code class="docutils literal notranslate"><span class="pre">bng_calc_auto</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#bng-average-py"><code class="docutils literal notranslate"><span class="pre">bng_average.py</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bng-average"><code class="docutils literal notranslate"><span class="pre">bng_average</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Usage</a></li>
 </ul>
@@ -122,12 +122,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dl">DL</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dl-calc-py"><code class="docutils literal notranslate"><span class="pre">dl_calc.py</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dl-calc"><code class="docutils literal notranslate"><span class="pre">dl_calc</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#dl-average-py"><code class="docutils literal notranslate"><span class="pre">dl_average.py</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dl-average"><code class="docutils literal notranslate"><span class="pre">dl_average</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">Usage</a></li>
 </ul>
@@ -213,8 +213,8 @@ scripts that can be used to determine station orientation, which are described b
 All of them use a station database provided as a <code class="xref py py-class docutils literal notranslate"><span class="pre">StDb</span></code> dictionary.</p>
 <div class="section" id="bng">
 <h2>BNG<a class="headerlink" href="#bng" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="bng-calc-auto-py">
-<h3><code class="docutils literal notranslate"><span class="pre">bng_calc_auto.py</span></code><a class="headerlink" href="#bng-calc-auto-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bng-calc-auto">
+<h3><code class="docutils literal notranslate"><span class="pre">bng_calc_auto</span></code><a class="headerlink" href="#bng-calc-auto" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="description">
 <h4>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h4>
 <p>Downloads three-component seismograms based on a catalogue of earthquakes
@@ -233,8 +233,8 @@ the quality of the estimates (see below).</p>
 </div>
 <div class="section" id="usage">
 <h4>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto.py -h
-usage: bng_calc_auto.py [options] &lt;Station Database&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto -h
+usage: bng_calc_auto [arguments] &lt;Station Database&gt;
 
 Program to compute the orientation of the components of a station based on
 those in a station database.
@@ -250,8 +250,8 @@ optional arguments:
                         Counter and results. Default 2
   -O, --overwrite       Overwrite existing data on disk. [Default False]
   --save-location SAVELOC
-                        Specify Save destination. Default is DLOPY_RESULTS
-                        (and sub-directories based on Station Name).
+                        Specify Save destination. Default is BNG_RESULTS (and
+                        sub-directories based on Station Name).
   --no-save-progress    Do not save progress during processing.
 
 Local Data Settings:
@@ -347,8 +347,8 @@ Processing Parameters:
 </div>
 </div>
 </div>
-<div class="section" id="bng-average-py">
-<h3><code class="docutils literal notranslate"><span class="pre">bng_average.py</span></code><a class="headerlink" href="#bng-average-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bng-average">
+<h3><code class="docutils literal notranslate"><span class="pre">bng_average</span></code><a class="headerlink" href="#bng-average" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id1">
 <h4>Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p>Collects the estimated azimuths previously calculated and calculates the
@@ -357,8 +357,8 @@ waveforms. The error is obtained from a bootstrap analysis of robust estimates.<
 </div>
 <div class="section" id="id2">
 <h4>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_average.py -h
-usage: bng_average.py [options] &lt;Station Database&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_average -h
+usage: bng_average [arguments] &lt;Station Database&gt;
 
 Program to average the orientations of the seismometer in a station database.
 
@@ -372,8 +372,8 @@ optional arguments:
                         No Output; (1) Output Event Analysis counter; (2)
                         Counter and results. Default 2
   --load-location LOADLOC
-                        Specify Load destination. Default is DLOPY_RESULTS
-                        (and sub-directories based on Station Name).
+                        Specify Load destination. Default is BNG_RESULTS (and
+                        sub-directories based on Station Name).
   --plot                Plot results at end (Default False)
   --save                Set this option if you wish to save the figure.
                         [Default does not save figure]
@@ -405,8 +405,8 @@ Quality control parameters:
 </div>
 <div class="section" id="dl">
 <h2>DL<a class="headerlink" href="#dl" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="dl-calc-py">
-<h3><code class="docutils literal notranslate"><span class="pre">dl_calc.py</span></code><a class="headerlink" href="#dl-calc-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dl-calc">
+<h3><code class="docutils literal notranslate"><span class="pre">dl_calc</span></code><a class="headerlink" href="#dl-calc" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id3">
 <h4>Description<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <p>Downloads three-component seismograms based on a catalogue of earthquakes
@@ -421,8 +421,8 @@ estimate of station orientation.</p>
 </div>
 <div class="section" id="id4">
 <h4>Usage<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_calc.py -h
-usage: dl_calc.py [options] &lt;Station Database&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_calc -h
+usage: dl_calc [arguments] &lt;Station Database&gt;
 
 Program to compute the orientation of the components of a station based on
 those in a station database.
@@ -438,8 +438,8 @@ optional arguments:
                         Counter and results. Default 2
   -O, --overwrite       Overwrite existing data on disk. [Default False]
   --save-location SAVELOC
-                        Specify Save destination. Default is DLOPY_RESULTS
-                        (and sub-directories based on Station Name).
+                        Specify Save destination. [Default is DL_RESULTS (and
+                        sub-directories based on Station Name)]
   --no-save-progress    Do not save progress during processing.
 
 Local Data Settings:
@@ -518,8 +518,8 @@ Earthquake Selection Criteria:
 </div>
 </div>
 </div>
-<div class="section" id="dl-average-py">
-<h3><code class="docutils literal notranslate"><span class="pre">dl_average.py</span></code><a class="headerlink" href="#dl-average-py" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dl-average">
+<h3><code class="docutils literal notranslate"><span class="pre">dl_average</span></code><a class="headerlink" href="#dl-average" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id5">
 <h4>Description<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>Collects the estimated azimuths previously calculated and calculates the
@@ -528,8 +528,8 @@ waveforms. The error is obtained from a bootstrap analysis of robust estimates.<
 </div>
 <div class="section" id="id6">
 <h4>Usage<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_average.py -h
-usage: dl_average.py [options] &lt;Station Database&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_average -h
+usage: dl_average [arguments] &lt;Station Database&gt;
 
 Program to average the orientations of the seismometer in a station database.
 
@@ -543,9 +543,14 @@ optional arguments:
                         No Output; (1) Output Event Analysis counter; (2)
                         Counter and results. Default 2
   --load-location LOADLOC
-                        Specify Load destination. Default is DLOPY_RESULTS
-                        (and sub-directories based on Station Name).
-  --plot                Plot results at end (Default False)
+                        Specify Load destination. [Default is DL_RESULTS (and
+                        sub-directories based on Station Name)]
+  --plot                Plot results at end [Default False]
+  --save                Set this option if you wish to save the figure.
+                        [Default does not save figure]
+  --format FMT          Specify format of figure. Can be any one of the
+                        validmatplotlib formats: &#39;png&#39;, &#39;jpg&#39;, &#39;eps&#39;, &#39;pdf&#39;.
+                        [Default &#39;png&#39;]
   --cc CC               Cross-correlation threshold for final estimate.
                         [Default 0.8]
 

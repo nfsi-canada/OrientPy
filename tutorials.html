@@ -235,7 +235,7 @@ program will automatically use either the P or PP waves to extract the waveforms
 <code class="docutils literal notranslate"><span class="pre">--minmax=6.</span></code> to limit the number of events to consider;
 <code class="docutils literal notranslate"><span class="pre">--mindist=30.</span></code> for the minimum epicentral distance for teleseismic P; and
 <code class="docutils literal notranslate"><span class="pre">--bp=0.04,0.1</span></code> to focus on the long-period P waves</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto.py --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 </pre></div>
 </div>
 <p>An example log printed on the terminal will look like:</p>
@@ -325,7 +325,7 @@ final average. In particular, Braunmiller et al. (2020) have shown how a
 combination of parameters can be used to exclude poorly constrained estimates
 to produce a more robust final estimate. Here we will use all default values
 in the script and specify arguments to plot and save final figures.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_average.py --plot --save YH_list.pkl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_average --plot --save YH_list.pkl
 </pre></div>
 </div>
 <p>An example log printed on the terminal will look like:</p>
@@ -367,7 +367,7 @@ station orientation using Rayleigh-wave polarization data. Following the previou
 example, since the file <code class="docutils literal notranslate"><span class="pre">YH_list.pkl</span></code> contains only one station, it is not
 necessary to specify a key. Here we use all default parameters, except for the
 minimum earthquake magnitude, which we set to 6.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_calc.py --min-mag=6. YH_list.pkl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_calc --min-mag=6. YH_list.pkl
 </pre></div>
 </div>
 <p>An example log printed on the terminal will look like:</p>
@@ -446,7 +446,7 @@ final average. In particular, Doran and Laske have shown how to specify a
 threshold cross-correlation (CC) value to exclude waveforms for which the CC
 between the radial and Hilbert-transformed vertical component is low. Here we use
 the default CC threshold of 0.8 and produce a final plot with the estimate.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_average.py --plot YH_list.pkl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dl_average --plot YH_list.pkl
 </pre></div>
 </div>
 <p>An example log printed on the terminal will look like:</p>
