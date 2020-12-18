@@ -44,7 +44,7 @@ def get_bng_average_arguments(argv=None):
         default="BNG_RESULTS",
         type=str,
         dest="loadloc",
-        help="Specify Load destination. Default is DLOPY_RESULTS " +
+        help="Specify Load destination. Default is BNG_RESULTS " +
         "(and sub-directories based on Station Name).")
     parser.add_argument(
         "--plot",

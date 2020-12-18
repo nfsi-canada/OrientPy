@@ -50,8 +50,8 @@ def get_dl_calc_arguments(argv=None):
         default="DL_RESULTS",
         type=str,
         dest="saveloc",
-        help="Specify Save destination. Default is DLOPY_RESULTS " +
-        "(and sub-directories based on Station Name).")
+        help="Specify Save destination. [Default is DL_RESULTS " +
+        "(and sub-directories based on Station Name)]")
     parser.add_argument(
         "--no-save-progress",
         default=True,

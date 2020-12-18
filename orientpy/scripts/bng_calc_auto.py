@@ -50,7 +50,7 @@ def get_bng_calc_arguments(argv=None):
         default="BNG_RESULTS",
         type=str,
         dest="saveloc",
-        help="Specify Save destination. Default is DLOPY_RESULTS " +
+        help="Specify Save destination. Default is BNG_RESULTS " +
         "(and sub-directories based on Station Name).")
     parser.add_argument(
         "--no-save-progress",

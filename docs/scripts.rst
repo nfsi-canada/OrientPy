@@ -13,8 +13,8 @@ All of them use a station database provided as a :class:`~stdb.StDb` dictionary.
 BNG
 +++
 
-``bng_calc_auto.py``
-********************
+``bng_calc_auto``
+*****************
 
 Description
 -----------
@@ -39,8 +39,8 @@ Usage
 
 .. code-block::
 
-    $ bng_calc_auto.py -h
-    usage: bng_calc_auto.py [options] <Station Database>
+    $ bng_calc_auto -h
+    usage: bng_calc_auto [arguments] <Station Database>
 
     Program to compute the orientation of the components of a station based on
     those in a station database.
@@ -56,8 +56,8 @@ Usage
                             Counter and results. Default 2
       -O, --overwrite       Overwrite existing data on disk. [Default False]
       --save-location SAVELOC
-                            Specify Save destination. Default is DLOPY_RESULTS
-                            (and sub-directories based on Station Name).
+                            Specify Save destination. Default is BNG_RESULTS (and
+                            sub-directories based on Station Name).
       --no-save-progress    Do not save progress during processing.
 
     Local Data Settings:
@@ -151,8 +151,8 @@ Usage
                             waveforms. [Default doesn't show plot]
 
 
-``bng_average.py``
-******************
+``bng_average``
+***************
 
 Description
 -----------
@@ -166,8 +166,8 @@ Usage
 
 .. code-block::
 
-    $ bng_average.py -h
-    usage: bng_average.py [options] <Station Database>
+    $ bng_average -h
+    usage: bng_average [arguments] <Station Database>
 
     Program to average the orientations of the seismometer in a station database.
 
@@ -181,8 +181,8 @@ Usage
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
       --load-location LOADLOC
-                            Specify Load destination. Default is DLOPY_RESULTS
-                            (and sub-directories based on Station Name).
+                            Specify Load destination. Default is BNG_RESULTS (and
+                            sub-directories based on Station Name).
       --plot                Plot results at end (Default False)
       --save                Set this option if you wish to save the figure.
                             [Default does not save figure]
@@ -211,8 +211,8 @@ Usage
 DL
 ++
 
-``dl_calc.py``
-**************
+``dl_calc``
+***********
 
 Description
 -----------
@@ -232,8 +232,8 @@ Usage
 
 .. code-block::
 
-    $ dl_calc.py -h
-    usage: dl_calc.py [options] <Station Database>
+    $ dl_calc -h
+    usage: dl_calc [arguments] <Station Database>
 
     Program to compute the orientation of the components of a station based on
     those in a station database.
@@ -249,8 +249,8 @@ Usage
                             Counter and results. Default 2
       -O, --overwrite       Overwrite existing data on disk. [Default False]
       --save-location SAVELOC
-                            Specify Save destination. Default is DLOPY_RESULTS
-                            (and sub-directories based on Station Name).
+                            Specify Save destination. [Default is DL_RESULTS (and
+                            sub-directories based on Station Name)]
       --no-save-progress    Do not save progress during processing.
 
     Local Data Settings:
@@ -326,8 +326,8 @@ Usage
       --max-dep MAXDEP      Specify maximum Earthquake Depth (km). [Default 150.]
       --discard-catalogue   Specify to discard the eq catalogue after processing.
 
-``dl_average.py``
-*****************
+``dl_average``
+**************
 
 Description
 -----------
@@ -341,8 +341,8 @@ Usage
 
 .. code-block::
 
-    $ dl_average.py -h
-    usage: dl_average.py [options] <Station Database>
+    $ dl_average -h
+    usage: dl_average [arguments] <Station Database>
 
     Program to average the orientations of the seismometer in a station database.
 
@@ -356,9 +356,14 @@ Usage
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
       --load-location LOADLOC
-                            Specify Load destination. Default is DLOPY_RESULTS
-                            (and sub-directories based on Station Name).
-      --plot                Plot results at end (Default False)
+                            Specify Load destination. [Default is DL_RESULTS (and
+                            sub-directories based on Station Name)]
+      --plot                Plot results at end [Default False]
+      --save                Set this option if you wish to save the figure.
+                            [Default does not save figure]
+      --format FMT          Specify format of figure. Can be any one of the
+                            validmatplotlib formats: 'png', 'jpg', 'eps', 'pdf'.
+                            [Default 'png']
       --cc CC               Cross-correlation threshold for final estimate.
                             [Default 0.8]
 
