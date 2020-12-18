@@ -44,14 +44,14 @@ def get_dl_average_arguments(argv=None):
         default="DL_RESULTS",
         type=str,
         dest="loadloc",
-        help="Specify Load destination. Default is DLOPY_RESULTS " +
-        "(and sub-directories based on Station Name).")
+        help="Specify Load destination. [Default is DL_RESULTS " +
+        "(and sub-directories based on Station Name)]")
     parser.add_argument(
         "--plot",
         default=False,
         action="store_true",
         dest="showplot",
-        help="Plot results at end (Default False)")
+        help="Plot results at end [Default False]")
     parser.add_argument(
         "--save",
         action="store_true",

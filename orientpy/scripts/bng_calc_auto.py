@@ -323,15 +323,15 @@ def get_bng_calc_arguments(argv=None):
                 "Error: --bp should contain 2 " +
                 "comma-separated floats")
 
-    if args.tt is None:
-        args.tt = [-2., 5.]
-    else:
+    if args.tt is not None:
         args.tt = [float(val) for val in args.tt.split(',')]
         args.tt = sorted(args.tt)
         if (len(args.tt)) != 2:
             parser.error(
                 "Error: --times should contain 2 " +
                 "comma-separated floats")
+    else:
+        args.tt = [-2., 5.]
 
     return args
 
