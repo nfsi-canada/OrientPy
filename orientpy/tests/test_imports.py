@@ -13,6 +13,5 @@ def test_orientpy_modules():
     from orientpy import utils
     from orientpy import plotting
     from orientpy import io
-    from orientpy import arguments
     import matplotlib
     matplotlib.use('Agg')

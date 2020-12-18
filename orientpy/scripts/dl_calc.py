@@ -251,18 +251,13 @@ def get_dl_calc_arguments(argv=None):
     if not len(args.UserAuth) == 0:
         tt = args.UserAuth.split(':')
         if not len(tt) == 2:
-            parser.errer(
+            parser.error(
                 "Error: Incorrect Username and Password Strings " +
                 "for User Authentification")
         else:
             args.UserAuth = tt
     else:
         args.UserAuth = []
-
-    # #-- Check existing file behaviour
-    # if opts.skip and opts.ovr:
-    # opts.skip=False
-    # opts.ovr=False
 
     # Parse Local Data directories
     if len(args.localdata) > 0:
@@ -279,7 +274,7 @@ def get_dl_calc_arguments(argv=None):
     return args
 
 
-def main():
+def main(args=None):
 
     # Run the Input Parser
     args = get_dl_calc_arguments()

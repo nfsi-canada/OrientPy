@@ -101,7 +101,7 @@ def get_dl_average_arguments(argv=None):
     return args
 
 
-def main():
+def main(args=None):
 
     # Run the Input Parser
     args = get_dl_average_arguments()

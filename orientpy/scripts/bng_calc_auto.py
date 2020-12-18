@@ -303,11 +303,6 @@ def get_bng_calc_arguments(argv=None):
     else:
         args.UserAuth = []
 
-    # #-- Check existing file behaviour
-    # if opts.skip and opts.ovr:
-    # opts.skip=False
-    # opts.ovr=False
-
     # Parse Local Data directories
     if len(args.localdata) > 0:
         args.localdata = args.localdata.split(',')
@@ -341,7 +336,7 @@ def get_bng_calc_arguments(argv=None):
     return args
 
 
-def main():
+def main(args=None):
 
     # Run the Input Parser
     args = get_bng_calc_arguments()
