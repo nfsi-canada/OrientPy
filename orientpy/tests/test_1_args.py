@@ -1,7 +1,6 @@
 import numpy as np
 from pkg_resources import resource_filename
 from pathlib import Path
-from . import get_meta
 import pytest
 
 
