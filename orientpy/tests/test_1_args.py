@@ -101,10 +101,10 @@ def test_bng_calc_args():
             dbfile, '--bp', '1.'])
     # tt
     args = bng.get_bng_calc_arguments([
-        dbfile, '--tt', '1.,2.'])
+        dbfile, '--times', '1.,2.'])
     with pytest.raises(SystemExit):
         assert bng.get_bng_calc_arguments([
-            dbfile, '--tt', '1.'])
+            dbfile, '--times', '1.'])
 
     return args0
 

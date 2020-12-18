@@ -295,7 +295,7 @@ def get_bng_calc_arguments(argv=None):
     if not len(args.UserAuth) == 0:
         tt = args.UserAuth.split(':')
         if not len(tt) == 2:
-            parser.errer(
+            parser.error(
                 "Error: Incorrect Username and Password Strings " +
                 "for User Authentification")
         else:
