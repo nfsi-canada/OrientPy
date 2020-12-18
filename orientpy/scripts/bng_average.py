@@ -131,8 +131,9 @@ def get_bng_average_arguments(argv=None):
 
 def main(args=None):
 
-    # Run the Input Parser
-    args = get_bng_average_arguments()
+    if args is None:
+        # Run Input Parser
+        args = get_bng_average_arguments()
 
     # Load Database
     db, stkeys = stdb.io.load_db(fname=args.indb, keys=args.stkeys)
