@@ -1,3 +1,4 @@
+import setuptools
 import os.path
 from os import listdir
 import re
@@ -14,8 +15,6 @@ def find_version(*paths):
         return match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-
-scripts = [str(x) for x in Path('Scripts').iterdir() if x.is_file()]
 
 setup(
     name='orientpy',
@@ -34,9 +33,11 @@ setup(
         'Programming Language :: Python :: 3.8'],
     install_requires=['numpy', 'obspy', 'stdb', 'geographiclib'],
     python_requires='>=3.6',
-    packages=['orientpy'],
-    package_data={
-        'orientpy': [
-            'dispmaps/R*txt']
-    },
-    scripts=scripts)
+    packages=setuptools.find_packages(),
+    include_package_data=True,
+    package_data={'orientpy': ['dispmaps/R*txt']},
+    entry_points={'console_scripts':
+        ['bng_calc_auto=orientpy.scripts.bng_calc_auto:main',
+         'bng_average=orientpy.scripts.bng_average:main',
+         'dl_calc=orientpy.scripts.dl_calc:main',
+         'dl_average=orientpy.scripts.dl_average:main']})
