@@ -76,7 +76,7 @@ Installing from source
 
 .. sourcecode:: bash
 
-   git clone https://github.com/paudetseis/OrientPy.git
+   git clone https://github.com/nfsi-canada/OrientPy
    cd OrientPy
 
 - Install using pip:
