@@ -150,7 +150,7 @@ def main(args=None):
         for folder in os.listdir(indir):
 
             # Load meta data
-            filename = indir / folder / "Meta_Data.pkl"
+            filename = indir / folder / "Meta_data.pkl"
             if not filename.is_file():
                 continue
             meta = pickle.load(open(filename, 'rb'))
