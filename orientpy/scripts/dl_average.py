@@ -188,7 +188,10 @@ def main(args=None):
             # save figure
             if args.saveplot:
                 figname = indir / ('results.' + args.fmt)
-                plot.savefig(figname, fmt=args.fmt)
+                try:
+                    plot.savefig(figname, fmt=args.fmt)
+                except:
+                    plot.savefig(figname, format=args.fmt)
             if args.showplot:
                 plot.show()
 
