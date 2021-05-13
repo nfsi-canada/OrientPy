@@ -481,8 +481,12 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0):
     st = stream.slice(starttime=dt+r1, endtime=dt+r2)
 
     # Extract waveform data for each component
-    tr1 = st.select(component='1')[0].data
-    tr2 = st.select(component='2')[0].data
+    try:
+        tr1 = st.select(component='1')[0].data
+        tr2 = st.select(component='2')[0].data
+    except:
+        tr1 = st.select(component='N')[0].data
+        tr2 = st.select(component='E')[0].data
     trZ = st.select(component='Z')[0].data
 
     # Calculate Hilbert transform of vertical trace data
