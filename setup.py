@@ -25,6 +25,7 @@ setup(
     maintainer='Pascal Audet',
     maintainer_email='pascal.audet@uottawa.ca',
     url='https://github.com/nfsi-canada/OrientPy',
+    download_url='https://github.com/nfsi-canada/OrientPy/archive/refs/tags/v0.0.2.tar.gz',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
