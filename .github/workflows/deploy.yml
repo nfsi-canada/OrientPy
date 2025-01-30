@@ -38,10 +38,11 @@ jobs:
         run: |
           conda info
           conda config --add channels conda-forge
-          conda install obspy pandas
+          conda install obspy pandas pytest
           pip install stdb
           pip install geographiclib
           pip install -e .
+          conda list
 
       - name: Tests
         shell: bash -l {0}
