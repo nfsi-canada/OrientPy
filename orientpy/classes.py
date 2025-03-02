@@ -609,13 +609,13 @@ class DL(Orient):
 
             # R1 path
             R1phi[k], R1cc[k] = utils.DLcalc(
-                stream, item[0], item[1],
+                stream.copy(), item[0], item[1],
                 item[2], self.meta.epi_dist, self.meta.baz, Ray1,
                 winlen=item[3], ptype=0)
 
             # R2 path
             R2phi[k], R2cc[k] = utils.DLcalc(
-                stream, item[0], item[1],
+                stream.copy(), item[0], item[1],
                 item[2], dist2, baz2, Ray2,
                 winlen=item[4], ptype=0)
 
