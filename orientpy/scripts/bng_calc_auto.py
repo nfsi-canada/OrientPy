@@ -6,7 +6,7 @@ import os.path
 import numpy as np
 from obspy.clients.fdsn import Client
 from obspy.taup import TauPyModel
-from orientpy import BNG
+from orientpy import BNG, utils
 from pathlib import Path
 
 from argparse import ArgumentParser
@@ -106,6 +106,15 @@ def get_bng_calc_arguments(argv=None):
         "LMU, NCEDC, NEIP, NERIES, ODC, ORFEUS, RESIF, SCEDC, USGS, USP. " +
         "[Default IRIS]")
     Svparm.add_argument(
+        "--cat_url",
+        action="store",
+        type=str,
+        dest="cat_url",
+        default=None,
+        help="Specify the obspy base_url server address (and port if needed) " +
+        "to open for the catalogue client. Overrides any settings to cat_client. " +
+        "[Default None]")
+    Svparm.add_argument(
         "--waveform-source",
         action="store",
         type=str,
@@ -115,6 +124,15 @@ def get_bng_calc_arguments(argv=None):
         "Options include: BGR, ETH, GEONET, GFZ, INGV, IPGP, IRIS, KOERI, " +
         "LMU, NCEDC, NEIP, NERIES, ODC, ORFEUS, RESIF, SCEDC, USGS, USP. " +
         "[Default IRIS]")
+    Svparm.add_argument(
+        "--wf_url",
+        action="store",
+        type=str,
+        dest="wf_url",
+        default=None,
+        help="Specify the obspy base_url server address (and port if needed) " +
+        "to open for the waveform client. Overrides any settings to wf_client. " +
+        "[Default None]")
     Svparm.add_argument(
         "-U",
         "--User-Auth",
@@ -137,14 +155,24 @@ def get_bng_calc_arguments(argv=None):
         default="",
         help="Specify list of Station Keys in the database to process.")
     stparm.add_argument(
+        "--Zcomp",
+        dest="zcomp",
+        type=str,
+        default='Z',
+        help="Specify the Vertical Component Channel Identifier. "+ 
+        "[Default Z].")
+    stparm.add_argument(
         "-c", "--coord-system",
         dest="nameconv",
         type=int,
         default=2,
         help="Coordinate system specification of instrument. " +
-        "(0) Attempt Autodetect between 1 and 2; (1) HZ, HN, HE; " +
-        "(2) Left Handed: HZ, H2 90 CW H1; (3) Right Handed: HZ, H2 90 CCW " +
-        "H1. [Default 2]")
+        "(0) Attempt Autodetect between 1 and 2; " +
+        "(1) HZ, HN, HE; " +
+        "(2) Left Handed: HZ, H2 90 CW H1; " +
+        "(3) Right Handed: HZ, H2 90 CCW H1 " +
+        "(4) Left Handed Numeric: H3, H2 90 CW H1 " +
+        "[Default 2]")
 
     #-- Timing
     Tmparm = parser.add_argument_group(
@@ -358,7 +386,10 @@ def main(args=None):
         # Establish client for catalogue
         if args.verb > 1:
             print("   Establishing Catalogue Client...")
-        cat_client = Client(args.cat_client)
+        if args.cat_url is not None:
+            cat_client = Client(base_url=args.cat_url)
+        else:
+            cat_client = Client(args.cat_client)
         if args.verb > 1:
             print("      Done")
 
@@ -366,9 +397,17 @@ def main(args=None):
         if args.verb > 1:
             print("   Establishing Waveform Client...")
         if len(args.UserAuth) == 0:
-            wf_client = Client(args.wf_client)
+            if args.wf_url is not None:
+                wf_client = Client(base_url=args.wf_url)
+            else:
+                wf_client = Client(args.wf_client)
         else:
-            wf_client = Client(args.wf_client,
+            if args.wf_url is not None:
+                wf_client = Client(base_url=args.wf_url,
+                               user=args.UserAuth[0],
+                               password=args.UserAuth[1])
+            else:
+                wf_client = Client(args.wf_client,
                                user=args.UserAuth[0],
                                password=args.UserAuth[1])
         if args.verb > 1:
@@ -437,17 +476,24 @@ def main(args=None):
             cat = cat_client.get_events(
                 starttime=tstart, endtime=tend,
                 minmagnitude=args.minmag, maxmagnitude=args.maxmag)
+
+            # get index of repeat events, save for later
+            reps = np.unique(utils.catclean(cat))
+
         except:
             raise(Exception("  Fatal Error: Cannot download Catalogue"))
 
         if args.verb > 1:
-            print("|   Retrieved {0} events ".format(len(cat.events)))
+            print("|   Retrieved {0} unique events of {1}".format(len(cat.events)-len(reps),len(cat.events)))
             print()
 
         for i, ev in enumerate(cat):
 
+            if i in reps:
+                continue
+
             # Initialize BNGData object with station info
-            bngdata = BNG(sta)
+            bngdata = BNG(sta,zcomp=args.zcomp)
 
             # Add event to object
             accept = bngdata.add_event(
