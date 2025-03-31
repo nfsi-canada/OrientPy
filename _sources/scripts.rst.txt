@@ -85,15 +85,21 @@ Usage
                             catalogue. Options include: BGR, ETH, GEONET, GFZ,
                             INGV, IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES,
                             ODC, ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
+      --cat_url CAT_URL     Specify the obspy base_url server address (and port if
+                            needed) to open for the catalogue client. Overrides
+                            any settings to cat_client. [Default None]
       --waveform-source WF_CLIENT
                             Specify the server to connect to for the waveform
                             data. Options include: BGR, ETH, GEONET, GFZ, INGV,
                             IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES, ODC,
                             ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      -U USERAUTH, --User-Auth USERAUTH
+      --wf_url WF_URL       Specify the obspy base_url server address (and port if
+                            needed) to open for the waveform client. Overrides any
+                            settings to wf_client. [Default None]
+      -U USERAUTH, --user-auth USERAUTH
                             Enter your Authentification Username and Password for
-                            the waveform server (--User-
-                            Auth='username:authpassword') to access and download
+                            the waveform server (--user-
+                            auth='username:authpassword') to access and download
                             restricted data. [Default no user and password]
 
     Station Selection Parameters:
@@ -101,6 +107,8 @@ Usage
 
       --keys STKEYS         Specify list of Station Keys in the database to
                             process.
+      --zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
+                            [Default Z].
       -c NAMECONV, --coord-system NAMECONV
                             Coordinate system specification of instrument. (0)
                             Attempt Autodetect between 1 and 2; (1) HZ, HN, HE;
@@ -278,15 +286,21 @@ Usage
                             catalogue. Options include: BGR, ETH, GEONET, GFZ,
                             INGV, IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES,
                             ODC, ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
+      --cat_url CAT_URL     Specify the obspy base_url server address (and port if
+                            needed) to open for the catalogue client. Overrides
+                            any settings to cat_client. [Default None]
       --waveform-source WF_CLIENT
                             Specify the server to connect to for the waveform
                             data. Options include: BGR, ETH, GEONET, GFZ, INGV,
                             IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES, ODC,
                             ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      -U USERAUTH, --User-Auth USERAUTH
+      --wf_url WF_URL       Specify the obspy base_url server address (and port if
+                            needed) to open for the waveform client. Overrides any
+                            settings to wf_client. [Default None]
+      -U USERAUTH, --user-auth USERAUTH
                             Enter your Authentification Username and Password for
-                            the waveform server (--User-
-                            Auth='username:authpassword') to access and download
+                            the waveform server (--user-
+                            auth='username:authpassword') to access and download
                             restricted data. [Default no user and password]
 
     Station Selection Parameters:
@@ -294,11 +308,14 @@ Usage
 
       --keys STKEYS         Specify list of Station Keys in the database to
                             process.
+      --zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
+                            [Default Z].
       -c NAMECONV, --coord-system NAMECONV
                             Coordinate system specification of instrument. (0)
                             Attempt Autodetect between 1 and 2; (1) HZ, HN, HE;
                             (2) Left Handed: HZ, H2 90 CW H1; (3) Right Handed:
-                            HZ, H2 90 CCW H1. [Default 2]
+                            HZ, H2 90 CCW H1 (4) Left Handed Numeric: H3, H2 90 CW
+                            H1 [Default 2]
 
     Timing Parameters:
       Parameters associated with event timing and window length.
