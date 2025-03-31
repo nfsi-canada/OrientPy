@@ -119,7 +119,7 @@ class Orient(object):
 
     """
 
-    def __init__(self, sta):
+    def __init__(self, sta, zcomp='Z'):
 
         # Attributes from parameters
         self.sta = sta
@@ -127,6 +127,7 @@ class Orient(object):
         # Initialize meta and data objects as None
         self.meta = None
         self.data = None
+        self.zcomp = zcomp
 
     def add_event(self, event, gacmin=None, gacmax=None,
                   depmax=1000., returned=False):
@@ -193,6 +194,9 @@ class Orient(object):
             :class:`~obspy.core.UTCDateTime` object.
         returned : bool
             Whether or not to return the ``accept`` attribute
+        zcomp : str
+            Character representing the vertical component. Should be
+            a single character :str:. Default Z
 
         Returns
         -------
@@ -228,14 +232,19 @@ class Orient(object):
         # Download data
         err, stream = io.download_data(
             client=client, sta=self.sta, start=tstart, end=tend,
-            stdata=stdata, ndval=ndval, new_sr=new_sr,
+            stdata=stdata, ndval=ndval, new_sr=new_sr, zcomp=self.zcomp,
             verbose=verbose)
+
+        if err or stream is None:
+            print("*  Waveform Request Failed...Skipping")
+            self.meta.accept = False
+            return self.meta.accept
 
         # Store as attributes with traces in dictionary
         try:
             trE = stream.select(component='E')[0]
             trN = stream.select(component='N')[0]
-            trZ = stream.select(component='Z')[0]
+            trZ = stream.select(component=self.zcomp)[0]
             self.data = Stream(traces=[trZ, trN, trE])
 
             # Filter Traces and resample
@@ -246,25 +255,23 @@ class Orient(object):
 
         # If there is no ZNE, perhaps there is Z12?
         except:
+            tr1 = stream.select(component='1')[0]
+            tr2 = stream.select(component='2')[0]
+            trZ = stream.select(component=self.zcomp)[0]
+            self.data = Stream(traces=[trZ, tr1, tr2])
 
-            try:
-                tr1 = stream.select(component='1')[0]
-                tr2 = stream.select(component='2')[0]
-                trZ = stream.select(component='Z')[0]
-                self.data = Stream(traces=[trZ, tr1, tr2])
+            # Filter Traces and resample
+            if new_sr:
+                self.data.filter('lowpass', freq=0.5*new_sr,
+                                 corners=2, zerophase=True)
+                self.data.resample(new_sr)
 
-                # Filter Traces and resample
-                if new_sr:
-                    self.data.filter('lowpass', freq=0.5*new_sr,
-                                     corners=2, zerophase=True)
-                    self.data.resample(new_sr)
-
-                if not np.sum([np.std(tr.data) for tr in self.data]) > 0.:
-                    print('Error: Data are all zeros')
-                    self.meta.accept = False
-
-            except:
+            if not np.sum([np.std(tr.data) for tr in self.data]) > 0.:
+                print('Error: Data are all zeros')
                 self.meta.accept = False
+
+            # except:
+            #     self.meta.accept = False
 
         if returned:
             return self.meta.accept
@@ -311,9 +318,9 @@ class BNG(Orient):
 
     """
 
-    def __init__(self, sta):
+    def __init__(self, sta, zcomp='Z'):
 
-        Orient.__init__(self, sta)
+        Orient.__init__(self, sta, zcomp=zcomp)
 
 
     def calc(self, dphi, dts, tt, bp=None, showplot=False):
@@ -366,7 +373,8 @@ class BNG(Orient):
         test_sets = {
                         'ZNE':{'Z', 'N', 'E'}, 
                         'Z12':{'Z', '1', '2'},
-                        'Z23':{'Z', '2', '3'}, 
+                        'Z23':{'Z', '2', '3'},
+                        '312':{'3', '1', '2'},
                         '123':{'1', '2', '3'}  # probably should raise an exception if this is the case,
                     }                          # as no correction is estimated for the vertical component
         for test_key in test_sets:
@@ -374,13 +382,14 @@ class BNG(Orient):
             if test_set.issubset(set(comps_id)):  # use sets to avoid sorting complications
                 comps_codes = list(test_key) 
                 break
-                
+  
         #-- temporarily modify channel codes, assuming that N/E are not oriented properly
         channel_code_prefix = stream[0].stats.channel[:2]  # prefix should be the same for all
                                                            # 3 components by now
         stream.select(component=comps_codes[1])[0].stats.channel = channel_code_prefix + '1'
         stream.select(component=comps_codes[2])[0].stats.channel = channel_code_prefix + '2'
-        stream.select(component=comps_codes[0])[0].stats.channel = channel_code_prefix + 'Z'
+        stream.select(component=comps_codes[0])[0].stats.channel = channel_code_prefix + self.zcomp.upper()
+
 
         # Filter if specified
         if bp:
@@ -396,8 +405,8 @@ class BNG(Orient):
         # Define signal and noise
         tr1 = stdata.select(component='1')[0].copy()
         tr2 = stdata.select(component='2')[0].copy()
-        trZ = stdata.select(component='Z')[0].copy()
-        ntrZ = stnoise.select(component='Z')[0].copy()
+        trZ = stdata.select(component=self.zcomp.upper())[0].copy()
+        ntrZ = stnoise.select(component=self.zcomp.upper())[0].copy()
 
         # Calculate and store SNR as attribute
         self.meta.snr = 10.*np.log10(
@@ -517,9 +526,9 @@ class DL(Orient):
 
     """
 
-    def __init__(self, sta):
+    def __init__(self, sta, zcomp='Z'):
 
-        Orient.__init__(self, sta)
+        Orient.__init__(self, sta, zcomp=zcomp)
 
 
     def calc(self, showplot=False):
@@ -609,15 +618,15 @@ class DL(Orient):
 
             # R1 path
             R1phi[k], R1cc[k] = utils.DLcalc(
-                stream.copy(), item[0], item[1],
+                stream, item[0], item[1],
                 item[2], self.meta.epi_dist, self.meta.baz, Ray1,
-                winlen=item[3], ptype=0)
+                winlen=item[3], ptype=0, zcomp=self.zcomp)
 
             # R2 path
             R2phi[k], R2cc[k] = utils.DLcalc(
-                stream.copy(), item[0], item[1],
+                stream, item[0], item[1],
                 item[2], dist2, baz2, Ray2,
-                winlen=item[4], ptype=0)
+                winlen=item[4], ptype=0, zcomp=self.zcomp)
 
         # Store azimuths and CC values as attributes
         self.meta.R1phi = R1phi

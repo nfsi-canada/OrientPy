@@ -434,7 +434,7 @@ def pathvels(lat1, lon1, lat2, lon2,
     return Ray(D1), Ray(D2)
 
 
-def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0):
+def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
     """
     DORAN-LASKE calculation for one freq, one orbit of surface wave
 
@@ -487,7 +487,7 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0):
     except:
         tr1 = st.select(component='N')[0].data
         tr2 = st.select(component='E')[0].data
-    trZ = st.select(component='Z')[0].data
+    trZ = st.select(component=zcomp.upper())[0].data
 
     # Calculate Hilbert transform of vertical trace data
     trZ = np.imag(sig.hilbert(trZ))
