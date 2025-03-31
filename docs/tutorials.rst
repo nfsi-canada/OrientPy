@@ -10,13 +10,13 @@ LOBS3 and send the prompt to a logfile
 
 .. code-block::
 
-   $ query_fdsn_stdb.py -N YH -C ?H? -S LOBS3 YH_list > logfile
+   $ query_fdsn_stdb -N YH -C ?H? -S LOBS3 YH_list > logfile
 
-To check the station info for M08A, use the program ``ls_stdb.py``:
+To check the station info for M08A, use the program ``ls_stdb``:
 
 .. code-block::
 
-    $ ls_stdb.py YH_list.pkl
+    $ ls_stdb YH_list.pkl
     Listing Station Pickle: YH_list.pkl
     YH.LOBS3
     --------------------------------------------------------------------------

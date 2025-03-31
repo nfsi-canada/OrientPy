@@ -93,7 +93,7 @@ def plot_bng_waveforms(bng, stream, dts, tt):
     """
 
     fig, ax = plt.subplots(5, 1, sharey=True)
-    cmpts = ['Z', 'R', 'T', '1', '2']
+    cmpts = [bng.zcomp.upper(), 'R', 'T', '1', '2']
     taxis = np.linspace(-dts, dts, stream[0].stats.npts)
 
     for item in list(zip(ax, cmpts)):
@@ -405,7 +405,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
 
     # Add text as title
     text = "Station "+stkey + \
-        ": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
+        ": $\phi$ = {0:.1f} $\pm$ {1:.1f}  (n={2:.0f}, cc={3:.2f})".format(val, err, sum(ind),cc0)
     plt.suptitle(text, fontsize=12)
     gs.tight_layout(f, rect=[0, 0, 1, 0.95])
 

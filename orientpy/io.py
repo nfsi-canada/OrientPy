@@ -400,7 +400,8 @@ def parse_localdata_for_comp(comp='Z', stdata=[], sta=None,
 
 
 def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
-                  stdata=[], ndval=nan, new_sr=0., verbose=False):
+                  stdata=[], ndval=nan, new_sr=0., verbose=False, zcomp='Z', 
+                  coordsys=2):
     """
     Function to build a stream object for a seismogram in a given time window either
     by downloading data from the client object or alternatively first checking if the
@@ -445,8 +446,7 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
     from math import floor
 
     # Output
-    print(("*     {0:s}.{1:2s} - ZNE:".format(sta.station,
-                                              sta.channel.upper())))
+    print("*     {0:s}.{1:2s}:".format(sta.station, sta.channel.upper()))
 
     # Set Error Default to True
     erd = True
@@ -456,7 +456,7 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
         # Only a single day: Search for local data
         # Get Z localdata
         errZ, stZ = parse_localdata_for_comp(
-            comp='Z', stdata=stdata, sta=sta, start=start, end=end,
+            comp=zcomp, stdata=stdata, sta=sta, start=start, end=end,
             ndval=ndval)
         # Get N localdata
         errN, stN = parse_localdata_for_comp(
@@ -481,52 +481,64 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
             # Construct location name
             if len(tloc) == 0:
                 tloc = "--"
-            # Construct Channel List
-            channelsZNE = sta.channel.upper() + 'Z,' + sta.channel.upper() + \
-                'N,' + sta.channel.upper() + 'E'
-            print(("*          {1:2s}[ZNE].{2:2s} - Checking Network".format(
-                sta.station, sta.channel.upper(), tloc)))
-
+            
             # Get waveforms, with extra 1 second to avoid
             # traces cropped too short - traces are trimmed later
+            st = None
+            
             try:
-                st = client.get_waveforms(
-                    network=sta.network,
-                    station=sta.station, location=loc,
-                    channel=channelsZNE, starttime=start,
-                    endtime=end+1., attach_response=False)
-                if len(st) == 3:
-                    print("*              - ZNE Data Downloaded")
-
-                # It's possible if len(st)==1 that data is Z12
-                else:
-                    # Construct Channel List
-                    channelsZ12 = sta.channel.upper() + 'Z,' + \
-                        sta.channel.upper() + '1,' + \
-                        sta.channel.upper() + '2'
-                    msg = "*          {1:2s}[Z12].{2:2s} - Checking Network".format(
-                            sta.station, sta.channel.upper(), tloc)
-                    print(msg)
-                    try:
-                        st = client.get_waveforms(
-                            network=sta.network,
-                            station=sta.station, location=loc,
-                            channel=channelsZ12, starttime=start,
-                            endtime=end, attach_response=False)
-                        if len(st) == 3:
-                            print("*              - Z12 Data Downloaded")
-                        else:
-                            print("* Stream has less than 3 components")
-                            st = None
-                    except:
-                        st = None
+                 # Construct Channel List
+                channelsZNE = sta.channel.upper() + zcomp.upper() + ',' + sta.channel.upper() + 'N,' + sta.channel.upper() + 'E'
+                print("*          {0:2s}[{1:1s}NE].{2:2s} - Checking FDSNWS".format(
+                    sta.channel.upper(), zcomp.upper(), tloc))
+                st = client.get_waveforms(network=sta.network,station=sta.station, location=loc,channel=channelsZNE, starttime=start,endtime=end+1., attach_response=False)
             except:
+                print("*              - No Data Available")
+
+            #-- check if download got all needed data
+            if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="N")) >= 1 and len(st.select(component='E')) >= 1:
+                    print("*              - "+zcomp.upper() + "NE Data Downloaded")
+                    break
+                
+
+            else:
+                # There was no data for above, so try other channels.
+                print("*              - "+zcomp.upper() + "NE missing data")
+
+                # Construct Channel List
+                channelsZ12 = sta.channel.upper() + zcomp.upper() +',' + sta.channel.upper() + '1,' + sta.channel.upper() + '2'
+                print("*          {0:2s}[{1:1s}12].{2:2s} - Checking Network".format(
+                        sta.channel.upper(), zcomp.upper(), tloc))
+                try:
+                    st = client.get_waveforms(
+                        network=sta.network,
+                        station=sta.station, location=loc,
+                        channel=channelsZ12, starttime=start,
+                        endtime=end, attach_response=False)
+                except:
+                    print("*              - No Data Available")
+                    st = None
+                    erd = True
+
+                #-- check if download got all needed data
+                if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="1")) >= 1 and len(st.select(component='2')) >= 1:
+                    print("*              - "+zcomp.upper() + "12 Data Downloaded")
+                    break
+                else:
+                    print("*              - "+zcomp.upper() + "12 missing data") 
+
+
+            if st is None:
+                print("*              - Stream is missing components")
                 st = None
+                erd = True
+
 
             # Break if we successfully obtained 3 components in st
             if not erd:
-
                 break
+
+            #print (st)
 
     # Check the correct 3 components exist
     if st is None:
@@ -558,7 +570,7 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
                    str(tr.stats.starttime)+" " +
                    str(tr.stats.endtime)) for tr in st]
             print("*   True start: "+str(start))
-            print("* -> Shifting traces to true start")
+            print("*        -> Shifting traces to true start")
             delay = [tr.stats.starttime - start for tr in st]
             st_shifted = Stream(
                 traces=[traceshift(tr, dt) for tr, dt in zip(st, delay)])

@@ -72,6 +72,12 @@ def get_dl_average_arguments(argv=None):
         type=float,
         dest="cc",
         help="Cross-correlation threshold for final estimate. [Default 0.8]")
+    parser.add_argument(
+        "--min-mag",
+        default=5.5,
+        type=float,
+        dest="minmag",
+        help="Specify default minimum magnitude to include in average. [Default 5.5]")
 
     # Station Selection Parameters
     stparm = parser.add_argument_group(
@@ -155,10 +161,11 @@ def main(args=None):
                 continue
             meta = pickle.load(open(filename, 'rb'))
 
-            R1phi.append(meta.R1phi)
-            R2phi.append(meta.R2phi)
-            R1cc.append(meta.R1cc)
-            R2cc.append(meta.R2cc)
+            if meta.mag > args.minmag:
+                R1phi.append(meta.R1phi)
+                R2phi.append(meta.R2phi)
+                R1cc.append(meta.R1cc)
+                R2cc.append(meta.R2cc)
 
         R1phi = np.array(R1phi).flatten()
         R1cc = np.array(R1cc).flatten()
@@ -168,17 +175,31 @@ def main(args=None):
         phi = np.concatenate((R1phi, R2phi), axis=None)
         cc = np.concatenate((R1cc, R2cc), axis=None)
         ind = cc > args.cc
-
         val, err = utils.estimate(phi, ind)
 
         # output results to termianl
-        print("|    D-L mean, error, data included: " +
+        print("|    D-L mean, error, # robust: " +
               "{0:.2f}, {1:.2f}, {2}".format(val, err, np.sum(ind)))
-        print("|    D-L CC level: {0:.1f}".format(args.cc))
+        print("|    D-L CC level: {0:.2f}".format(args.cc))
         print()
+
 
         if np.sum(np.isnan(np.array([val, err])))>0:
             continue
+
+
+        #-- Save Text results
+        outfilename = indir / "{0:2s}.{1:s}.dat".format(sta.network,sta.station)
+        if not outfilename.is_file():
+            fid=open(outfilename,'w')
+            fid.writelines("<date>, <time>, <network>, <station>, <chn>, <min-mag>, <# data>, <CC cutoff>, <# robust>, <phi mean>, <phi error>\n")
+        else:
+            fid=open(outfilename,'a')
+
+        nn=UTCDateTime()
+        fid.writelines("{0:s}, {1:s}, {2:2s}, {3:5s}, {4:2s}, {5:3.1f}, {6:5.0f}, {7:4.2f}, {8:5.0f}, {9:6.2f}, {10:5.2f}\n".format(nn.strftime("%Y-%m-%d"),nn.strftime("%H:%M:%S"),
+                        sta.network, sta.station, sta.channel[0:2], args.minmag, len(ind), args.cc, sum(ind), val, err ))
+        fid.close()
 
         if args.showplot or args.saveplot:
 
@@ -187,7 +208,7 @@ def main(args=None):
 
             # save figure
             if args.saveplot:
-                figname = indir / ('results.' + args.fmt)
+                figname = indir / ('results_mm{2:.1f}_cc{0:.2f}.{1:s}'.format(args.cc,args.fmt,args.minmag))
                 try:
                     plot.savefig(figname, fmt=args.fmt)
                 except:
