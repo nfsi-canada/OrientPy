@@ -161,7 +161,7 @@
 <h2>Orient<a class="headerlink" href="#orient" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="orientpy.classes.Orient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">Orient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">Orient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zcomp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Z'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient" title="Link to this definition"></a></dt>
 <dd><p>A Orient object contains Class attributes that associate
 station information with a single event (i.e., earthquake)
 metadata.</p>
@@ -229,6 +229,8 @@ other attributes are added to the object as the analysis proceeds.</p>
 <li><p><strong>t2</strong> (<em>float</em>) – End time to consider (sec). Can be float or
 <code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code> object.</p></li>
 <li><p><strong>returned</strong> (<em>bool</em>) – Whether or not to return the <code class="docutils literal notranslate"><span class="pre">accept</span></code> attribute</p></li>
+<li><p><strong>zcomp</strong> (<em>str</em>) – Character representing the vertical component. Should be
+a single character :str:. Default Z</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -283,7 +285,7 @@ for a single earthquake event.</p>
 <h2>BNG<a class="headerlink" href="#bng" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="orientpy.classes.BNG">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">BNG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.BNG" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">BNG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zcomp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Z'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.BNG" title="Link to this definition"></a></dt>
 <dd><p>A BNG object inherits from <a class="reference internal" href="#orientpy.classes.Orient" title="orientpy.classes.Orient"><code class="xref py py-class docutils literal notranslate"><span class="pre">Orient</span></code></a>.
 This object contains a method to estimate station orientation
 based on P-wave particle motion.</p>
@@ -399,7 +401,7 @@ this is 1 - R/Z</p>
 <h2>DL<a class="headerlink" href="#dl" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="orientpy.classes.DL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.DL" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orientpy.classes.</span></span><span class="sig-name descname"><span class="pre">DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zcomp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Z'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.DL" title="Link to this definition"></a></dt>
 <dd><p>A DL object inherits from <a class="reference internal" href="#orientpy.classes.Orient" title="orientpy.classes.Orient"><code class="xref py py-class docutils literal notranslate"><span class="pre">Orient</span></code></a>. This object
 contains a method to estimate station orientation based on Rayleigh-wave
 particle motion.</p>
@@ -738,7 +740,7 @@ RELEASED APRIL 2017</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="orientpy.utils.DLcalc">
-<span class="sig-prename descclassname"><span class="pre">orientpy.utils.</span></span><span class="sig-name descname"><span class="pre">DLcalc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LPF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HPF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ptype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.DLcalc" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">orientpy.utils.</span></span><span class="sig-name descname"><span class="pre">DLcalc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LPF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HPF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ptype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zcomp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Z'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.utils.DLcalc" title="Link to this definition"></a></dt>
 <dd><p>DORAN-LASKE calculation for one freq, one orbit of surface wave</p>
 <p>ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
 RELEASED APRIL 2017</p>

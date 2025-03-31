@@ -112,11 +112,11 @@
 <p>All the scripts provided require a <code class="docutils literal notranslate"><span class="pre">StDb</span></code> database containing station
 information and metadata. Let’s first create this database for station
 LOBS3 and send the prompt to a logfile</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ query_fdsn_stdb.py -N YH -C ?H? -S LOBS3 YH_list &gt; logfile
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ query_fdsn_stdb -N YH -C ?H? -S LOBS3 YH_list &gt; logfile
 </pre></div>
 </div>
-<p>To check the station info for M08A, use the program <code class="docutils literal notranslate"><span class="pre">ls_stdb.py</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls_stdb.py YH_list.pkl
+<p>To check the station info for M08A, use the program <code class="docutils literal notranslate"><span class="pre">ls_stdb</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls_stdb YH_list.pkl
 Listing Station Pickle: YH_list.pkl
 YH.LOBS3
 --------------------------------------------------------------------------
