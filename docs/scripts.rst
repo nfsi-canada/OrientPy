@@ -107,7 +107,7 @@ Usage
 
       --keys STKEYS         Specify list of Station Keys in the database to
                             process.
-      --Zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
+      --zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
                             [Default Z].
       -c NAMECONV, --coord-system NAMECONV
                             Coordinate system specification of instrument. (0)
@@ -308,7 +308,7 @@ Usage
 
       --keys STKEYS         Specify list of Station Keys in the database to
                             process.
-      --Zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
+      --zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
                             [Default Z].
       -c NAMECONV, --coord-system NAMECONV
                             Coordinate system specification of instrument. (0)
