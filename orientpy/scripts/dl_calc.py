@@ -135,13 +135,13 @@ def get_dl_calc_arguments(argv=None):
         "[Default None]")
     Svparm.add_argument(
         "-U",
-        "--User-Auth",
+        "--user-auth",
         action="store",
         type=str,
-        dest="UserAuth",
+        dest="userauth",
         default="",
         help="Enter your Authentification Username and Password for the " +
-        "waveform server (--User-Auth='username:authpassword') to access " +
+        "waveform server (--user-auth='username:authpassword') to access " +
         "and download restricted data. [Default no user and password]")
 
     # Station Selection Parameters
@@ -276,16 +276,16 @@ def get_dl_calc_arguments(argv=None):
         args.endT = None
 
     # Parse User Authentification
-    if not len(args.UserAuth) == 0:
-        tt = args.UserAuth.split(':')
+    if not len(args.userauth) == 0:
+        tt = args.userauth.split(':')
         if not len(tt) == 2:
             parser.error(
                 "Error: Incorrect Username and Password Strings " +
                 "for User Authentification")
         else:
-            args.UserAuth = tt
+            args.userauth = tt
     else:
-        args.UserAuth = []
+        args.userauth = []
 
     # Parse Local Data directories
     if len(args.localdata) > 0:
@@ -334,7 +334,7 @@ def main(args=None):
         # Establish client for waveforms
         if args.verb > 1:
             print("   Establishing Waveform Client...")
-        if len(args.UserAuth) == 0:
+        if len(args.userauth) == 0:
             if args.wf_url is not None:
                 wf_client = Client(base_url=args.wf_url)
             else:
@@ -342,12 +342,12 @@ def main(args=None):
         else:
             if args.wf_url is not None:
                 wf_client = Client(base_url=args.wf_url,
-                               user=args.UserAuth[0],
-                               password=args.UserAuth[1])
+                               user=args.userauth[0],
+                               password=args.userauth[1])
             else:
                 wf_client = Client(args.wf_client,
-                               user=args.UserAuth[0],
-                               password=args.UserAuth[1])
+                               user=args.userauth[0],
+                               password=args.userauth[1])
         if args.verb > 1:
             print("      Done")
             print(" ")
