@@ -155,7 +155,7 @@ def get_bng_calc_arguments(argv=None):
         default="",
         help="Specify list of Station Keys in the database to process.")
     stparm.add_argument(
-        "--Zcomp",
+        "--zcomp",
         dest="zcomp",
         type=str,
         default='Z',
