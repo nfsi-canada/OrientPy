@@ -37,8 +37,8 @@ def get_dl_calc_arguments(argv=None):
         type=int,
         dest="verb",
         help="Enable Level of verbose output during processing. " +
-        "(0) No Output; (1) Output Event Analysis counter; " +
-        "(2) Counter and results. Default 2")
+            "(0) No Output; (1) Output Event Analysis counter; " +
+            "(2) Counter and results. Default 2")
     parser.add_argument(
         "-O", "--overwrite",
         default=False,
@@ -51,7 +51,7 @@ def get_dl_calc_arguments(argv=None):
         type=str,
         dest="saveloc",
         help="Specify Save destination. [Default is DL_RESULTS " +
-        "(and sub-directories based on Station Name)]")
+            "(and sub-directories based on Station Name)]")
     parser.add_argument(
         "--no-save-progress",
         default=True,
@@ -63,7 +63,7 @@ def get_dl_calc_arguments(argv=None):
     Dtparm = parser.add_argument_group(
         title="Local Data Settings",
         description="Settings associated with defining and using a " +
-        "local data base of pre-downloaded day-long SAC files.")
+            "local data base of pre-downloaded day-long SAC files.")
     Dtparm.add_argument(
         "--local-data",
         action="store",
@@ -71,78 +71,78 @@ def get_dl_calc_arguments(argv=None):
         dest="localdata",
         default="",
         help="Specify a comma separated list of paths containing " +
-        "day-long sac files of data already downloaded. If data exists " +
-        "for a seismogram is already present on disk, it is selected " +
-        "preferentially over downloading the data using the Client interface")
+            "day-long sac files of data already downloaded. If data exists " +
+            "for a seismogram is already present on disk, it is selected " +
+            "preferentially over downloading the data using the Client interface")
     Dtparm.add_argument(
         "--no-data-zero",
         action="store_true",
         dest="ndval",
         default=False,
         help="Specify to force missing data to be set as zero, rather " +
-        "than default behaviour. [Default sets to nan]")
+            "than default behaviour. [Default sets to nan]")
     Dtparm.add_argument(
         "--no-local-net",
         action="store_false",
         dest="useNet",
         default=True,
         help="Specify to prevent using the Network code in the search " +
-        "for local data (sometimes for CN stations the dictionary name " +
-        "for a station may disagree with that in the filename. " +
-        "[Default Network used]")
+            "for local data (sometimes for CN stations the dictionary name " +
+            "for a station may disagree with that in the filename. " +
+            "[Default Network used]")
 
     # Server Settings
     Svparm = parser.add_argument_group(
         title="Server Settings",
         description="Settings associated with which datacenter to log into.")
     Svparm.add_argument(
-        "--catalogue-source",
+        "--server-cat",
         action="store",
         type=str,
-        dest="cat_client",
+        dest="server_cat",
         default="IRIS",
-        help="Specify the server to connect to for the event catalogue. " +
-        "Options include: BGR, ETH, GEONET, GFZ, INGV, IPGP, IRIS, KOERI, " +
-        "LMU, NCEDC, NEIP, NERIES, ODC, ORFEUS, RESIF, SCEDC, USGS, USP. " +
-        "[Default IRIS]")
+        help="Key string for recognized server that provide "
+            "`available_event_catalogs` service "
+            "(one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', "
+            "'GEOFON', 'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP', 'IRIS', "
+            "'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA', "
+            "'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', "
+            "'TEXNET', 'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']")
     Svparm.add_argument(
-        "--cat_url",
+        "--server-wf",
         action="store",
         type=str,
-        dest="cat_url",
-        default=None,
-        help="Specify the obspy base_url server address (and port if needed) " +
-        "to open for the catalogue client. Overrides any settings to cat_client. " +
-        "[Default None]")
-    Svparm.add_argument(
-        "--waveform-source",
-        action="store",
-        type=str,
-        dest="wf_client",
+        dest="server_wf",
         default="IRIS",
-        help="Specify the server to connect to for the waveform data. " +
-        "Options include: BGR, ETH, GEONET, GFZ, INGV, IPGP, IRIS, KOERI, " +
-        "LMU, NCEDC, NEIP, NERIES, ODC, ORFEUS, RESIF, SCEDC, USGS, USP. " +
-        "[Default IRIS]")
-    Svparm.add_argument(
-        "--wf_url",
-        action="store",
-        type=str,
-        dest="wf_url",
-        default=None,
-        help="Specify the obspy base_url server address (and port if needed) " +
-        "to open for the waveform client. Overrides any settings to wf_client. " +
-        "[Default None]")
+        help="Base URL of FDSN web service compatible server "
+            "(e.g. “http://service.iris.edu”) or key string for recognized server "
+            "(one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', "
+            "'GEOFON', 'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP', 'IRIS', "
+            "'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA', "
+            "'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', "
+            "'TEXNET', 'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']")
     Svparm.add_argument(
         "-U",
         "--user-auth",
         action="store",
         type=str,
         dest="userauth",
-        default="",
+        default=None,
         help="Enter your Authentification Username and Password for the " +
-        "waveform server (--user-auth='username:authpassword') to access " +
-        "and download restricted data. [Default no user and password]")
+            "waveform server (--user-auth='username:authpassword') to access " +
+            "and download restricted data. [Default no user and password]")
+    Svparm.add_argument(
+        "--eida-token", 
+        action="store", 
+        type=str,
+        dest="tokenfile", 
+        default=None, 
+        help="Token for EIDA authentication mechanism, see " +
+            "http://geofon.gfz-potsdam.de/waveform/archive/auth/index.php. "
+            "If a token is provided, argument --user-auth will be ignored. "
+            "This mechanism is only available on select EIDA nodes. The token can "
+            "be provided in form of the PGP message as a string, or the filename of "
+            "a local file with the PGP message in it. [Default None]")
 
     # Station Selection Parameters
     stparm = parser.add_argument_group(
@@ -160,87 +160,81 @@ def get_dl_calc_arguments(argv=None):
         type=str,
         default='Z',
         help="Specify the Vertical Component Channel Identifier. "+ 
-        "[Default Z].")
+            "[Default Z].")
     stparm.add_argument(
         "-c", "--coord-system",
         dest="nameconv",
         type=int,
         default=2,
         help="Coordinate system specification of instrument. " +
-        "(0) Attempt Autodetect between 1 and 2; " +
-        "(1) HZ, HN, HE; " +
-        "(2) Left Handed: HZ, H2 90 CW H1; " +
-        "(3) Right Handed: HZ, H2 90 CCW H1 " +
-        "(4) Left Handed Numeric: H3, H2 90 CW H1 " +
-        "[Default 2]")
+            "(0) Attempt Autodetect between 1 and 2; " +
+            "(1) HZ, HN, HE; " +
+            "(2) Left Handed: HZ, H2 90 CW H1; " +
+            "(3) Right Handed: HZ, H2 90 CCW H1 " +
+            "(4) Left Handed Numeric: H3, H2 90 CW H1 " +
+            "[Default 2]")
 
     #-- Timing
     Tmparm = parser.add_argument_group(
         title="Timing Parameters",
         description="Parameters associated with event timing and window " +
-        "length.")
+            "length.")
     Tmparm.add_argument(
         "--start",
         dest="startT",
         type=str,
         default="",
         help="Enter Start date for event catalogue search. Note, more " +
-        "recent of this value or station start date will be used.")
+            "recent of this value or station start date will be used.")
     Tmparm.add_argument(
         "--end",
         dest="endT",
         type=str,
         default="",
         help="Enter End date for event catalogue search. Note, less " +
-        "recent of this or the station end date will be used.")
+            "recent of this or the station end date will be used.")
     Tmparm.add_argument(
         "--window",
         dest="twin",
         type=int,
         default=0,
         help="Enter time window length in days. A non-zero value will " +
-        "cause the results to repeat for each set of twin days in " +
-        "the operating window, calculating the change in orientation over " +
-        "time. [Default 0]")
+            "cause the results to repeat for each set of twin days in " +
+            "the operating window, calculating the change in orientation over " +
+            "time. [Default 0]")
 
     # EQ Specifications
     Eqparm = parser.add_argument_group(
         title="Earthquake Selection Criteria",
         description="Parameters associated with selecing the subset of " +
-        "earthquakes to use in calculations.")
+            "earthquakes to use in calculations.")
     Eqparm.add_argument(
         "--min-mag",
         dest="minmag",
         type=float,
         default=5.5,
         help="Specify the minimum magnitude of Earthquakes to use in " +
-        "the catalogue search. [Default 5.5]")
+            "the catalogue search. [Default 5.5]")
     Eqparm.add_argument(
         "--min-dist",
         dest="mindist",
         type=float,
         default=5.,
         help="Specify the minimum earthquake distance (in degrees). " +
-        "[Default 5.]")
+            "[Default 5.]")
     Eqparm.add_argument(
         "--max-dist",
         dest="maxdist",
         type=float,
         default=175.,
         help="Specify the maximum earthquake distance (in degrees). " +
-        "[Default 175.]")
+            "[Default 175.]")
     Eqparm.add_argument(
         "--max-dep",
         dest="maxdep",
         type=float,
         default=150.,
         help="Specify maximum Earthquake Depth (km). [Default 150.]")
-    Eqparm.add_argument(
-        "--discard-catalogue",
-        dest="savecat",
-        default=True,
-        action="store_false",
-        help="Specify to discard the eq catalogue after processing.")
 
     # Parse Arguments
     args = parser.parse_args(argv)
@@ -275,17 +269,20 @@ def get_dl_calc_arguments(argv=None):
     else:
         args.endT = None
 
-    # Parse User Authentification
-    if not len(args.userauth) == 0:
-        tt = args.userauth.split(':')
-        if not len(tt) == 2:
-            parser.error(
-                "Error: Incorrect Username and Password Strings " +
-                "for User Authentification")
-        else:
-            args.userauth = tt
+    # Parse restricted data settings
+    if args.tokenfile is not None:
+        args.userauth = [None, None]
     else:
-        args.userauth = []
+        if args.userauth is not None:
+            tt = args.userauth.split(':')
+            if not len(tt) == 2:
+                msg = ("Error: Incorrect Username and Password Strings for User "
+                       "Authentification")
+                parser.errer(msg)
+            else:
+                args.userauth = tt
+        else:
+            args.userauth = [None, None]
 
     # Parse Local Data directories
     if len(args.localdata) > 0:
@@ -324,30 +321,19 @@ def main(args=None):
         # Establish client for catalogue
         if args.verb > 1:
             print("   Establishing Catalogue Client...")
-        if args.cat_url is not None:
-            cat_client = Client(base_url=args.cat_url)
-        else:
-            cat_client = Client(args.cat_client)
+        cat_client = Client(
+            base_url=args.server_cat)
         if args.verb > 1:
             print("      Done")
 
         # Establish client for waveforms
         if args.verb > 1:
             print("   Establishing Waveform Client...")
-        if len(args.userauth) == 0:
-            if args.wf_url is not None:
-                wf_client = Client(base_url=args.wf_url)
-            else:
-                wf_client = Client(args.wf_client)
-        else:
-            if args.wf_url is not None:
-                wf_client = Client(base_url=args.wf_url,
-                               user=args.userauth[0],
-                               password=args.userauth[1])
-            else:
-                wf_client = Client(args.wf_client,
-                               user=args.userauth[0],
-                               password=args.userauth[1])
+        wf_client = Client(
+            args.server_wf,
+            user=args.userauth[0],
+            password=args.userauth[1],
+            eida_token=args.tokenfile)
         if args.verb > 1:
             print("      Done")
             print(" ")
