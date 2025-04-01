@@ -101,8 +101,8 @@ def get_bng_calc_arguments(argv=None):
         type=str,
         dest="server_cat",
         default="IRIS",
-        help="Key string for recognized server that provide "
-            "`available_event_catalogs` service "
+        help="Catalogue server setting: Key string for recognized server that "
+            "provide `available_event_catalogs` service "
             "(one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', "
             "'GEOFON', 'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP', 'IRIS', "
             "'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA', "
@@ -114,9 +114,9 @@ def get_bng_calc_arguments(argv=None):
         type=str,
         dest="server_wf",
         default="IRIS",
-        help="Base URL of FDSN web service compatible server "
-            "(e.g. “http://service.iris.edu”) or key string for recognized server "
-            "(one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', "
+        help="Waveform server setting: Base URL of FDSN web service compatible "
+            "server (e.g. “http://service.iris.edu”) or key string for recognized "
+            "server (one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', "
             "'GEOFON', 'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP', 'IRIS', "
             "'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA', "
             "'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', "

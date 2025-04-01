@@ -81,19 +81,20 @@ Usage
       Settings associated with which datacenter to log into.
 
       --server-cat SERVER_CAT
-                            Key string for recognized server that provide
-                            `available_event_catalogs` service (one of 'AUSPASS',
-                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
-                            'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
-                            'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
-                            'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
-                            'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
-                            'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
+                            Catalogue server setting: Key string for recognized
+                            server that provide `available_event_catalogs` service
+                            (one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA',
+                            'EMSC', 'ETH', 'GEOFON', 'GEONET', 'GFZ', 'ICGC',
+                            'IESDMC', 'INGV', 'IPGP', 'IRIS', 'IRISPH5', 'ISC',
+                            'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA',
+                            'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF',
+                            'RESIFPH5', 'SCEDC', 'TEXNET', 'UIB-NORSAR', 'USGS',
+                            'USP'). [Default 'IRIS']
       --server-wf SERVER_WF
-                            Base URL of FDSN web service compatible server (e.g.
-                            “http://service.iris.edu”) or key string for
-                            recognized server (one of 'AUSPASS', 'BGR',
-                            'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
+                            Waveform server setting: Base URL of FDSN web service
+                            compatible server (e.g. “http://service.iris.edu”) or
+                            key string for recognized server (one of 'AUSPASS',
+                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
                             'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
                             'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
                             'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
@@ -293,19 +294,20 @@ Usage
       Settings associated with which datacenter to log into.
 
       --server-cat SERVER_CAT
-                            Key string for recognized server that provide
-                            `available_event_catalogs` service (one of 'AUSPASS',
-                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
-                            'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
-                            'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
-                            'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
-                            'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
-                            'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
+                            Catalogue server setting: Key string for recognized
+                            server that provide `available_event_catalogs` service
+                            (one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA',
+                            'EMSC', 'ETH', 'GEOFON', 'GEONET', 'GFZ', 'ICGC',
+                            'IESDMC', 'INGV', 'IPGP', 'IRIS', 'IRISPH5', 'ISC',
+                            'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA',
+                            'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF',
+                            'RESIFPH5', 'SCEDC', 'TEXNET', 'UIB-NORSAR', 'USGS',
+                            'USP'). [Default 'IRIS']
       --server-wf SERVER_WF
-                            Base URL of FDSN web service compatible server (e.g.
-                            “http://service.iris.edu”) or key string for
-                            recognized server (one of 'AUSPASS', 'BGR',
-                            'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
+                            Waveform server setting: Base URL of FDSN web service
+                            compatible server (e.g. “http://service.iris.edu”) or
+                            key string for recognized server (one of 'AUSPASS',
+                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
                             'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
                             'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
                             'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
