@@ -100,11 +100,11 @@ Usage
                             'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
                             'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
                             'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
-      -U USERAUTH, --user-auth USERAUTH
-                            Enter your Authentification Username and Password for
-                            the waveform server (--user-
-                            auth='username:authpassword') to access and download
-                            restricted data. [Default no user and password]
+      --user-auth USERAUTH  Authentification Username and Password for the
+                            waveform server (--user-auth='username:authpassword')
+                            to access and download restricted data. [Default no
+                            user and password]
+
       --eida-token TOKENFILE
                             Token for EIDA authentication mechanism, see
                             http://geofon.gfz-
@@ -313,11 +313,10 @@ Usage
                             'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
                             'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
                             'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
-      -U USERAUTH, --user-auth USERAUTH
-                            Enter your Authentification Username and Password for
-                            the waveform server (--user-
-                            auth='username:authpassword') to access and download
-                            restricted data. [Default no user and password]
+      --user-auth USERAUTH  Authentification Username and Password for the
+                            waveform server (--user-auth='username:authpassword')
+                            to access and download restricted data. [Default no
+                            user and password]
       --eida-token TOKENFILE
                             Token for EIDA authentication mechanism, see
                             http://geofon.gfz-

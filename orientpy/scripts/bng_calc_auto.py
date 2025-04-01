@@ -122,13 +122,12 @@ def get_bng_calc_arguments(argv=None):
             "'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', "
             "'TEXNET', 'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']")
     Svparm.add_argument(
-        "-U",
         "--user-auth",
         action="store",
         type=str,
         dest="userauth",
         default=None,
-        help="Enter your Authentification Username and Password for the " +
+        help="Authentification Username and Password for the " +
             "waveform server (--user-auth='username:authpassword') to access " +
             "and download restricted data. [Default no user and password]")
     Svparm.add_argument(
