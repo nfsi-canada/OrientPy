@@ -321,7 +321,7 @@ def get_bng_calc_arguments(argv=None):
             if not len(tt) == 2:
                 msg = ("Error: Incorrect Username and Password Strings for User "
                        "Authentification")
-                parser.errer(msg)
+                parser.error(msg)
             else:
                 args.userauth = tt
         else:
@@ -391,7 +391,7 @@ def main(args=None):
         if args.verb > 1:
             print("   Establishing Waveform Client...")
         wf_client = Client(
-            args.server_wf,
+            base_url=args.server_wf,
             user=args.userauth[0],
             password=args.userauth[1],
             eida_token=args.tokenfile)
