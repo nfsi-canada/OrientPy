@@ -80,27 +80,40 @@ Usage
     Server Settings:
       Settings associated with which datacenter to log into.
 
-      --catalogue-source CAT_CLIENT
-                            Specify the server to connect to for the event
-                            catalogue. Options include: BGR, ETH, GEONET, GFZ,
-                            INGV, IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES,
-                            ODC, ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      --cat_url CAT_URL     Specify the obspy base_url server address (and port if
-                            needed) to open for the catalogue client. Overrides
-                            any settings to cat_client. [Default None]
-      --waveform-source WF_CLIENT
-                            Specify the server to connect to for the waveform
-                            data. Options include: BGR, ETH, GEONET, GFZ, INGV,
-                            IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES, ODC,
-                            ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      --wf_url WF_URL       Specify the obspy base_url server address (and port if
-                            needed) to open for the waveform client. Overrides any
-                            settings to wf_client. [Default None]
-      -U USERAUTH, --user-auth USERAUTH
-                            Enter your Authentification Username and Password for
-                            the waveform server (--user-
-                            auth='username:authpassword') to access and download
-                            restricted data. [Default no user and password]
+      --server-cat SERVER_CAT
+                            Catalogue server setting: Key string for recognized
+                            server that provide `available_event_catalogs` service
+                            (one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA',
+                            'EMSC', 'ETH', 'GEOFON', 'GEONET', 'GFZ', 'ICGC',
+                            'IESDMC', 'INGV', 'IPGP', 'IRIS', 'IRISPH5', 'ISC',
+                            'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA',
+                            'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF',
+                            'RESIFPH5', 'SCEDC', 'TEXNET', 'UIB-NORSAR', 'USGS',
+                            'USP'). [Default 'IRIS']
+      --server-wf SERVER_WF
+                            Waveform server setting: Base URL of FDSN web service
+                            compatible server (e.g. “http://service.iris.edu”) or
+                            key string for recognized server (one of 'AUSPASS',
+                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
+                            'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
+                            'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
+                            'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
+                            'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
+                            'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
+      --user-auth USERAUTH  Authentification Username and Password for the
+                            waveform server (--user-auth='username:authpassword')
+                            to access and download restricted data. [Default no
+                            user and password]
+
+      --eida-token TOKENFILE
+                            Token for EIDA authentication mechanism, see
+                            http://geofon.gfz-
+                            potsdam.de/waveform/archive/auth/index.php. If a token
+                            is provided, argument --user-auth will be ignored.
+                            This mechanism is only available on select EIDA nodes.
+                            The token can be provided in form of the PGP message
+                            as a string, or the filename of a local file with the
+                            PGP message in it. [Default None]
 
     Station Selection Parameters:
       Parameters to select a specific station.
@@ -143,7 +156,6 @@ Usage
                             [Default 175.]
       --max-dep MAXDEP      Specify maximum Earthquake Depth (km). [Default no
                             limit]
-      --discard-catalogue   Specify to discard the eq catalogue after processing.
 
     Processing Parameters:
       Parameters associated with BNG processing.
@@ -281,27 +293,39 @@ Usage
     Server Settings:
       Settings associated with which datacenter to log into.
 
-      --catalogue-source CAT_CLIENT
-                            Specify the server to connect to for the event
-                            catalogue. Options include: BGR, ETH, GEONET, GFZ,
-                            INGV, IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES,
-                            ODC, ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      --cat_url CAT_URL     Specify the obspy base_url server address (and port if
-                            needed) to open for the catalogue client. Overrides
-                            any settings to cat_client. [Default None]
-      --waveform-source WF_CLIENT
-                            Specify the server to connect to for the waveform
-                            data. Options include: BGR, ETH, GEONET, GFZ, INGV,
-                            IPGP, IRIS, KOERI, LMU, NCEDC, NEIP, NERIES, ODC,
-                            ORFEUS, RESIF, SCEDC, USGS, USP. [Default IRIS]
-      --wf_url WF_URL       Specify the obspy base_url server address (and port if
-                            needed) to open for the waveform client. Overrides any
-                            settings to wf_client. [Default None]
-      -U USERAUTH, --user-auth USERAUTH
-                            Enter your Authentification Username and Password for
-                            the waveform server (--user-
-                            auth='username:authpassword') to access and download
-                            restricted data. [Default no user and password]
+      --server-cat SERVER_CAT
+                            Catalogue server setting: Key string for recognized
+                            server that provide `available_event_catalogs` service
+                            (one of 'AUSPASS', 'BGR', 'EARTHSCOPE', 'EIDA',
+                            'EMSC', 'ETH', 'GEOFON', 'GEONET', 'GFZ', 'ICGC',
+                            'IESDMC', 'INGV', 'IPGP', 'IRIS', 'IRISPH5', 'ISC',
+                            'KNMI', 'KOERI', 'LMU', 'NCEDC', 'NIEP', 'NOA',
+                            'NRCAN', 'ODC', 'ORFEUS', 'RASPISHAKE', 'RESIF',
+                            'RESIFPH5', 'SCEDC', 'TEXNET', 'UIB-NORSAR', 'USGS',
+                            'USP'). [Default 'IRIS']
+      --server-wf SERVER_WF
+                            Waveform server setting: Base URL of FDSN web service
+                            compatible server (e.g. “http://service.iris.edu”) or
+                            key string for recognized server (one of 'AUSPASS',
+                            'BGR', 'EARTHSCOPE', 'EIDA', 'EMSC', 'ETH', 'GEOFON',
+                            'GEONET', 'GFZ', 'ICGC', 'IESDMC', 'INGV', 'IPGP',
+                            'IRIS', 'IRISPH5', 'ISC', 'KNMI', 'KOERI', 'LMU',
+                            'NCEDC', 'NIEP', 'NOA', 'NRCAN', 'ODC', 'ORFEUS',
+                            'RASPISHAKE', 'RESIF', 'RESIFPH5', 'SCEDC', 'TEXNET',
+                            'UIB-NORSAR', 'USGS', 'USP'). [Default 'IRIS']
+      --user-auth USERAUTH  Authentification Username and Password for the
+                            waveform server (--user-auth='username:authpassword')
+                            to access and download restricted data. [Default no
+                            user and password]
+      --eida-token TOKENFILE
+                            Token for EIDA authentication mechanism, see
+                            http://geofon.gfz-
+                            potsdam.de/waveform/archive/auth/index.php. If a token
+                            is provided, argument --user-auth will be ignored.
+                            This mechanism is only available on select EIDA nodes.
+                            The token can be provided in form of the PGP message
+                            as a string, or the filename of a local file with the
+                            PGP message in it. [Default None]
 
     Station Selection Parameters:
       Parameters to select a specific station.
@@ -341,7 +365,6 @@ Usage
       --max-dist MAXDIST    Specify the maximum earthquake distance (in degrees).
                             [Default 175.]
       --max-dep MAXDEP      Specify maximum Earthquake Depth (km). [Default 150.]
-      --discard-catalogue   Specify to discard the eq catalogue after processing.
 
 ``dl_average``
 **************

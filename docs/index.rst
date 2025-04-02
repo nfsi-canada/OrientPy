@@ -27,7 +27,7 @@ used in command-line scripts. Tutorials are provided in the sections below.
 .. image:: https://github.com/nfsi-canada/OrientPy/workflows/Build/badge.svg
    :target: https://github.com/nfsi-canada/OrientPy/actions
 .. image:: https://codecov.io/gh/nfsi-canada/OrientPy/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/nfsi-canada/OrientPy
+   :target: https://codecov.io/gh/nfsi-canada/OrientPy
 
 .. note::
 
