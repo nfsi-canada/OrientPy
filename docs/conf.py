@@ -17,12 +17,12 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
-project = ''
+project = 'Home'
 copyright = '2020, Pascal Audet'
 author = 'Pascal Audet'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+from orientpy import __version__ as release
 
 
 # -- General configuration ---------------------------------------------------
