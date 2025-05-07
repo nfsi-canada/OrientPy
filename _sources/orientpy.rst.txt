@@ -31,14 +31,12 @@ Installation
 Dependencies
 ------------
 
-The current version has been tested using **Python3.10** \
+The current version has been tested using **Python3.12** \
 Also, the following packages are required:
 
+- `obspy <https://github.com/obspy/obspy>`_
 - `stdb <https://github.com/schaefferaj/StDb>`_
 - `geographiclib <https://geographiclib.sourceforge.io/html/python/>`_
-
-Other required packages (e.g., ``obspy``)
-will be automatically installed by ``stdb``.
 
 Conda environment
 -----------------
@@ -48,7 +46,7 @@ where ``OrientPy`` can be installed along with some of its dependencies.
 
 .. sourcecode:: bash
 
-   conda create -n orient "python=3.10" "setuptools=60" obspy -c conda-forge
+   conda create -n orient -c conda-forge python=3.12 obspy 
 
 Activate the newly created environment:
 

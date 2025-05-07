@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Licence &mdash; Home 0.1.0 documentation</title>
+  <title>Licence &mdash; Home 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/documentation_options.js?v=938c9ccc"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -125,19 +125,18 @@ SOFTWARE.</p>
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
-<p>The current version has been tested using <strong>Python3.10</strong> Also, the following packages are required:</p>
+<p>The current version has been tested using <strong>Python3.12</strong> Also, the following packages are required:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/obspy/obspy">obspy</a></p></li>
 <li><p><a class="reference external" href="https://github.com/schaefferaj/StDb">stdb</a></p></li>
 <li><p><a class="reference external" href="https://geographiclib.sourceforge.io/html/python/">geographiclib</a></p></li>
 </ul>
-<p>Other required packages (e.g., <code class="docutils literal notranslate"><span class="pre">obspy</span></code>)
-will be automatically installed by <code class="docutils literal notranslate"><span class="pre">stdb</span></code>.</p>
 </section>
 <section id="conda-environment">
 <h2>Conda environment<a class="headerlink" href="#conda-environment" title="Link to this heading"></a></h2>
 <p>We recommend creating a custom <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment
 where <code class="docutils literal notranslate"><span class="pre">OrientPy</span></code> can be installed along with some of its dependencies.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>orient<span class="w"> </span><span class="s2">&quot;python=3.10&quot;</span><span class="w"> </span><span class="s2">&quot;setuptools=60&quot;</span><span class="w"> </span>obspy<span class="w"> </span>-c<span class="w"> </span>conda-forge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>orient<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>obspy
 </pre></div>
 </div>
 <p>Activate the newly created environment:</p>
