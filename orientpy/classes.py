@@ -251,7 +251,7 @@ class Orient(object):
             self.data = Stream(traces=[trZ, trN, trE])
 
             # Filter Traces and resample
-            if new_sr:
+            if new_sr is not None:
                 self.data.filter('lowpass', freq=0.5*new_sr,
                                  corners=2, zerophase=True)
                 self.data.resample(new_sr)
@@ -264,7 +264,7 @@ class Orient(object):
             self.data = Stream(traces=[trZ, tr1, tr2])
 
             # Filter Traces and resample
-            if new_sr:
+            if new_sr is not None:
                 self.data.filter('lowpass', freq=0.5*new_sr,
                                  corners=2, zerophase=True)
                 self.data.resample(new_sr)

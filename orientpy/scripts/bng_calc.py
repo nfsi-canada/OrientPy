@@ -224,6 +224,12 @@ def get_bng_calc_arguments(argv=None):
         help="Enter window start and end times relative to predicted " +
              "P arrival time in seconds. Negative values imply start of " +
              "window before P wave arrival. [Default -2., 5.]")
+    Tmparm.add_argument(
+        "--sampling-rate",
+        dest="new_sr",
+        type=float,
+        default=None,
+        help="Specify new sampling rate in Hz. [Default no resampling]")
 
     # EQ Specifications
     Eqparm = parser.add_argument_group(
@@ -269,12 +275,6 @@ def get_bng_calc_arguments(argv=None):
     Procparm = parser.add_argument_group(
         title="Processing Parameters",
         description="Parameters associated with BNG processing.")
-    Procparm.add_argument(
-        "--new-sampling-rate",
-        dest="new_sr",
-        type=float,
-        default=None,
-        help="Specify new sampling rate in Hz. [Default no resampling]")
     Procparm.add_argument(
         "--dphi",
         dest="dphi",

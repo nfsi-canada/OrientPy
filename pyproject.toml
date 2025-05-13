@@ -30,7 +30,7 @@ Documentation = "https://nfsi-canada.github.io/OrientPy"
 "Bug Tracker" = "https://github.com/nfsi-canada/OrientPy/issues"
 
 [project.scripts]
-bng_calc_auto = "orientpy.scripts.bng_calc:main"
+bng_calc = "orientpy.scripts.bng_calc:main"
 bng_average = "orientpy.scripts.bng_average:main"
 dl_calc = "orientpy.scripts.dl_calc:main"
 dl_average = "orientpy.scripts.dl_average:main"

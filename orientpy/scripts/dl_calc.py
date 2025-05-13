@@ -217,7 +217,7 @@ def get_dl_calc_arguments(argv=None):
              "the operating window, calculating the change in orientation " +
              "over time. [Default 0]")
     Tmparm.add_argument(
-        "--new-sampling-rate",
+        "--sampling-rate",
         dest="new_sr",
         type=float,
         default=2.,
