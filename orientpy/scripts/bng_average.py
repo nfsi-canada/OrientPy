@@ -131,6 +131,19 @@ def get_bng_average_arguments(argv=None):
 
 def main(args=None):
 
+    print()
+    print("###############################################################")
+    print("#  _                                                          #")
+    print("# | |__  _ __   __ _     __ ___   _____ _ __ __ _  __ _  ___  #")
+    print("# | '_ \| '_ \ / _` |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #")
+    print("# | |_) | | | | (_| |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #")
+    print("# |_.__/|_| |_|\__, |___\__,_| \_/ \___|_|  \__,_|\__, |\___| #")
+    print("#              |___/_____|                        |___/       #")
+    print("#                                                             #")
+    print("###############################################################")
+    print()
+
+
     if args is None:
         # Run Input Parser
         args = get_bng_average_arguments()
@@ -200,10 +213,10 @@ def main(args=None):
         mag = np.array(mag)
 
         # Set conditions for good result
-        snrp = snr>args.snr
-        ccp = cc>args.cc
-        TRp = TR>args.TR
-        RZp = RZ>args.RZ
+        snrp = snr > args.snr
+        ccp = cc > args.cc
+        TRp = TR > args.TR
+        RZp = RZ > args.RZ
 
         # Indices where conditions are met
         ind = snrp*ccp*TRp*RZp
@@ -216,33 +229,34 @@ def main(args=None):
               "{0:.1f}, {1:.1f}, {2}".format(val, err, np.sum(ind)))
         print()
 
-        if np.sum(np.isnan(np.array([val, err])))>0:
+        if np.sum(np.isnan(np.array([val, err]))) > 0:
             continue
 
         if args.showplot or args.saveplot:
 
-            plot = plotting.plot_bng_conditions(stkey, snr, cc, TR, RZ, ind)
+            plot = plotting.plot_bng_conditions(
+                stkey, snr, cc, TR, RZ, ind)
 
             # save figure
             if args.saveplot:
                 figname = indir / ('conditions.' + args.fmt)
                 try:
                     plot.savefig(figname, fmt=args.fmt)
-                except:
+                except Exception:
                     plot.savefig(figname, format=args.fmt)
 
             if args.showplot:
                 plot.show()
 
-            plot = plotting.plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                ind, val, err)
+            plot = plotting.plot_bng_results(
+                stkey, phi, snr, cc, TR, RZ, baz, mag, ind, val, err)
 
             # save figure
             if args.saveplot:
                 figname = indir / ('results.' + args.fmt)
                 try:
                     plot.savefig(figname, fmt=args.fmt)
-                except:
+                except Exception:
                     plot.savefig(figname, format=args.fmt)
             if args.showplot:
                 plot.show()

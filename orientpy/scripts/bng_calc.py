@@ -362,6 +362,18 @@ def get_bng_calc_arguments(argv=None):
 
 def main(args=None):
 
+    print()
+    print("###########################################")
+    print("#  _                              _       #")
+    print("# | |__  _ __   __ _     ___ __ _| | ___  #")
+    print("# | '_ \| '_ \ / _` |   / __/ _` | |/ __| #")
+    print("# | |_) | | | | (_| |  | (_| (_| | | (__  #")
+    print("# |_.__/|_| |_|\__, |___\___\__,_|_|\___| #")
+    print("#              |___/_____|                #")
+    print("#                                         #")
+    print("###########################################")
+    print()
+
     if args is None:
         # Run Input Parser
         args = get_bng_calc_arguments()

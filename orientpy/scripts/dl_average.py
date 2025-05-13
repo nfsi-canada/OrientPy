@@ -109,6 +109,18 @@ def get_dl_average_arguments(argv=None):
 
 def main(args=None):
 
+    print()
+    print("#####################################################")
+    print("#      _ _                                          #")
+    print("#   __| | |    __ ___   _____ _ __ __ _  __ _  ___  #")
+    print("#  / _` | |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #")
+    print("# | (_| | |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #")
+    print("#  \__,_|_|___\__,_| \_/ \___|_|  \__,_|\__, |\___| #")
+    print("#        |_____|                        |___/       #")
+    print("#                                                   #")
+    print("#####################################################")
+    print()
+
     if args is None:
         # Run Input Parser
         args = get_dl_average_arguments()

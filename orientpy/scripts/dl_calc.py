@@ -304,6 +304,18 @@ def get_dl_calc_arguments(argv=None):
 
 def main(args=None):
 
+    print()
+    print("#################################")
+    print("#      _ _              _       #")
+    print("#   __| | |    ___ __ _| | ___  #")
+    print("#  / _` | |   / __/ _` | |/ __| #")
+    print("# | (_| | |  | (_| (_| | | (__  #")
+    print("#  \__,_|_|___\___\__,_|_|\___| #")
+    print("#        |_____|                #")
+    print("#                               #")
+    print("#################################")
+    print()
+
     if args is None:
         # Run Input Parser
         args = get_dl_calc_arguments()
