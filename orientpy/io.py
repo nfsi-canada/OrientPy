@@ -42,7 +42,7 @@ def traceshift(trace, tt):
 
 def list_local_data_stn(lcldrs=list, sta=None, net=None, altnet=[]):
     """
-    Function to take the list of local directories and recursively 
+    Function to take the list of local directories and recursively
     find all data that matches the station name
 
     Parameters
@@ -399,17 +399,13 @@ def parse_localdata_for_comp(comp='Z', stdata=[], sta=None,
     return erd, None
 
 
-def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
-                  stdata=[], ndval=nan, new_sr=0., verbose=False, zcomp='Z', 
-                  coordsys=2):
+def download_data(client=None, sta=None, start=UTCDateTime(),
+                  end=UTCDateTime(), verbose=False,
+                  zcomp='Z'):
     """
     Function to build a stream object for a seismogram in a given time window either
     by downloading data from the client object or alternatively first checking if the
     given data is already available locally.
-
-    Note 
-    ----
-    Currently only supports NEZ Components!
 
     Parameters
     ----------
@@ -421,10 +417,12 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
         Start time for request
     end : :class:`~obspy.core.utcdatetime.UTCDateTime`
         End time for request
-    stdata : List
-        Station list
-    ndval : float or nan
-        Default value for missing data
+    verbose : bool
+        Whether or not to print messages to screen during run-time
+    zcomp : str
+        Vertical Component Identifier. Should be a single character.
+        This is different then 'Z' only for fully unknown component
+        orientation (i.e., components are 1, 2, 3)
 
     Returns
     -------
@@ -434,7 +432,7 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
         Trace of North component of motion
     trE : :class:`~obspy.core.Trace`
         Trace of East component of motion
-    trZ : :class:`~obspy.core.Trace` 
+    trZ : :class:`~obspy.core.Trace`
         Trace of Vertical component of motion
 
     """
@@ -445,100 +443,69 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
     from numpy import any
     from math import floor
 
-    # Output
-    print("*     {0:s}.{1:2s}:".format(sta.station, sta.channel.upper()))
+    # # Output
+    # print("*     {0:s}.{1:2s}:".format(sta.station, sta.channel.upper()))
 
-    # Set Error Default to True
-    erd = True
+    # # Set Error Default to True
+    # erd = True
 
-    # Check if there is local data
-    if len(stdata) > 0:
-        # Only a single day: Search for local data
-        # Get Z localdata
-        errZ, stZ = parse_localdata_for_comp(
-            comp=zcomp, stdata=stdata, sta=sta, start=start, end=end,
-            ndval=ndval)
-        # Get N localdata
-        errN, stN = parse_localdata_for_comp(
-            comp='N', stdata=stdata, sta=sta, start=start, end=end,
-            ndval=ndval)
-        # Get E localdata
-        errE, stE = parse_localdata_for_comp(
-            comp='E', stdata=stdata, sta=sta, start=start, end=end,
-            ndval=ndval)
-        # Retreived Succesfully?
-        erd = errZ or errN or errE
-        if not erd:
-            # Combine Data
-            st = stZ + stN + stE
+    # # Check if there is local data
+    # if len(stdata) > 0:
+    #     # Only a single day: Search for local data
+    #     # Get Z localdata
+    #     errZ, stZ = parse_localdata_for_comp(
+    #         comp=zcomp, stdata=stdata, sta=sta, start=start, end=end,
+    #         ndval=ndval)
+    #     # Get N localdata
+    #     errN, stN = parse_localdata_for_comp(
+    #         comp='N', stdata=stdata, sta=sta, start=start, end=end,
+    #         ndval=ndval)
+    #     # Get E localdata
+    #     errE, stE = parse_localdata_for_comp(
+    #         comp='E', stdata=stdata, sta=sta, start=start, end=end,
+    #         ndval=ndval)
+    #     # Retreived Succesfully?
+    #     erd = errZ or errN or errE
+    #     if not erd:
+    #         # Combine Data
+    #         st = stZ + stN + stE
 
-    # No local data? Request using client
-    if erd:
-        erd = False
+    for loc in sta.location:
 
-        for loc in sta.location:
-            tloc = loc
-            # Construct location name
-            if len(tloc) == 0:
-                tloc = "--"
-            
-            # Get waveforms, with extra 1 second to avoid
-            # traces cropped too short - traces are trimmed later
-            st = None
-            
-            try:
-                 # Construct Channel List
-                channelsZNE = sta.channel.upper() + zcomp.upper() + ',' + sta.channel.upper() + 'N,' + sta.channel.upper() + 'E'
-                print("*          {0:2s}[{1:1s}NE].{2:2s} - Checking FDSNWS".format(
-                    sta.channel.upper(), zcomp.upper(), tloc))
-                st = client.get_waveforms(network=sta.network,station=sta.station, location=loc,channel=channelsZNE, starttime=start,endtime=end+1., attach_response=False)
-            except:
-                print("*              - No Data Available")
+        # Construct location name
+        if len(tloc) == 0:
+            tloc = "--"
 
-            #-- check if download got all needed data
-            if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="N")) >= 1 and len(st.select(component='E')) >= 1:
-                    print("*              - "+zcomp.upper() + "NE Data Downloaded")
-                    break
-                
+        # Construct Channel List
+        cha = sta.channel.upper() + '?'
+        msg = "*          {0:s}.{1:2s}?.{2:2s} - Checking Network".format(
+            sta.station, sta.channel.upper(), tloc)
+        print(msg)
 
-            else:
-                # There was no data for above, so try other channels.
-                print("*              - "+zcomp.upper() + "NE missing data")
+        # Get waveforms, with extra 1 second to avoid
+        # traces cropped too short - traces are trimmed later
+        try:
+            st = client.get_waveforms(
+                network=sta.network,
+                station=sta.station,
+                location=loc,
+                channel=cha,
+                starttime=start,
+                endtime=end+1.)
+        except Exception:
+            print("*              - No Data Available")
 
-                # Construct Channel List
-                channelsZ12 = sta.channel.upper() + zcomp.upper() +',' + sta.channel.upper() + '1,' + sta.channel.upper() + '2'
-                print("*          {0:2s}[{1:1s}12].{2:2s} - Checking Network".format(
-                        sta.channel.upper(), zcomp.upper(), tloc))
-                try:
-                    st = client.get_waveforms(
-                        network=sta.network,
-                        station=sta.station, location=loc,
-                        channel=channelsZ12, starttime=start,
-                        endtime=end, attach_response=False)
-                except:
-                    print("*              - No Data Available")
-                    st = None
-                    erd = True
+        # check if download got all needed data
+        if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="N")) >= 1 and len(st.select(component='E')) >= 1:
+            print("*              - " + zcomp.upper() + "NE Data Downloaded")
+            break
 
-                #-- check if download got all needed data
-                if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="1")) >= 1 and len(st.select(component='2')) >= 1:
-                    print("*              - "+zcomp.upper() + "12 Data Downloaded")
-                    break
-                else:
-                    print("*              - "+zcomp.upper() + "12 missing data") 
-
-
-            if st is None:
-                print("*              - Stream is missing components")
-                st = None
-                erd = True
-
-
-            # Break if we successfully obtained 3 components in st
-            if not erd:
-                break
-
-            #print (st)
+        # check if download got all needed data
+        elif st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="1")) >= 1 and len(st.select(component='2')) >= 1:
+            print("*              - " + zcomp.upper() + "12 Data Downloaded")
+            break
+        else:
+            print("*              - Stream is missing components")
 
     # Check the correct 3 components exist
     if st is None:
@@ -587,7 +554,7 @@ def download_data(client=None, sta=None, start=UTCDateTime, end=UTCDateTime,
         # Try trimming
         try:
             st.trim(start, end)
-        except:
+        except Exception:
             print("* Unable to trim")
             print("* -> Aborting")
             print("**************************************************")

@@ -14,7 +14,7 @@ py.install_sources(
   'orientpy/plotting.py',
   'orientpy/utils.py',
   'orientpy/io.py',
-  'orientpy/scripts/bng_calc_auto.py',
+  'orientpy/scripts/bng_calc.py',
   'orientpy/scripts/bng_average.py',
   'orientpy/scripts/dl_calc.py',
   'orientpy/scripts/dl_average.py',
