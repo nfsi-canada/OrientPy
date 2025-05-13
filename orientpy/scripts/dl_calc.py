@@ -425,8 +425,8 @@ def main(args=None):
             raise Exception("  Fatal Error: Cannot download Catalogue")
 
         if args.verb > 1:
-            print("|   Retrieved {0} unique events of " +
-                  "{1}".format(len(cat.events)-len(reps), len(cat.events)))
+            print("|   Retrieved {0} unique events of {1}".format(
+                len(cat.events)-len(reps), len(cat.events)))
             print()
 
         for i, ev in enumerate(cat):
