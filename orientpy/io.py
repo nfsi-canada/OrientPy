@@ -473,7 +473,7 @@ def download_data(client=None, sta=None, start=UTCDateTime(),
     for loc in sta.location:
 
         # Construct location name
-        if len(tloc) == 0:
+        if len(loc) == 0:
             tloc = "--"
 
         # Construct Channel List

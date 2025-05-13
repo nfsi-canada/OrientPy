@@ -324,7 +324,7 @@ def main(args=None):
         # Establish client for catalogue
         if args.verb > 1:
             print("   Establishing Catalogue Client...")
-        cat_client = Client(
+        cat_client = FDSN_Client(
             base_url=args.server_cat)
         if args.verb > 1:
             print("      Done")
