@@ -21,26 +21,24 @@ def get_bng_calc_arguments(argv=None):
     """
     Get Options from :class:`~optparse.OptionParser` objects.
 
-    This function is used for data processing on-the-fly (requires web connection)
-
     """
 
     parser = ArgumentParser(
         usage="%(prog)s [arguments] <Station Database>",
         description="Program to compute the orientation of the components " +
-            "of a station based on those in a station database.")
+                    "of a station based on those in a station database.")
     parser.add_argument(
         "indb",
         help="Station Database to process from.",
         type=str)
     parser.add_argument(
-        "-v", "--verbose",
+        "-V", "--verbose",
         default=2,
         type=int,
         dest="verb",
         help="Enable Level of verbose output during processing. " +
-            "(0) No Output; (1) Output Event Analysis counter; " +
-            "(2) Counter and results. Default 2")
+             "(0) No Output; (1) Output Event Analysis counter; " +
+             "(2) Counter and results. Default 2")
     parser.add_argument(
         "-O", "--overwrite",
         default=False,
