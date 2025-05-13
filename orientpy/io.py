@@ -4,6 +4,7 @@ from obspy.clients.fdsn import Client
 from obspy import UTCDateTime, read, Stream, Trace
 import os
 import math
+import copy
 from numpy import nan, isnan, abs
 
 
@@ -475,6 +476,8 @@ def download_data(client=None, sta=None, start=UTCDateTime(),
         # Construct location name
         if len(loc) == 0:
             tloc = "--"
+        else:
+            tloc = copy.copy(loc)
 
         # Construct Channel List
         cha = sta.channel.upper() + '?'
