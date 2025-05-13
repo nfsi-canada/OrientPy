@@ -497,6 +497,7 @@ def download_data(client=None, sta=None, start=UTCDateTime(),
                 endtime=end+1.)
         except Exception:
             print("*              - No Data Available")
+            st = None
 
         # check if download got all needed data
         if st is not None and len(st.select(component=zcomp)) >= 1 and len(st.select(component="N")) >= 1 and len(st.select(component='E')) >= 1:
