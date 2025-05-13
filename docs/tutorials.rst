@@ -10,7 +10,7 @@ LOBS3 and send the prompt to a logfile
 
 .. code-block::
 
-   $ query_fdsn_stdb -N YH -C ?H? -S LOBS3 YH_list > logfile
+   $ query_fdsn_stdb -N YH -S LOBS3 YH_list > logfile
 
 To check the station info for M08A, use the program ``ls_stdb``:
 
