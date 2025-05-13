@@ -178,7 +178,7 @@ def get_bng_calc_arguments(argv=None):
         help="Specify the Vertical Component Channel Identifier. " +
              "[Default Z]")
     stparm.add_argument(
-        "-c", "--coord-system",
+        "--coord-system",
         dest="nameconv",
         type=int,
         default=2,

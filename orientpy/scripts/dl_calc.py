@@ -31,7 +31,7 @@ def get_dl_calc_arguments(argv=None):
         help="Station Database to process from.",
         type=str)
     parser.add_argument(
-        "-v", "--verbose",
+        "-V", "--verbose",
         default=2,
         type=int,
         dest="verb",
@@ -176,7 +176,7 @@ def get_dl_calc_arguments(argv=None):
         help="Specify the Vertical Component Channel Identifier. " +
              "[Default Z].")
     stparm.add_argument(
-        "-c", "--coord-system",
+        "--coord-system",
         dest="nameconv",
         type=int,
         default=2,
