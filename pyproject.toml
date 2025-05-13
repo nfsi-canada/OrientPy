@@ -4,9 +4,9 @@ requires = ["meson-python>0.15.0", "numpy >= 1.25.0"]
 
 
 [project]
-name = "obstools"
+name = "orientpy"
 version = "0.2.0"
-description = "Python tools for ocean bottom seismic instruments"
+description = "Seismic station orientation tools"
 authors = [
     { name = "Pascal Audet", email = "pascal.audet@uottawa.ca" }
 ]
