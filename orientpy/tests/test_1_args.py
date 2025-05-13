@@ -39,9 +39,12 @@ def test_dl_calc_args():
     # local data
     args = dl.get_dl_calc_arguments([
         dbfile, '--local-data', 'bla'])
-    # ndval
+    # dtype
     args = dl.get_dl_calc_arguments([
-        dbfile, '--no-data-zero'])
+        dbfile, '--dtype', 'SAC'])
+    with pytest.raises(SystemExit):
+        dl.get_dl_calc_arguments([
+            dbfile, '--dtype', 'bla'])
 
     return args0
 
@@ -91,9 +94,12 @@ def test_bng_calc_args():
     # local data
     args = bng.get_bng_calc_arguments([
         dbfile, '--local-data', 'bla'])
-    # ndval
-    args = bng.get_bng_calc_arguments([
-        dbfile, '--no-data-zero'])
+    # dtype
+    args = dl.get_bng_calc_arguments([
+        dbfile, '--dtype', 'SAC'])
+    with pytest.raises(SystemExit):
+        dl.get_bng_calc_arguments([
+            dbfile, '--dtype', 'bla'])
     # bp
     args = bng.get_bng_calc_arguments([
         dbfile, '--bp', '1.,2.'])
