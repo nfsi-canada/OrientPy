@@ -52,12 +52,6 @@ def get_bng_calc_arguments(argv=None):
         dest="saveloc",
         help="Specify Save destination. Default is BNG_RESULTS " +
              "(and sub-directories based on Station Name).")
-    parser.add_argument(
-        "--no-save-progress",
-        default=True,
-        action="store_false",
-        dest="constsave",
-        help="Do not save progress during processing.")
 
     # Use local data directory
     Dtparm = parser.add_argument_group(
@@ -87,22 +81,6 @@ def get_bng_calc_arguments(argv=None):
              "SAC files. Local archive files must have extensions of " +
              "'.SAC'  or '.MSEED'. These are case dependent, so specify " +
              "the correct case here.")
-    # Dtparm.add_argument(
-    #     "--no-data-zero",
-    #     action="store_true",
-    #     dest="ndval",
-    #     default=False,
-    #     help="Specify to force missing data to be set as zero, rather " +
-    #          "than default behaviour. [Default sets to nan]")
-    # Dtparm.add_argument(
-    #     "--no-local-net",
-    #     action="store_false",
-    #     dest="useNet",
-    #     default=True,
-    #     help="Specify to prevent using the Network code in the search " +
-    #          "for local data (sometimes for CN stations the dictionary name " +
-    #          "for a station may disagree with that in the filename. " +
-    #          "[Default Network used]")
 
     # Server Settings
     Svparm = parser.add_argument_group(
@@ -468,7 +446,6 @@ def main(args=None):
             print("|      End time:   {0:19s}         |".format(
                 sta.enddate.strftime("%Y-%m-%d %H:%M:%S")))
             print("| Output Directory: ", args.saveloc)
-            print("| Save Progress: ", args.constsave)
             print("|----------------------------------------------|")
             print("| Searching Possible events:                   |")
             print("|   Start: {0:19s}                 |".format(
