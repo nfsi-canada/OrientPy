@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Classes &mdash; Home 0.2.0 documentation</title>
+  <title>Classes &mdash; Home 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=37f418d5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -176,6 +176,9 @@ other attributes are added to the object as the analysis proceeds.</p>
 <li><p><strong>sta</strong> (<em>object</em>) – Object containing station information - from <code class="xref py py-mod docutils literal notranslate"><span class="pre">stdb</span></code> database.</p></li>
 <li><p><strong>meta</strong> (<a class="reference internal" href="#orientpy.classes.Meta" title="orientpy.classes.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a>) – Object of metadata information for single event (initially set to None)</p></li>
 <li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code>) – Stream object containing the three-component seismograms</p></li>
+<li><p><strong>zcomp</strong> (<em>str</em>) – Vertical Component Identifier. Should be a single character.
+This is different then ‘Z’ only for fully unknown component
+orientation (i.e., components are 1, 2, 3)</p></li>
 </ul>
 </dd>
 </dl>
@@ -215,22 +218,19 @@ other attributes are added to the object as the analysis proceeds.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="orientpy.classes.Orient.download_data">
-<span class="sig-name descname"><span class="pre">download_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient.download_data" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">download_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.Orient.download_data" title="Link to this definition"></a></dt>
 <dd><p>Downloads seismograms based on a time interval.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code>) – Client object</p></li>
-<li><p><strong>stdata</strong> (<em>List</em>) – Station list</p></li>
-<li><p><strong>ndval</strong> (<em>float</em>) – Fill in value for missing data</p></li>
 <li><p><strong>new_sr</strong> (<em>float</em>) – New sampling rate (Hz)</p></li>
 <li><p><strong>t1</strong> (<em>float</em>) – Start time to consider (sec). Can be float or
 <code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code> object.</p></li>
 <li><p><strong>t2</strong> (<em>float</em>) – End time to consider (sec). Can be float or
 <code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code> object.</p></li>
 <li><p><strong>returned</strong> (<em>bool</em>) – Whether or not to return the <code class="docutils literal notranslate"><span class="pre">accept</span></code> attribute</p></li>
-<li><p><strong>zcomp</strong> (<em>str</em>) – Character representing the vertical component. Should be
-a single character :str:. Default Z</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether or not to print messages to screen during run-time</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -418,10 +418,10 @@ Doran and Laske (2017) <a class="footnote-reference brackets" href="#id4" id="id
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
-<p>Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer instrument
-orientations via automated Rayleigh-wave arrival-angle measurements,
-<em>Bulletin of the Seismological Society of America</em>, 107(2),
-doi:10.1785/0120160165.</p>
+<p>Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer
+instrument orientations via automated Rayleigh-wave arrival-angle
+measurements, <em>Bulletin of the Seismological Society of America</em>,
+107(2), doi:10.1785/0120160165.</p>
 </aside>
 </aside>
 <dl class="field-list simple">
@@ -437,12 +437,12 @@ doi:10.1785/0120160165.</p>
 <dt class="sig sig-object py" id="orientpy.classes.DL.calc">
 <span class="sig-name descname"><span class="pre">calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">showplot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orientpy.classes.DL.calc" title="Link to this definition"></a></dt>
 <dd><p>Method to estimate azimuth of component <cite>?H1</cite> (or <cite>?HN</cite>). This
-method maximizes the normalized covariance between the Hilbert-transformed
-vertical component and the radial component of Rayleigh-wave data measured
-at multiple periods. This is done for the shortest (R1) and longest (R2)
-orbits of fundamental-mode Rayleigh waves. Window selection is done based on
-average group velocity extracted from a global model of Rayleigh-wave
-dispersion.</p>
+method maximizes the normalized covariance between the
+Hilbert-transformed vertical component and the radial component of
+Rayleigh-wave data measured at multiple periods. This is done for the
+shortest (R1) and longest (R2) orbits of fundamental-mode Rayleigh
+waves. Window selection is done based on average group velocity
+extracted from a global model of Rayleigh-wave dispersion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>showplot</strong> (<em>bool</em>) – Whether or not to plot waveforms.</p>
@@ -463,8 +463,8 @@ at different periods</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="orientpy.classes.DL.meta.R1cc">
 <span class="sig-prename descclassname"><span class="pre">meta.</span></span><span class="sig-name descname"><span class="pre">R1cc</span></span><a class="headerlink" href="#orientpy.classes.DL.meta.R1cc" title="Link to this definition"></a></dt>
-<dd><p>Cross-correlation coefficient between hilbert-transformed vertical and
-radial component for R1, measured at different periods</p>
+<dd><p>Cross-correlation coefficient between hilbert-transformed vertical
+and radial component for R1, measured at different periods</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -487,8 +487,8 @@ at different periods</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="orientpy.classes.DL.meta.R2cc">
 <span class="sig-prename descclassname"><span class="pre">meta.</span></span><span class="sig-name descname"><span class="pre">R2cc</span></span><a class="headerlink" href="#orientpy.classes.DL.meta.R2cc" title="Link to this definition"></a></dt>
-<dd><p>Cross-correlation coefficient between hilbert-transformed vertical and
-radial component for R2, measured at different periods</p>
+<dd><p>Cross-correlation coefficient between hilbert-transformed vertical
+and radial component for R2, measured at different periods</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>

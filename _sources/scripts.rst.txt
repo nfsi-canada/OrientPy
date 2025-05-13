@@ -13,7 +13,7 @@ All of them use a station database provided as a :class:`~stdb.StDb` dictionary.
 BNG
 +++
 
-``bng_calc_auto``
+``bng_calc``
 *****************
 
 Description
@@ -39,8 +39,8 @@ Usage
 
 .. code-block::
 
-    $ bng_calc_auto -h
-    usage: bng_calc_auto [arguments] <Station Database>
+    $ bng_calc -h
+    usage: bng_calc [arguments] <Station Database>
 
     Program to compute the orientation of the components of a station based on
     those in a station database.

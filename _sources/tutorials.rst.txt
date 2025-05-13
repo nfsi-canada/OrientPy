@@ -58,7 +58,7 @@ The parameters to edit in this case are:
 
 .. code-block::
 
-    $ bng_calc_auto --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
+    $ bng_calc --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 
 An example log printed on the terminal will look like:
 

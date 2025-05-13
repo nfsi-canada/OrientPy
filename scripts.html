@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scripts &mdash; Home 0.2.0 documentation</title>
+  <title>Scripts &mdash; Home 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=37f418d5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -67,7 +67,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Scripts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bng">BNG</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bng-calc-auto"><code class="docutils literal notranslate"><span class="pre">bng_calc_auto</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bng-calc"><code class="docutils literal notranslate"><span class="pre">bng_calc</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
@@ -132,8 +132,8 @@ scripts that can be used to determine station orientation, which are described b
 All of them use a station database provided as a <code class="xref py py-class docutils literal notranslate"><span class="pre">StDb</span></code> dictionary.</p>
 <section id="bng">
 <h2>BNG<a class="headerlink" href="#bng" title="Link to this heading"></a></h2>
-<section id="bng-calc-auto">
-<h3><code class="docutils literal notranslate"><span class="pre">bng_calc_auto</span></code><a class="headerlink" href="#bng-calc-auto" title="Link to this heading"></a></h3>
+<section id="bng-calc">
+<h3><code class="docutils literal notranslate"><span class="pre">bng_calc</span></code><a class="headerlink" href="#bng-calc" title="Link to this heading"></a></h3>
 <section id="description">
 <h4>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h4>
 <p>Downloads three-component seismograms based on a catalogue of earthquakes
@@ -152,8 +152,8 @@ the quality of the estimates (see below).</p>
 </section>
 <section id="usage">
 <h4>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto -h
-usage: bng_calc_auto [arguments] &lt;Station Database&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc -h
+usage: bng_calc [arguments] &lt;Station Database&gt;
 
 Program to compute the orientation of the components of a station based on
 those in a station database.
