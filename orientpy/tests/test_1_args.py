@@ -59,8 +59,9 @@ def test_dl_average_args():
 
     return args0
 
+
 def test_bng_calc_args():
-    from orientpy.scripts import bng_calc_auto as bng
+    from orientpy.scripts import bng_calc as bng
     # no stdb
     with pytest.raises(SystemExit):
         bng.get_bng_calc_arguments([])
