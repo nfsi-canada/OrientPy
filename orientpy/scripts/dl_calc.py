@@ -363,13 +363,10 @@ def main(args=None):
             continue
 
         # Temporary print locations
-        tlocs = sta.location
-        if len(tlocs) == 0:
-            tlocs = ['']
-        for il in range(0, len(tlocs)):
-            if len(tlocs[il]) == 0:
-                tlocs[il] = "--"
-        sta.location = tlocs
+        tlocs = []
+        for il in range(0, len(sta.location)):
+            if len(sta.location[il]) == 0:
+                tlocs.append("--")
 
         # Update Display
         if args.verb > 1:
