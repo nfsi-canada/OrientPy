@@ -67,7 +67,7 @@ Installing development branch from GitHub
 
 .. sourcecode:: bash
 
-   pip install orientpy@git+https://github.com/nfsi-canada/orientpy
+   pip install git+https://github.com/nfsi-canada/orientpy
 
 Installing from source
 ----------------------
@@ -88,7 +88,7 @@ Installing from source
 Using locally-stored data
 =========================
 
-The various scripts packaged with ``OrientPy`` use FDSN web services through and ``ObsPy Client`` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a Client that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data``.
+The various scripts packaged with ``OrientPy`` use FDSN web services through and ``ObsPy`` `Client` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a `Client` that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data`` and ``--dtype`` for more details.
 
 Station Metadata
 ----------------
