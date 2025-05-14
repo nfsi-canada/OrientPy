@@ -3,6 +3,7 @@
 import stdb
 import pickle
 import numpy as np
+import copy
 # from numpy import nan
 
 from obspy.clients.fdsn import Client as FDSN_Client
@@ -433,9 +434,11 @@ def main(args=None):
             continue
 
         # Temporary print locations
-        tlocs = []
-        for il in range(0, len(sta.location)):
-            if len(sta.location[il]) == 0:
+        tlocs = copy.copy(sta.location)
+        if len(tlocs) == 0:
+            tlocs = ['']
+        for il in range(0, len(tlocs)):
+            if len(tlocs[il]) == 0:
                 tlocs.append("--")
 
         # Update Display

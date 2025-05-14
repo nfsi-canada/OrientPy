@@ -4,15 +4,16 @@
 
 import stdb
 import pickle
-import os.path
 import numpy as np
-from orientpy import utils, plotting
-from pathlib import Path
+import copy
+import os
 
+from obspy import UTCDateTime
+from orientpy import utils, plotting
+
+from pathlib import Path
 from argparse import ArgumentParser
 from os.path import exists as exist
-from obspy import UTCDateTime
-from numpy import nan
 
 
 def get_bng_average_arguments(argv=None):
@@ -162,13 +163,12 @@ def main(args=None):
             raise(Exception("Directory does not exist: ", indir, ", aborting"))
 
         # Temporary print locations
-        tlocs = sta.location
+        tlocs = copy.copy(sta.location)
         if len(tlocs) == 0:
             tlocs = ['']
         for il in range(0, len(tlocs)):
             if len(tlocs[il]) == 0:
-                tlocs[il] = "--"
-        sta.location = tlocs
+                tlocs.append("--")
 
         # Update Display
         if args.verb > 1:

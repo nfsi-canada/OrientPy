@@ -474,8 +474,8 @@ def download_data(client=None, sta=None, start=UTCDateTime(),
     for loc in sta.location:
 
         # Construct location name
-        if len(loc) == 0:
-            tloc = "--"
+        if loc == "--":
+            tloc = ""
         else:
             tloc = copy.copy(loc)
 
@@ -491,7 +491,7 @@ def download_data(client=None, sta=None, start=UTCDateTime(),
             st = client.get_waveforms(
                 network=sta.network,
                 station=sta.station,
-                location=loc,
+                location=tloc,
                 channel=cha,
                 starttime=start,
                 endtime=end+1.)
