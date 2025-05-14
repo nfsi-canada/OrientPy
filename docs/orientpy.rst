@@ -88,7 +88,7 @@ Installing from source
 Using locally-stored data
 =========================
 
-To load waveforms data located on your hard drive, the code can read a "SeisComP Data Structure" (SDS) for archiving SAC or miniSEED waveform data. 
+The various scripts packaged with ``OrientPy`` use FDSN web services through and ``ObsPy Client`` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a Client that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data``.
 
 Station Metadata
 ----------------
@@ -98,27 +98,29 @@ If you have data stored locally on your drive, it is likely you also have a stat
 Waveform Data
 -------------
 
-``OrientPy`` can read waveform data using the `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ The SDS folder containing the waveform data has the structure:
+The SDS folder containing the waveform data has the structure:
 
-``
-archive
-  + year
-    + network code
-      + station code
-        + channel code + type
-          + one file per day and location, e.g. NET.STA.LOC.CHAN.type.YEAR.DOY
-``
+.. code-block:: python
+
+   archive
+     + year
+       + network code
+         + station code
+           + channel code + type
+             + one file per day and location, e.g. NET.STA.LOC.CHAN.TYPE.YEAR.DOY
+
 
 For example:
 
-``
-SDS/
-  2014/
-    YH/
-      LOBS3/
-        HH1.D/ 
-          YH.LOBS3..CH1.D.2014.332
-          ...
-``
+.. code-block:: python
 
-Note, the filename does not include the extension `.mseed`, and the characters `.D` that appear in both the channel code and the filename. Note also the two dots (`..`). If there is a location code, it should appear between those dots (e.g., for a location code `10`, the corresponding filename should be `YH.LOBS3.10.HH1.D.2014.332`). There is no location code for the YH.LOBS3 data, and this field is simply absent from the filenames. Finally, the day-of-year (DOY) field must be zero-padded to be exactly 3 characters.
+   SDS/
+     2014/
+       YH/
+         LOBS3/
+           HH1.D/ 
+             YH.LOBS3..CH1.D.2014.332
+             ...
+
+
+Note, the filename does not include the extension (`.MSEED` or `.SAC`), and the characters `.D` (for type Data) that appear in both the channel code and the filename. Note also the two dots (`..`). If there is a location code, it should appear between those dots (e.g., for a location code `10`, the corresponding filename should be `YH.LOBS3.10.HH1.D.2014.332`). There is no location code for the YH.LOBS3 data, and this field is simply absent from the filenames. Finally, the day-of-year (DOY) field must be zero-padded to be exactly 3 characters.
