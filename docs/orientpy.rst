@@ -84,3 +84,41 @@ Installing from source
 .. sourcecode:: bash
 
    pip install .
+
+Using locally-stored data
+=========================
+
+To load waveforms data located on your hard drive, the code can read a "SeisComP Data Structure" (SDS) for archiving SAC or miniSEED waveform data. 
+
+Station Metadata
+----------------
+
+If you have data stored locally on your drive, it is likely you also have a station `XML <https://www.fdsn.org/xml/station/>`_ file containing the metadata. To convert the station `XML` file to an input that can be read by ``OrientPy``, you run the command ``gen_stdb station.xml``, which will create the file ``station.pkl``. The corresponding ObsPy documentation is `here <https://docs.obspy.org/packages/obspy.core.inventory.html>`_. If you don't have a station `XML` file but you have a dataless SEED file, you can convert it to `XML` using `this tools <https://seiscode.iris.washington.edu/projects/stationxml-converter>`_.
+
+Waveform Data
+-------------
+
+``OrientPy`` can read waveform data using the `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ The SDS folder containing the waveform data has the structure:
+
+``
+archive
+  + year
+    + network code
+      + station code
+        + channel code + type
+          + one file per day and location, e.g. NET.STA.LOC.CHAN.type.YEAR.DOY
+``
+
+For example:
+
+``
+SDS/
+  2014/
+    YH/
+      LOBS3/
+        HH1.D/ 
+          YH.LOBS3..CH1.D.2014.332
+          ...
+``
+
+Note, the filename does not include the extension `.mseed`, and the characters `.D` that appear in both the channel code and the filename. Note also the two dots (`..`). If there is a location code, it should appear between those dots (e.g., for a location code `10`, the corresponding filename should be `YH.LOBS3.10.HH1.D.2014.332`). There is no location code for the YH.LOBS3 data, and this field is simply absent from the filenames. Finally, the day-of-year (DOY) field must be zero-padded to be exactly 3 characters.
