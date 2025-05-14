@@ -32,10 +32,10 @@ def test_dl_calc_args():
             dbfile, '--end', 'abcd'])
     # user auth.
     args = dl.get_dl_calc_arguments([
-        dbfile, '-U', 'bla:bla'])
+        dbfile, '--user-auth', 'bla:bla'])
     with pytest.raises(SystemExit):
         dl.get_dl_calc_arguments([
-            dbfile, '-U', 'abcd'])
+            dbfile, '--user-auth', 'abcd'])
     # local data
     args = dl.get_dl_calc_arguments([
         dbfile, '--local-data', 'bla'])
@@ -87,18 +87,18 @@ def test_bng_calc_args():
             dbfile, '--end', 'abcd'])
     # user auth.
     args = bng.get_bng_calc_arguments([
-        dbfile, '-U', 'bla:bla'])
+        dbfile, '--user-auth', 'bla:bla'])
     with pytest.raises(SystemExit):
         bng.get_bng_calc_arguments([
-            dbfile, '-U', 'abcd'])
+            dbfile, '--user-auth', 'abcd'])
     # local data
     args = bng.get_bng_calc_arguments([
         dbfile, '--local-data', 'bla'])
     # dtype
-    args = dl.get_bng_calc_arguments([
+    args = bng.get_bng_calc_arguments([
         dbfile, '--dtype', 'SAC'])
     with pytest.raises(SystemExit):
-        dl.get_bng_calc_arguments([
+        bng.get_bng_calc_arguments([
             dbfile, '--dtype', 'bla'])
     # bp
     args = bng.get_bng_calc_arguments([
