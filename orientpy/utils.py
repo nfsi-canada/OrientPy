@@ -49,8 +49,8 @@ def catclean(cat):
 
     Returns
     -------
-    reps : :class:`~numpy.ndarray`
-        Array of ID of repeat events in catalogue.
+    rep : :class:`~numpy.ndarray`
+        1D array of repeat events in the catalogue.
 
     """
 
@@ -140,12 +140,12 @@ def getf(freq, A):
     freq : float
         Frequency of interest (Hz)
     A : :class:`~numpy.ndarray`
-        Array of frequencies obtained from global dispersion maps
+        Array of frequencies (Hz) obtained from global dispersion maps
 
     Returns
     -------
     v : float
-        Nearest frequency in A
+        Nearest frequency in A (Hz)
 
     """
 
@@ -157,7 +157,7 @@ def getf(freq, A):
 
 def nv(x, v):
     """
-    Function to find nearest value in an np.array.
+    Function to find nearest value in an array.
 
     ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
@@ -181,7 +181,7 @@ def nv(x, v):
 
 def rms(x):
     """
-    Function to calculate root-mean-square of array
+    Function to calculate root-mean-square of array.
 
     ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
@@ -203,7 +203,7 @@ def rms(x):
 
 def mad(x):
     """
-    Function to calculate Median Absolute Deviation
+    Function to calculate Median Absolute Deviation.
 
     ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
@@ -238,7 +238,8 @@ def outlier(x, lim=5.0):
     Returns
     -------
     x : :class:`~numpy.ndarray`
-        Shortened array where MAD is lower than `lim`
+        Shortened array where robust standard units are 
+        lower than `lim`
 
     """
 
@@ -247,7 +248,7 @@ def outlier(x, lim=5.0):
 
 def boot(x, bootnum):
     """
-    Function to calculate directional mean value from bootstrap
+    Function to calculate directional mean value from bootstrap.
 
     ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
@@ -276,7 +277,7 @@ def boot(x, bootnum):
 
 def centerat(phi, m=0.):
     """
-    Function to re-center azimuth array to the mean value
+    Function to re-center azimuth array to the mean value.
 
     ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
@@ -515,62 +516,6 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
         phi += 360.
     if phi >= 360.:
         phi -= 360.
-
-    # # plotting:
-    # # ptype=0, no plot
-    # # ptype=1, Rayleigh plot
-    # # ptype=2, Love plot
-    # if ptype == 1:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt + r1 + X[q]
-    #     ZZ = dat.epoch2num(T)
-    #     Z = dat.num2date(ZZ)
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.plot(Z, vdat, label='Vertical')
-    #     plt.hold("on")
-    #     plt.plot(Z, n, label='BH1')
-    #     plt.legend(loc=4)
-    #     plt.xlabel('Time')
-    #     plt.ylabel('Counts')
-    #     plt.title('D-L Results (%i mHz)' % (Rf))
-    # elif ptype == 2:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt+r1+X[q]
-    #     ZZ = dat.epoch2num(T)
-    #     Z = dat.num2date(ZZ)
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.subplot(121)
-    #     plt.plot(Z, vdat, label='Vertical')
-    #     plt.hold("on")
-    #     plt.plot(Z, n, label='BH1')
-    #     plt.legend(loc=4)
-    #     plt.xlabel('Time')
-    #     plt.suptitle('D-L Results (%i mHz)' % (Rf))
-    #     plt.subplot(122)
-    #     plt.plot(Z, e, label='BH2')
-    #     plt.xlabel('Time')
-    #     plt.ylabel('Counts')
-    #     plt.legend(loc=4)
-    # elif ptype == 3:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt+r1+X[q]
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.plot(T, vdat, label='Vertical')
-
-    # if ptype > 0:
-    #     plt.show()
 
     return phi, cc1[ia]
 

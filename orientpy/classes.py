@@ -109,7 +109,7 @@ class Orient(object):
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)
@@ -309,7 +309,7 @@ class BNG(Orient):
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)
@@ -397,7 +397,7 @@ class BNG(Orient):
         stream.select(component=comps_codes[0])[0].stats.channel = channel_code_prefix + self.zcomp.upper()
 
         # Filter if specified
-        if bp:
+        if bp is not None:
             stream.filter('bandpass', freqmin=bp[0],
                           freqmax=bp[1], zerophase=True)
 
@@ -521,7 +521,7 @@ class DL(Orient):
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)

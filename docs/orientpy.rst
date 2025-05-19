@@ -35,7 +35,7 @@ The current version has been tested using **Python3.12** \
 Also, the following packages are required:
 
 - `obspy <https://github.com/obspy/obspy>`_
-- `stdb <https://github.com/schaefferaj/StDb>`_
+- `stdb <https://schaefferaj.github.io/StDb/>`_
 - `geographiclib <https://geographiclib.sourceforge.io/html/python/>`_
 
 Conda environment
@@ -58,7 +58,7 @@ Install remaining dependencies using ``pip`` inside the ``orient`` environment:
 
 .. sourcecode:: bash
 
-   pip install stdb
+   pip install git+https://github.com/schaefferaj/stdb
    pip install geographiclib
 
 

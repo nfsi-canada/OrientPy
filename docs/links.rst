@@ -26,11 +26,6 @@ References
   *Bull. Seism. Soc. Am.*, 107(2), 691--708,
   doi: 10.1785/012016,165.
 
-* Lim, H., Kim, Y., Song, T.-R. A., and Shen, Z., 2018, Measurement of 
-  seismometer orientation using the tangential P-wave
-  receiver function based on harmonic decomposition, *Geophys. J. Int.*, 212,
-  1747-1765.
-
 * Ma, Z., and G. Masters (2014), A new global Rayleigh- and Love-wave group
   velocity dataset for constraining lithosphere properties, 
   *Bull. Seism. Soc. Am.*, 104(4), 2007--2026, 
