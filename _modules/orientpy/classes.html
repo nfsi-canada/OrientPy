@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>orientpy.classes &mdash; Home 0.2.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=37f418d5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Home
+              <img src="../../_static/OrientPy_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Disclaimer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../disclaimer.html#dlopy-licence">DLOPy Licence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html#using-local-data">Using local data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#modules">Modules</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Home</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">orientpy.classes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for orientpy.classes</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Pascal Audet</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of OrientPy.</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c1"># all copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trace</span><span class="p">,</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">UTCDateTime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">circmean</span> <span class="k">as</span> <span class="n">cmean</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">circstd</span> <span class="k">as</span> <span class="n">cstd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">hmean</span> <span class="k">as</span> <span class="n">hm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">orientpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">utils</span><span class="p">,</span> <span class="n">plotting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">obspy.signal.rotate</span><span class="w"> </span><span class="kn">import</span> <span class="n">rotate_rt_ne</span><span class="p">,</span> <span class="n">rotate_ne_rt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pkg_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource_filename</span>
+
+
+<div class="viewcode-block" id="Meta">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.Meta">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Meta object contains attributes associated with the metadata</span>
+<span class="sd">    for a single earthquake event.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time : :class:`~obspy.core.UTCDateTime`</span>
+<span class="sd">        Origin time of earthquake</span>
+<span class="sd">    dep : float</span>
+<span class="sd">        Depth of hypocenter (km)</span>
+<span class="sd">    lon : float</span>
+<span class="sd">        Longitude coordinate of epicenter</span>
+<span class="sd">    lat : float</span>
+<span class="sd">        Latitude coordinate of epicenter</span>
+<span class="sd">    mag : float</span>
+<span class="sd">        Magnitude of earthquake</span>
+<span class="sd">    gac : float</span>
+<span class="sd">        Great arc circle between station and epicenter (degrees)</span>
+<span class="sd">    epi_dist : float</span>
+<span class="sd">        Epicentral distance between station and epicenter (km)</span>
+<span class="sd">    baz : float</span>
+<span class="sd">        Back-azimuth - pointing to earthquake from station (degrees)</span>
+<span class="sd">    az : float</span>
+<span class="sd">        Azimuth - pointing to station from earthquake (degrees)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">gacmin</span><span class="o">=</span><span class="mf">5.</span><span class="p">,</span> <span class="n">gacmax</span><span class="o">=</span><span class="mf">30.</span><span class="p">,</span> <span class="n">depmax</span><span class="o">=</span><span class="mf">1000.</span><span class="p">):</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">obspy.geodetics.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">gps2dist_azimuth</span> <span class="k">as</span> <span class="n">epi</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">obspy.geodetics</span><span class="w"> </span><span class="kn">import</span> <span class="n">kilometer2degrees</span> <span class="k">as</span> <span class="n">k2d</span>
+
+        <span class="c1"># Extract event 4D parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">longitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">latitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">depth</span>
+
+        <span class="c1"># Check if depth is valid type</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">&gt;</span> <span class="mf">1000.</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep</span><span class="o">/</span><span class="mf">1000.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">=</span> <span class="mf">10.</span>
+
+        <span class="c1"># Magnitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">magnitudes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mag</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9.</span>
+
+        <span class="c1"># Calculate epicentral distance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epi_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">az</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">baz</span> <span class="o">=</span> <span class="n">epi</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">sta</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">sta</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epi_dist</span> <span class="o">/=</span> <span class="mi">1000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gac</span> <span class="o">=</span> <span class="n">k2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epi_dist</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gac</span> <span class="o">&gt;</span> <span class="n">gacmin</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gac</span> <span class="o">&lt;</span> <span class="n">gacmax</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">&lt;</span> <span class="n">depmax</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">accept</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="Orient">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.Orient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Orient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Orient object contains Class attributes that associate</span>
+<span class="sd">    station information with a single event (i.e., earthquake)</span>
+<span class="sd">    metadata.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    The object is initialized with the ``sta`` field only, and</span>
+<span class="sd">    other attributes are added to the object as the analysis proceeds.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sta : :class:`~stdb.StDbElement`</span>
+<span class="sd">        Object containing station information - from :mod:`~stdb` database.</span>
+<span class="sd">    meta : :class:`~orientpy.classes.Meta`</span>
+<span class="sd">        Object of metadata information for single event (initially set to None)</span>
+<span class="sd">    data : :class:`~obspy.core.Stream`</span>
+<span class="sd">        Stream object containing the three-component seismograms</span>
+<span class="sd">    zcomp : str</span>
+<span class="sd">        Vertical Component Identifier. Should be a single character.</span>
+<span class="sd">        This is different then &#39;Z&#39; only for fully unknown component</span>
+<span class="sd">        orientation (i.e., components are 1, 2, 3)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">):</span>
+
+        <span class="c1"># Attributes from parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sta</span> <span class="o">=</span> <span class="n">sta</span>
+
+        <span class="c1"># Initialize meta and data objects as None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span> <span class="o">=</span> <span class="n">zcomp</span>
+
+<div class="viewcode-block" id="Orient.add_event">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.Orient.add_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">gacmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gacmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">depmax</span><span class="o">=</span><span class="mf">1000.</span><span class="p">,</span> <span class="n">returned</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds event metadata to Orient object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event : :class:`~obspy.core.event`</span>
+<span class="sd">            Event XML object</span>
+<span class="sd">        gacmin : float</span>
+<span class="sd">            Minimum great-arc circle distance to consider (deg)</span>
+<span class="sd">        gacmax : float</span>
+<span class="sd">            Maximum great-arc circle distance to consider (deg)</span>
+<span class="sd">        depmax : float</span>
+<span class="sd">            Maximum event depth to consider (km)</span>
+<span class="sd">        returned : bool</span>
+<span class="sd">            Whether or not to return the ``accept`` attribute</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        accept : bool</span>
+<span class="sd">            Whether or not the object is accepted for further analysis</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        meta : :class:`~orientpy.classes.Meta`</span>
+<span class="sd">            Meta data object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">obspy.core.event.event</span><span class="w"> </span><span class="kn">import</span> <span class="n">Event</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">Event</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Event has incorrect type&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Store as object attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="o">=</span> <span class="n">Meta</span><span class="p">(</span><span class="n">sta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sta</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="n">event</span><span class="p">,</span>
+                         <span class="n">gacmin</span><span class="o">=</span><span class="n">gacmin</span><span class="p">,</span> <span class="n">gacmax</span><span class="o">=</span><span class="n">gacmax</span><span class="p">,</span>
+                         <span class="n">depmax</span><span class="o">=</span><span class="n">depmax</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">returned</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span></div>
+
+
+<div class="viewcode-block" id="Orient.download_data">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.Orient.download_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">download_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">new_sr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">returned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Downloads seismograms based on a time interval.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        client : :class:`~obspy.client.fdsn.Client`</span>
+<span class="sd">            Client object</span>
+<span class="sd">        new_sr : float</span>
+<span class="sd">            New sampling rate (Hz)</span>
+<span class="sd">        t1 : float</span>
+<span class="sd">            Start time to consider (sec). Can be float or</span>
+<span class="sd">            :class:`~obspy.core.UTCDateTime` object.</span>
+<span class="sd">        t2 : float</span>
+<span class="sd">            End time to consider (sec). Can be float or</span>
+<span class="sd">            :class:`~obspy.core.UTCDateTime` object.</span>
+<span class="sd">        returned : bool</span>
+<span class="sd">            Whether or not to return the ``accept`` attribute</span>
+<span class="sd">        verbose : bool</span>
+<span class="sd">            Whether or not to print messages to screen during run-time</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        accept : bool</span>
+<span class="sd">            Whether or not the object is accepted for further analysis</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : :class:`~obspy.core.Stream`</span>
+<span class="sd">            Stream containing :class:`~obspy.core.Trace` objects</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Requires event data as attribute - aborting&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Define start time for request</span>
+            <span class="n">tstart</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">time</span> <span class="o">+</span> <span class="n">t1</span>
+            <span class="n">tend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">time</span> <span class="o">+</span> <span class="n">t2</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot; Start and end request times have not been set&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">returned</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span>
+
+        <span class="c1"># Get waveforms</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* Requesting Waveforms: &quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*    Startime: &quot;</span> <span class="o">+</span> <span class="n">tstart</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*    Endtime:  &quot;</span> <span class="o">+</span> <span class="n">tend</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Download data</span>
+        <span class="n">err</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">download_data</span><span class="p">(</span>
+            <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">sta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sta</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">tstart</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">tend</span><span class="p">,</span>
+            <span class="n">zcomp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">err</span> <span class="ow">or</span> <span class="n">stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*  Waveform Request Failed...Skipping&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">returned</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span>
+
+        <span class="c1"># Store as attributes with traces in dictionary</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">trE</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">trN</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">trZ</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">(</span><span class="n">traces</span><span class="o">=</span><span class="p">[</span><span class="n">trZ</span><span class="p">,</span> <span class="n">trN</span><span class="p">,</span> <span class="n">trE</span><span class="p">])</span>
+
+            <span class="c1"># Filter Traces and resample</span>
+            <span class="k">if</span> <span class="n">new_sr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;lowpass&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">new_sr</span><span class="p">,</span>
+                                 <span class="n">corners</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">new_sr</span><span class="p">)</span>
+
+        <span class="c1"># If there is no ZNE, perhaps there is Z12?</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">tr1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">tr2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">trZ</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">(</span><span class="n">traces</span><span class="o">=</span><span class="p">[</span><span class="n">trZ</span><span class="p">,</span> <span class="n">tr1</span><span class="p">,</span> <span class="n">tr2</span><span class="p">])</span>
+
+            <span class="c1"># Filter Traces and resample</span>
+            <span class="k">if</span> <span class="n">new_sr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;lowpass&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">new_sr</span><span class="p">,</span>
+                                 <span class="n">corners</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">new_sr</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: Data are all zeros&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">returned</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">accept</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="BNG">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.BNG">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BNG</span><span class="p">(</span><span class="n">Orient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A BNG object inherits from :class:`~orientpy.classes.Orient`.</span>
+<span class="sd">    This object contains a method to estimate station orientation</span>
+<span class="sd">    based on P-wave particle motion.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    This class is designed after the method developed by Braunmiller,</span>
+<span class="sd">    Nabelek and Ghods (2020) [1]_. It is slightly more flexible, however, </span>
+<span class="sd">    in that it can handle either regional or teleseismic P-wave data</span>
+<span class="sd">    and provides additional quality-control mesures (e.g., SNR, 1-R/Z).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    .. [1] Braunmiller, J., Nabelek, J., and Ghods, A., 2020, Sensor orientation </span>
+<span class="sd">       of Iranian broadband seismic stations from P-wave particle motion, </span>
+<span class="sd">       *Seismological Research Letters*, doi:10.1785/0220200019.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sta : :class:`~stdb.StDbElement`</span>
+<span class="sd">        Object containing station information - from :mod:`~stdb` database.</span>
+<span class="sd">    meta : :class:`~orientpy.classes.Meta`</span>
+<span class="sd">        Object of metadata information for single event (initially set to None)</span>
+<span class="sd">    data : :class:`~obspy.core.Stream`</span>
+<span class="sd">        Stream object containing the three-component seismograms</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">):</span>
+
+        <span class="n">Orient</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="n">zcomp</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BNG.calc">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.BNG.calc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dphi</span><span class="p">,</span> <span class="n">dts</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">bp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">showplot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to estimate azimuth of component `?H1` (or `?HN`). This</span>
+<span class="sd">        method minimizes the energy (RMS) of the transverse component of</span>
+<span class="sd">        P-wave data within some bandwidth.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dphi : float</span>
+<span class="sd">            Azimuth increment for search (deg)</span>
+<span class="sd">        dts : float</span>
+<span class="sd">            Length of time window on either side of</span>
+<span class="sd">            predicted P-wave arrival time (sec)</span>
+<span class="sd">        tt : list</span>
+<span class="sd">            List of two floats containing the time picks relative</span>
+<span class="sd">            to P-wave time, within which to perform the estimation of</span>
+<span class="sd">            station orientation (sec)</span>
+<span class="sd">        bp : list</span>
+<span class="sd">            List of two floats containing the low- and high-frequency</span>
+<span class="sd">            corners of a bandpass filter (Hz)</span>
+<span class="sd">        showplot : bool</span>
+<span class="sd">            Whether or not to plot waveforms.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        meta.phi : float</span>
+<span class="sd">            Azimuth of H1 (or HN) component (deg)</span>
+<span class="sd">        meta.cc : float</span>
+<span class="sd">            Cross-correlation coefficient between</span>
+<span class="sd">            vertical and radial component</span>
+<span class="sd">        meta.snr : float</span>
+<span class="sd">            Signal-to-noise ratio of P-wave measured on the</span>
+<span class="sd">            vertical seismogram</span>
+<span class="sd">        meta.TR : float</span>
+<span class="sd">            Measure of the transverse to radial ratio. In reality</span>
+<span class="sd">            this is 1 - T/R</span>
+<span class="sd">        meta.RZ : float</span>
+<span class="sd">            Measure of the radial to vertical ratio. In reality</span>
+<span class="sd">            this is 1 - R/Z</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Work on a copy of the waveform data</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Identify components in Stream</span>
+        <span class="n">comps_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">]</span>
+        <span class="n">test_sets</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s1">&#39;ZNE&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;Z12&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;Z23&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;312&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">},</span>
+                        <span class="s1">&#39;123&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">}</span>
+                    <span class="p">}</span>
+        <span class="c1"># Probably should raise an exception if set is &#39;123&#39;,</span>
+        <span class="c1"># as no correction is estimated for the vertical component</span>
+
+        <span class="k">for</span> <span class="n">test_key</span> <span class="ow">in</span> <span class="n">test_sets</span><span class="p">:</span>
+            <span class="n">test_set</span> <span class="o">=</span> <span class="n">test_sets</span><span class="p">[</span><span class="n">test_key</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">test_set</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">comps_id</span><span class="p">)):</span>
+
+                <span class="c1"># Use sets to avoid sorting complications</span>
+                <span class="n">comps_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_key</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Temporarily modify channel codes,</span>
+        <span class="c1"># assuming that N/E are not oriented properly</span>
+        <span class="n">channel_code_prefix</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">comps_codes</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel_code_prefix</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">comps_codes</span><span class="p">[</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel_code_prefix</span> <span class="o">+</span> <span class="s1">&#39;2&#39;</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">comps_codes</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel_code_prefix</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+        <span class="c1"># Filter if specified</span>
+        <span class="k">if</span> <span class="n">bp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;bandpass&#39;</span><span class="p">,</span> <span class="n">freqmin</span><span class="o">=</span><span class="n">bp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                          <span class="n">freqmax</span><span class="o">=</span><span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Get data and noise based on symmetric waveform wrt arrival</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span>
+        <span class="n">stnoise</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="o">+</span><span class="n">dts</span><span class="o">+</span><span class="n">tt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">stdata</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="n">dts</span><span class="o">+</span><span class="n">tt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="o">+</span><span class="n">dts</span><span class="o">+</span><span class="n">tt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Define signal and noise</span>
+        <span class="n">tr1</span> <span class="o">=</span> <span class="n">stdata</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">tr2</span> <span class="o">=</span> <span class="n">stdata</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">trZ</span> <span class="o">=</span> <span class="n">stdata</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="o">.</span><span class="n">upper</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">ntrZ</span> <span class="o">=</span> <span class="n">stnoise</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="o">.</span><span class="n">upper</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Calculate and store SNR as attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">snr</span> <span class="o">=</span> <span class="mf">10.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">trZ</span><span class="p">)</span><span class="o">*</span><span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">trZ</span><span class="p">)</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">ntrZ</span><span class="p">)</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">ntrZ</span><span class="p">))</span>
+
+        <span class="c1"># Search through azimuths from 0 to 180 deg and find best-fit azimuth</span>
+        <span class="n">ang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">180.</span><span class="p">,</span> <span class="n">dphi</span><span class="p">)</span>
+        <span class="n">cc1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+        <span class="n">cc2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+        <span class="n">cc3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+        <span class="n">cc4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ang</span><span class="p">):</span>
+            <span class="n">R</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">rotate_ne_rt</span><span class="p">(</span><span class="n">tr1</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">tr2</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">covmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">trZ</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">cc1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">covmat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">cc2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+            <span class="n">cc3</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">cc4</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">trZ</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Get argument of minimum of cc3 and store useful measures</span>
+        <span class="n">ia</span> <span class="o">=</span> <span class="n">cc3</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">cc1</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">TR</span> <span class="o">=</span> <span class="n">cc2</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">RZ</span> <span class="o">=</span> <span class="n">cc4</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span>
+
+        <span class="c1"># correct for angles above 360</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">baz</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">ia</span><span class="p">)</span><span class="o">*</span><span class="n">dphi</span><span class="p">)</span>
+
+        <span class="c1"># Use azimuth where CC is negative</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">cc</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">+=</span> <span class="mf">180.</span>
+
+        <span class="k">if</span> <span class="n">phi</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">+=</span> <span class="mf">360.</span>
+        <span class="k">if</span> <span class="n">phi</span> <span class="o">&gt;=</span> <span class="mf">360.</span><span class="p">:</span>
+            <span class="n">phi</span> <span class="o">-=</span> <span class="mf">360.</span>
+
+        <span class="c1"># Store the best-fit azimuth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span>
+
+        <span class="c1"># If a plot is requested, rotate Z12 to ZNE and then ZRT</span>
+        <span class="k">if</span> <span class="n">showplot</span><span class="p">:</span>
+
+            <span class="c1"># Now rotate components to proper N, E and then R, T</span>
+            <span class="n">sttmp</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># Apply filter if defined previously</span>
+            <span class="k">if</span> <span class="n">bp</span><span class="p">:</span>
+                <span class="n">sttmp</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;bandpass&#39;</span><span class="p">,</span> <span class="n">freqmin</span><span class="o">=</span><span class="n">bp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">freqmax</span><span class="o">=</span><span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1"># Copy traces</span>
+            <span class="n">trN</span> <span class="o">=</span> <span class="n">sttmp</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">trE</span> <span class="o">=</span> <span class="n">sttmp</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># Rotating from 1,2 to N,E is the negative of</span>
+            <span class="c1"># rotation from RT to NE, with baz corresponding</span>
+            <span class="c1"># to azim of component 1, or phi previously determined</span>
+            <span class="n">azim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">phi</span>
+            <span class="n">N</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">rotate_rt_ne</span><span class="p">(</span><span class="n">trN</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">trE</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">azim</span><span class="p">)</span>
+            <span class="n">trN</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="o">*</span><span class="n">N</span>
+            <span class="n">trE</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="o">*</span><span class="n">E</span>
+
+            <span class="c1"># Update stats of streams</span>
+            <span class="n">trN</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">trN</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;N&#39;</span>
+            <span class="n">trE</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">trE</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">channel</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;E&#39;</span>
+
+            <span class="c1"># Store corrected traces in new stream and rotate to</span>
+            <span class="c1"># R, T using back-azimuth</span>
+            <span class="n">stcorr</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">(</span><span class="n">traces</span><span class="o">=</span><span class="p">[</span><span class="n">trN</span><span class="p">,</span> <span class="n">trE</span><span class="p">])</span>
+            <span class="n">stcorr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="s1">&#39;NE-&gt;RT&#39;</span><span class="p">,</span> <span class="n">back_azimuth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">baz</span><span class="p">)</span>
+
+            <span class="c1"># Merge original and corrected streams</span>
+            <span class="n">st</span> <span class="o">=</span> <span class="n">stream</span> <span class="o">+</span> <span class="n">stcorr</span>
+
+            <span class="c1"># Plot</span>
+            <span class="n">plot</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot_bng_waveforms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">dts</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span>
+            <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DL">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.DL">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DL</span><span class="p">(</span><span class="n">Orient</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A DL object inherits from :class:`~orientpy.classes.Orient`. This object</span>
+<span class="sd">    contains a method to estimate station orientation based on Rayleigh-wave</span>
+<span class="sd">    particle motion.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    This algorithm is heavily based on the code `DLOPy` by</span>
+<span class="sd">    Doran and Laske (2017) [2]_. The original code can be found here:</span>
+<span class="sd">    https://igppweb.ucsd.edu/~adoran/DLOPy.html</span>
+
+<span class="sd">    There are also a couple of versions available on GitHub:</span>
+
+<span class="sd">    - https://github.com/kschramm-usgs/DLOPy</span>
+<span class="sd">    - https://github.com/jbrussell/DLOPy_v1.0</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    .. [2] Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer</span>
+<span class="sd">       instrument orientations via automated Rayleigh-wave arrival-angle</span>
+<span class="sd">       measurements, *Bulletin of the Seismological Society of America*,</span>
+<span class="sd">       107(2), doi:10.1785/0120160165.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sta : :class:`~stdb.StDbElement`</span>
+<span class="sd">        Object containing station information - from :mod:`~stdb` database.</span>
+<span class="sd">    meta : :class:`~orientpy.classes.Meta`</span>
+<span class="sd">        Object of metadata information for single event (initially set to None)</span>
+<span class="sd">    data : :class:`~obspy.core.Stream`</span>
+<span class="sd">        Stream object containing the three-component seismograms</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">):</span>
+
+        <span class="n">Orient</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="n">zcomp</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DL.calc">
+<a class="viewcode-back" href="../../api.html#orientpy.classes.DL.calc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">showplot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to estimate azimuth of component `?H1` (or `?HN`). This</span>
+<span class="sd">        method maximizes the normalized covariance between the</span>
+<span class="sd">        Hilbert-transformed vertical component and the radial component of</span>
+<span class="sd">        Rayleigh-wave data measured at multiple periods. This is done for the</span>
+<span class="sd">        shortest (R1) and longest (R2) orbits of fundamental-mode Rayleigh</span>
+<span class="sd">        waves. Window selection is done based on average group velocity</span>
+<span class="sd">        extracted from a global model of Rayleigh-wave dispersion.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        showplot : bool</span>
+<span class="sd">            Whether or not to plot waveforms.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        meta.R1phi : list</span>
+<span class="sd">            List of azimuth of H1 (or HN) component (deg) based on R1, measured</span>
+<span class="sd">            at different periods</span>
+<span class="sd">        meta.R1cc : float</span>
+<span class="sd">            Cross-correlation coefficient between hilbert-transformed vertical</span>
+<span class="sd">            and radial component for R1, measured at different periods</span>
+<span class="sd">        meta.R2phi : list</span>
+<span class="sd">            List of azimuth of H1 (or HN) component (deg) based on R2, measured</span>
+<span class="sd">            at different periods</span>
+<span class="sd">        meta.R2cc : float</span>
+<span class="sd">            Cross-correlation coefficient between hilbert-transformed vertical</span>
+<span class="sd">            and radial component for R2, measured at different periods</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Work on a copy of the waveform data</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Initialize surface wave arrays</span>
+        <span class="n">nper</span> <span class="o">=</span> <span class="mi">7</span>
+        <span class="n">R1phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nper</span><span class="p">)</span>
+        <span class="n">R1cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nper</span><span class="p">)</span>
+        <span class="n">R2phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nper</span><span class="p">)</span>
+        <span class="n">R2cc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nper</span><span class="p">)</span>
+
+        <span class="c1"># Load group velocity maps</span>
+        <span class="n">map10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.10.txt&#39;</span><span class="p">))</span>
+        <span class="n">map15</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.15.txt&#39;</span><span class="p">))</span>
+        <span class="n">map20</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.20.txt&#39;</span><span class="p">))</span>
+        <span class="n">map25</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.25.txt&#39;</span><span class="p">))</span>
+        <span class="n">map30</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.30.txt&#39;</span><span class="p">))</span>
+        <span class="n">map35</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.35.txt&#39;</span><span class="p">))</span>
+        <span class="n">map40</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;orientpy&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;dispmaps/R.gv.40.txt&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Get parameters for R2</span>
+        <span class="n">Rearth</span> <span class="o">=</span> <span class="mf">6371.25</span>
+        <span class="n">circE</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rearth</span>
+        <span class="n">dist2</span> <span class="o">=</span> <span class="n">circE</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">epi_dist</span>
+        <span class="n">baz2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">baz</span> <span class="o">+</span> <span class="mf">180.</span>
+        <span class="k">if</span> <span class="n">baz2</span> <span class="o">&gt;=</span> <span class="mf">360.</span><span class="p">:</span>
+            <span class="n">baz2</span> <span class="o">-=</span> <span class="mf">360.</span>
+
+        <span class="c1"># Check data length, data quality</span>
+        <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">checklen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="mf">4.</span><span class="o">*</span><span class="mf">60.</span><span class="o">*</span><span class="mf">60.</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;      Error: Length Incorrect&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get path-averaged group velocities</span>
+        <span class="n">Ray1</span><span class="p">,</span> <span class="n">Ray2</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">pathvels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sta</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sta</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>
+            <span class="n">map10</span><span class="p">,</span> <span class="n">map15</span><span class="p">,</span> <span class="n">map20</span><span class="p">,</span> <span class="n">map25</span><span class="p">,</span> <span class="n">map30</span><span class="p">,</span> <span class="n">map35</span><span class="p">,</span> <span class="n">map40</span><span class="p">)</span>
+
+        <span class="c1"># Calculate arrival angle for each frequency and orbit</span>
+        <span class="n">Rf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">40.</span><span class="p">,</span> <span class="mf">35.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">25.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">15.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">]</span>
+        <span class="n">LPF</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.035</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">]</span>
+        <span class="n">HPF</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.045</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">]</span>
+        <span class="n">winlen1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.</span><span class="p">,</span> <span class="mf">17.</span><span class="p">,</span> <span class="mf">14.</span><span class="p">,</span> <span class="mf">12.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">]</span>
+        <span class="n">winlen2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">24.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">16.</span><span class="p">,</span> <span class="mf">13.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">]</span>
+        <span class="n">flist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">HPF</span><span class="p">,</span> <span class="n">LPF</span><span class="p">,</span> <span class="n">winlen1</span><span class="p">,</span> <span class="n">winlen2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">flist</span><span class="p">):</span>
+
+            <span class="c1"># R1 path</span>
+            <span class="n">R1phi</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R1cc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">DLcalc</span><span class="p">(</span>
+                <span class="n">stream</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">epi_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">baz</span><span class="p">,</span> <span class="n">Ray1</span><span class="p">,</span>
+                <span class="n">winlen</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">ptype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="p">)</span>
+
+            <span class="c1"># R2 path</span>
+            <span class="n">R2phi</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R2cc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">DLcalc</span><span class="p">(</span>
+                <span class="n">stream</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">dist2</span><span class="p">,</span> <span class="n">baz2</span><span class="p">,</span> <span class="n">Ray2</span><span class="p">,</span>
+                <span class="n">winlen</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">ptype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zcomp</span><span class="p">)</span>
+
+        <span class="c1"># Store azimuths and CC values as attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">R1phi</span> <span class="o">=</span> <span class="n">R1phi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">R2phi</span> <span class="o">=</span> <span class="n">R2phi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">R1cc</span> <span class="o">=</span> <span class="n">R1cc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">R2cc</span> <span class="o">=</span> <span class="n">R2cc</span>
+
+        <span class="k">return</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Pascal Audet.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

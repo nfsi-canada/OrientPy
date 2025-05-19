@@ -35,7 +35,7 @@ The current version has been tested using **Python3.12** \
 Also, the following packages are required:
 
 - `obspy <https://github.com/obspy/obspy>`_
-- `stdb <https://github.com/schaefferaj/StDb>`_
+- `stdb <https://schaefferaj.github.io/StDb/>`_
 - `geographiclib <https://geographiclib.sourceforge.io/html/python/>`_
 
 Conda environment
@@ -58,7 +58,7 @@ Install remaining dependencies using ``pip`` inside the ``orient`` environment:
 
 .. sourcecode:: bash
 
-   pip install stdb
+   pip install git+https://github.com/schaefferaj/stdb
    pip install geographiclib
 
 
@@ -67,7 +67,7 @@ Installing development branch from GitHub
 
 .. sourcecode:: bash
 
-   pip install orientpy@git+https://github.com/nfsi-canada/orientpy
+   pip install git+https://github.com/nfsi-canada/orientpy
 
 Installing from source
 ----------------------
@@ -84,3 +84,45 @@ Installing from source
 .. sourcecode:: bash
 
    pip install .
+
+Using local data
+================
+
+The various scripts packaged with ``OrientPy`` use FDSN web services through and ``ObsPy`` `Client` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a `Client` that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data`` and ``--dtype`` for more details.
+
+Station Metadata
+----------------
+
+If you have data stored locally on your drive, it is likely you also have a station `XML <https://www.fdsn.org/xml/station/>`_ file containing the metadata. The corresponding ObsPy documentation is `here <https://docs.obspy.org/packages/obspy.core.inventory.html>`_. 
+
+To convert the station `XML` file to an input that can be read by ``OrientPy``, you run the command ``gen_stdb station.xml`` (only available on StDb version 0.2.7), which will create the file ``station.pkl``. If you don't have a station `XML` file but you have a dataless SEED file, you can convert it first to `XML` using `this tools <https://seiscode.iris.washington.edu/projects/stationxml-converter>`_.
+
+Waveform Data
+-------------
+
+The SDS folder containing the waveform data has the structure:
+
+.. code-block:: python
+
+   archive
+     + year
+       + network code
+         + station code
+           + channel code + type
+             + one file per day and location, e.g. NET.STA.LOC.CHAN.TYPE.YEAR.DOY
+
+
+For example:
+
+.. code-block:: python
+
+   SDS/
+     2014/
+       YH/
+         LOBS3/
+           HH1.D/ 
+             YH.LOBS3..CH1.D.2014.332
+             ...
+
+
+Note, the filename does not include the extension (`.MSEED` or `.SAC`), and the characters `.D` (for type Data) that appear in both the channel code and the filename. Note also the two dots (`..`). If there is a location code, it should appear between those dots (e.g., for a location code `10`, the corresponding filename should be `YH.LOBS3.10.HH1.D.2014.332`). There is no location code for the YH.LOBS3 data, and this field is simply absent from the filenames. Finally, the day-of-year (DOY) field must be zero-padded to be exactly 3 characters.

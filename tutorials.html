@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tutorials &mdash; Home 0.2.0 documentation</title>
+  <title>Tutorials &mdash; Home 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=37f418d5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -56,6 +56,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="orientpy.html">Licence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="orientpy.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orientpy.html#using-local-data">Using local data</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
@@ -112,7 +113,7 @@
 <p>All the scripts provided require a <code class="docutils literal notranslate"><span class="pre">StDb</span></code> database containing station
 information and metadata. Let’s first create this database for station
 LOBS3 and send the prompt to a logfile</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ query_fdsn_stdb -N YH -C ?H? -S LOBS3 YH_list &gt; logfile
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ query_fdsn_stdb -N YH -S LOBS3 YH_list &gt; logfile
 </pre></div>
 </div>
 <p>To check the station info for M08A, use the program <code class="docutils literal notranslate"><span class="pre">ls_stdb</span></code>:</p>
@@ -154,7 +155,7 @@ program will automatically use either the P or PP waves to extract the waveforms
 <code class="docutils literal notranslate"><span class="pre">--minmax=6.</span></code> to limit the number of events to consider;
 <code class="docutils literal notranslate"><span class="pre">--mindist=30.</span></code> for the minimum epicentral distance for teleseismic P; and
 <code class="docutils literal notranslate"><span class="pre">--bp=0.04,0.1</span></code> to focus on the long-period P waves</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc_auto --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bng_calc --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 </pre></div>
 </div>
 <p>An example log printed on the terminal will look like:</p>

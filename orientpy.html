@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Licence &mdash; Home 0.2.0 documentation</title>
+  <title>Licence &mdash; Home 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=37f418d5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -61,6 +61,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#conda-environment">Conda environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-development-branch-from-github">Installing development branch from GitHub</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#using-local-data">Using local data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#station-metadata">Station Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#waveform-data">Waveform Data</a></li>
 </ul>
 </li>
 </ul>
@@ -128,7 +133,7 @@ SOFTWARE.</p>
 <p>The current version has been tested using <strong>Python3.12</strong> Also, the following packages are required:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/obspy/obspy">obspy</a></p></li>
-<li><p><a class="reference external" href="https://github.com/schaefferaj/StDb">stdb</a></p></li>
+<li><p><a class="reference external" href="https://schaefferaj.github.io/StDb/">stdb</a></p></li>
 <li><p><a class="reference external" href="https://geographiclib.sourceforge.io/html/python/">geographiclib</a></p></li>
 </ul>
 </section>
@@ -144,14 +149,14 @@ where <code class="docutils literal notranslate"><span class="pre">OrientPy</spa
 </pre></div>
 </div>
 <p>Install remaining dependencies using <code class="docutils literal notranslate"><span class="pre">pip</span></code> inside the <code class="docutils literal notranslate"><span class="pre">orient</span></code> environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>stdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/schaefferaj/stdb
 pip<span class="w"> </span>install<span class="w"> </span>geographiclib
 </pre></div>
 </div>
 </section>
 <section id="installing-development-branch-from-github">
 <h2>Installing development branch from GitHub<a class="headerlink" href="#installing-development-branch-from-github" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>orientpy@git+https://github.com/nfsi-canada/orientpy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/nfsi-canada/orientpy
 </pre></div>
 </div>
 </section>
@@ -170,6 +175,38 @@ pip<span class="w"> </span>install<span class="w"> </span>geographiclib
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
+</section>
+</section>
+<section id="using-local-data">
+<h1>Using local data<a class="headerlink" href="#using-local-data" title="Link to this heading"></a></h1>
+<p>The various scripts packaged with <code class="docutils literal notranslate"><span class="pre">OrientPy</span></code> use FDSN web services through and <code class="docutils literal notranslate"><span class="pre">ObsPy</span></code> <cite>Client</cite> to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a <cite>Client</cite> that reads a <a class="reference external" href="https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html">SeisComP Data Structure</a> archive containing SAC or miniSEED waveform data. Check out the scripts <code class="docutils literal notranslate"><span class="pre">bng_calc</span></code> and <code class="docutils literal notranslate"><span class="pre">dl_calc</span></code> below and the argument <code class="docutils literal notranslate"><span class="pre">--local-data</span></code> and <code class="docutils literal notranslate"><span class="pre">--dtype</span></code> for more details.</p>
+<section id="station-metadata">
+<h2>Station Metadata<a class="headerlink" href="#station-metadata" title="Link to this heading"></a></h2>
+<p>If you have data stored locally on your drive, it is likely you also have a station <a class="reference external" href="https://www.fdsn.org/xml/station/">XML</a> file containing the metadata. The corresponding ObsPy documentation is <a class="reference external" href="https://docs.obspy.org/packages/obspy.core.inventory.html">here</a>.</p>
+<p>To convert the station <cite>XML</cite> file to an input that can be read by <code class="docutils literal notranslate"><span class="pre">OrientPy</span></code>, you run the command <code class="docutils literal notranslate"><span class="pre">gen_stdb</span> <span class="pre">station.xml</span></code> (only available on StDb version 0.2.7), which will create the file <code class="docutils literal notranslate"><span class="pre">station.pkl</span></code>. If you don’t have a station <cite>XML</cite> file but you have a dataless SEED file, you can convert it first to <cite>XML</cite> using <a class="reference external" href="https://seiscode.iris.washington.edu/projects/stationxml-converter">this tools</a>.</p>
+</section>
+<section id="waveform-data">
+<h2>Waveform Data<a class="headerlink" href="#waveform-data" title="Link to this heading"></a></h2>
+<p>The SDS folder containing the waveform data has the structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">archive</span>
+  <span class="o">+</span> <span class="n">year</span>
+    <span class="o">+</span> <span class="n">network</span> <span class="n">code</span>
+      <span class="o">+</span> <span class="n">station</span> <span class="n">code</span>
+        <span class="o">+</span> <span class="n">channel</span> <span class="n">code</span> <span class="o">+</span> <span class="nb">type</span>
+          <span class="o">+</span> <span class="n">one</span> <span class="n">file</span> <span class="n">per</span> <span class="n">day</span> <span class="ow">and</span> <span class="n">location</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">NET</span><span class="o">.</span><span class="n">STA</span><span class="o">.</span><span class="n">LOC</span><span class="o">.</span><span class="n">CHAN</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">YEAR</span><span class="o">.</span><span class="n">DOY</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SDS</span><span class="o">/</span>
+  <span class="mi">2014</span><span class="o">/</span>
+    <span class="n">YH</span><span class="o">/</span>
+      <span class="n">LOBS3</span><span class="o">/</span>
+        <span class="n">HH1</span><span class="o">.</span><span class="n">D</span><span class="o">/</span>
+          <span class="n">YH</span><span class="o">.</span><span class="n">LOBS3</span><span class="o">..</span><span class="n">CH1</span><span class="o">.</span><span class="n">D</span><span class="mf">.2014.332</span>
+          <span class="o">...</span>
+</pre></div>
+</div>
+<p>Note, the filename does not include the extension (<cite>.MSEED</cite> or <cite>.SAC</cite>), and the characters <cite>.D</cite> (for type Data) that appear in both the channel code and the filename. Note also the two dots (<cite>..</cite>). If there is a location code, it should appear between those dots (e.g., for a location code <cite>10</cite>, the corresponding filename should be <cite>YH.LOBS3.10.HH1.D.2014.332</cite>). There is no location code for the YH.LOBS3 data, and this field is simply absent from the filenames. Finally, the day-of-year (DOY) field must be zero-padded to be exactly 3 characters.</p>
 </section>
 </section>
 

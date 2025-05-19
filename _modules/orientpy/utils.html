@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>orientpy.utils &mdash; Home 0.2.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=37f418d5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Home
+              <img src="../../_static/OrientPy_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html#references">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Disclaimer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../disclaimer.html#dlopy-licence">DLOPy Licence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../orientpy.html#using-local-data">Using local data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#modules">Modules</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Home</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">orientpy.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for orientpy.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Pascal Audet</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of OrientPy.</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c1"># all copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geographiclib.geodesic</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">obspy.signal.rotate</span><span class="w"> </span><span class="kn">import</span> <span class="n">rotate_rt_ne</span><span class="p">,</span> <span class="n">rotate_ne_rt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTCDateTime</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">Trace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">circmean</span> <span class="k">as</span> <span class="n">cmean</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">circstd</span> <span class="k">as</span> <span class="n">cstd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">hmean</span> <span class="k">as</span> <span class="n">hm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+
+<div class="viewcode-block" id="catclean">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.catclean">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">catclean</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function looks for repeat events in a catalogue of</span>
+<span class="sd">    earthquakes.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cat : :class:`~obspy.core.event.Catalog`</span>
+<span class="sd">        Catalogue XML object, container for Event objects.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rep : :class:`~numpy.ndarray`</span>
+<span class="sd">        1D array of repeat events in the catalogue.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">rep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">kk</span><span class="p">,</span> <span class="n">ev</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ev</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span> <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time</span> <span class="o">&lt;</span> <span class="mf">60.</span><span class="o">*</span><span class="mf">60.</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="n">close</span><span class="p">(</span><span class="n">ev</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+                          <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="n">close</span><span class="p">(</span><span class="n">ev</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                          <span class="n">event</span><span class="o">.</span><span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="p">(</span><span class="n">ev</span><span class="o">.</span><span class="n">magnitudes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span> <span class="o">&lt;</span> <span class="n">event</span><span class="o">.</span><span class="n">magnitudes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mag</span> <span class="o">-</span> <span class="mf">0.3</span><span class="p">):</span>
+                <span class="n">rep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">kk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rep</span></div>
+
+
+
+<div class="viewcode-block" id="checklen">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.checklen">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">checklen</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">hrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to check if there is enough downloaded data to run program</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, </span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    st : :class:`~obspy.core.Stream`</span>
+<span class="sd">        Stream containing waveforms</span>
+<span class="sd">    hrs : float</span>
+<span class="sd">        Amount of time (hours) that should be available for analysis</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    boolean</span>
+<span class="sd">        Whether or not the check is successful</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">L</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">endtime</span><span class="p">)</span> <span class="o">-</span>
+                <span class="n">UTCDateTime</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span><span class="p">))</span> <span class="o">+</span> <span class="mf">100.</span> <span class="o">&lt;</span> <span class="n">hrs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="resiz">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.resiz">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">resiz</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to resize arrays to all identical shapes</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x* : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array for which to check length (here it&#39;s trace.data)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    x* : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array trimmed to shortest segment</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x3</span><span class="p">)]))</span>
+    <span class="k">return</span> <span class="n">x1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">L</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">L</span><span class="p">],</span> <span class="n">x3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">L</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="getf">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.getf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">getf</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to extract frequency in array.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Frequency of interest (Hz)</span>
+<span class="sd">    A : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array of frequencies (Hz) obtained from global dispersion maps</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    v : float</span>
+<span class="sd">        Nearest frequency in A (Hz)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">freq</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">v</span></div>
+
+
+
+<div class="viewcode-block" id="nv">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.nv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">nv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to find nearest value in an array.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+<span class="sd">    v : float</span>
+<span class="sd">        Value to compare within array</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x[idx] : float</span>
+<span class="sd">        Nearest value to v in x</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">v</span><span class="p">))</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span></div>
+
+
+
+<div class="viewcode-block" id="rms">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.rms">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rms</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to calculate root-mean-square of array.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rms : float</span>
+<span class="sd">        Root-Mean-Square value of `x`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="mad">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.mad">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mad</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to calculate Median Absolute Deviation.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mad : float</span>
+<span class="sd">        Median Absolute deviation of `x`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="outlier">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.outlier">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">outlier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lim</span><span class="o">=</span><span class="mf">5.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to remove outliers based on MAD threshold</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Shortened array where robust standard units are </span>
+<span class="sd">        lower than `lim`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">mad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">lim</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="boot">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.boot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">boot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bootnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to calculate directional mean value from bootstrap.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+<span class="sd">    bootnum : int</span>
+<span class="sd">        Number of bootstrap estimates to produce</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    m : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array of directional mean values</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">bootnum</span><span class="p">))</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">bootnum</span><span class="p">)):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">360</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span></div>
+
+
+
+<div class="viewcode-block" id="centerat">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.centerat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">centerat</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to re-center azimuth array to the mean value.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    phi : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array</span>
+<span class="sd">    m : float</span>
+<span class="sd">        Value around which to center the azimuth</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    phinew : :class:`~numpy.ndarray`</span>
+<span class="sd">        Re-centered azimuth array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">phinew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">phi</span><span class="p">))):</span>
+            <span class="k">if</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="o">+</span><span class="mf">180.</span><span class="p">:</span>
+                <span class="n">phinew</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">360.</span>
+            <span class="k">if</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="o">-</span><span class="mf">180.</span><span class="p">:</span>
+                <span class="n">phinew</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">360.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="k">if</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="o">+</span><span class="mf">180.</span><span class="p">:</span>
+                    <span class="n">phinew</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">360.</span>
+                <span class="k">if</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="o">-</span><span class="mf">180.</span><span class="p">:</span>
+                    <span class="n">phinew</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">360.</span>
+    <span class="k">return</span> <span class="n">phinew</span></div>
+
+
+
+<div class="viewcode-block" id="pathvels">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.pathvels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pathvels</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span>
+             <span class="n">map10</span><span class="p">,</span> <span class="n">map15</span><span class="p">,</span> <span class="n">map20</span><span class="p">,</span> <span class="n">map25</span><span class="p">,</span> <span class="n">map30</span><span class="p">,</span> <span class="n">map35</span><span class="p">,</span> <span class="n">map40</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overall function to get path-averaged group velocity.</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lat1 : float</span>
+<span class="sd">        Latitude of origin point (deg)</span>
+<span class="sd">    lon1 : float</span>
+<span class="sd">        Longitude of origin point (deg)</span>
+<span class="sd">    lat2 : float</span>
+<span class="sd">        Latitude of end point (deg)</span>
+<span class="sd">    lon2 : float</span>
+<span class="sd">        Longitude of end point (deg)</span>
+<span class="sd">    map* : :class:`~numpy.ndarray`</span>
+<span class="sd">        maps of Rayleigh-wave dispersion at various frequencies</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    R1 : :class:`~numpy.ndarray`</span>
+<span class="sd">        R1 velocity path</span>
+
+<span class="sd">    R2 : :class:`~numpy.ndarray`</span>
+<span class="sd">        R2 velocity path</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Rearth</span> <span class="o">=</span> <span class="mf">6371.25</span>
+    <span class="n">circE</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Rearth</span>
+
+    <span class="c1"># Get distance and azimuth</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Geodesic</span><span class="o">.</span><span class="n">WGS84</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">)</span>
+
+    <span class="n">minor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;s12&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mf">1000.</span>
+    <span class="n">major</span> <span class="o">=</span> <span class="n">circE</span><span class="o">-</span><span class="n">minor</span>
+
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">Geodesic</span><span class="o">.</span><span class="n">WGS84</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;azi1&#39;</span><span class="p">])</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">Geodesic</span><span class="o">.</span><span class="n">WGS84</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;azi1&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span>
+
+    <span class="n">deg</span> <span class="o">=</span> <span class="mf">111.17</span>
+    <span class="n">D1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="mi">361</span><span class="p">)):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">deg</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">]])</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">D1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">D1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">D1</span><span class="p">,</span> <span class="n">p2</span><span class="p">))</span>
+
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">Geodesic</span><span class="o">.</span><span class="n">WGS84</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">bb</span><span class="p">[</span><span class="s1">&#39;s12&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">deg</span><span class="o">*</span><span class="mf">1000.</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="n">D2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="mi">361</span><span class="p">)):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">l2</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">deg</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">]])</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">D2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">D2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">D2</span><span class="p">,</span> <span class="n">p2</span><span class="p">))</span>
+
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">Geodesic</span><span class="o">.</span><span class="n">WGS84</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">bb</span><span class="p">[</span><span class="s1">&#39;s12&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">deg</span><span class="o">*</span><span class="mf">1000.0</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="c1"># We now have lat and lon points along the major and minor great circles.</span>
+    <span class="c1"># We calculate the group velocity of at each point, and then</span>
+    <span class="c1"># find the average velocities.</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">D1</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">D1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">D1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">360</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">D2</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">D2</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">D2</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">360</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">Ray</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+        <span class="n">U1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">),</span> <span class="mi">7</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">))):</span>
+            <span class="c1"># Do latitude first</span>
+
+            <span class="c1"># Get correct precision</span>
+            <span class="c1"># designed to match results of Ma et al codes</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+
+            <span class="c1"># find right index</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">map10</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">nv</span><span class="p">(</span><span class="n">map10</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">qq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">map10</span><span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nv</span><span class="p">(</span><span class="n">map10</span><span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">qq</span><span class="p">]</span>
+
+            <span class="c1"># update path</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">map10</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">map15</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">map20</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">map25</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">map30</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">map35</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">U1</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">map40</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">mhz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">mhz</span><span class="p">,</span> <span class="n">hm</span><span class="p">(</span><span class="n">U1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">return</span> <span class="n">Ray</span><span class="p">(</span><span class="n">D1</span><span class="p">),</span> <span class="n">Ray</span><span class="p">(</span><span class="n">D2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DLcalc">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.DLcalc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">DLcalc</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">Rf</span><span class="p">,</span> <span class="n">LPF</span><span class="p">,</span> <span class="n">HPF</span><span class="p">,</span> <span class="n">epi</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">winlen</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">ptype</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zcomp</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DORAN-LASKE calculation for one freq, one orbit of surface wave</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stream : float</span>
+<span class="sd">        Latitude of origin point (deg)</span>
+<span class="sd">    lon1 : float</span>
+<span class="sd">        Longitude of origin point (deg)</span>
+<span class="sd">    lat2 : float</span>
+<span class="sd">        Latitude of end point (deg)</span>
+<span class="sd">    lon2 : float</span>
+<span class="sd">        Longitude of end point (deg)</span>
+<span class="sd">    map* : :class:`~numpy.ndarray`</span>
+<span class="sd">        maps of Rayleigh-wave dispersion at various frequencies</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    R1 : :class:`~numpy.ndarray`</span>
+<span class="sd">        R1 velocity path</span>
+
+<span class="sd">    R2 : :class:`~numpy.ndarray`</span>
+<span class="sd">        R2 velocity path</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Pre-process</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">taper</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span> <span class="n">max_percentage</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;lowpass&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">LPF</span><span class="p">,</span> <span class="n">corners</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;highpass&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">HPF</span><span class="p">,</span> <span class="n">corners</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">zerophase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">detrend</span><span class="p">()</span>
+
+    <span class="c1"># Window info</span>
+    <span class="n">Rvel</span> <span class="o">=</span> <span class="n">getf</span><span class="p">(</span><span class="n">Rf</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>  <span class="c1"># Group velocity at Rf</span>
+    <span class="n">R1window</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">Rf</span><span class="o">/</span><span class="mf">1000.</span><span class="p">))</span><span class="o">*</span><span class="n">winlen</span>
+    <span class="n">arv</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">Rvel</span> <span class="o">*</span> <span class="n">epi</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">arv</span> <span class="o">-</span> <span class="n">R1window</span><span class="o">/</span><span class="mf">2.</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">arv</span> <span class="o">+</span> <span class="n">R1window</span><span class="o">/</span><span class="mf">2.</span>
+
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">dt</span><span class="o">+</span><span class="n">r1</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="n">dt</span><span class="o">+</span><span class="n">r2</span><span class="p">)</span>
+
+    <span class="c1"># Extract waveform data for each component</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tr1</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">tr2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">tr1</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">tr2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">trZ</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="n">zcomp</span><span class="o">.</span><span class="n">upper</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="c1"># Calculate Hilbert transform of vertical trace data</span>
+    <span class="n">trZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">hilbert</span><span class="p">(</span><span class="n">trZ</span><span class="p">))</span>
+
+    <span class="c1"># Ensure all data vectors are same length</span>
+    <span class="n">tr1</span><span class="p">,</span> <span class="n">tr2</span><span class="p">,</span> <span class="n">trZ</span> <span class="o">=</span> <span class="n">resiz</span><span class="p">(</span><span class="n">tr1</span><span class="p">,</span> <span class="n">tr2</span><span class="p">,</span> <span class="n">trZ</span><span class="p">)</span>
+
+    <span class="c1"># Rotate through and find max normalized covariance</span>
+    <span class="n">dphi</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">ang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">dphi</span><span class="p">)</span>
+    <span class="n">cc1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+    <span class="n">cc2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ang</span><span class="p">):</span>
+        <span class="n">R</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">rotate_ne_rt</span><span class="p">(</span><span class="n">tr1</span><span class="p">,</span> <span class="n">tr2</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">covmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">trZ</span><span class="p">)</span>
+        <span class="n">cc1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">covmat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">cstar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">trZ</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">trZ</span><span class="p">)</span>
+        <span class="n">cc2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">cstar</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Get argument of maximum of cc2</span>
+    <span class="n">ia</span> <span class="o">=</span> <span class="n">cc2</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+
+    <span class="c1"># Get azimuth and correct for angles above 360</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">baz</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">ia</span><span class="p">)</span><span class="o">*</span><span class="n">dphi</span><span class="p">)</span> <span class="o">+</span> <span class="mf">180.</span>
+    <span class="k">if</span> <span class="n">phi</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">:</span>
+        <span class="n">phi</span> <span class="o">+=</span> <span class="mf">360.</span>
+    <span class="k">if</span> <span class="n">phi</span> <span class="o">&gt;=</span> <span class="mf">360.</span><span class="p">:</span>
+        <span class="n">phi</span> <span class="o">-=</span> <span class="mf">360.</span>
+
+    <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">cc1</span><span class="p">[</span><span class="n">ia</span><span class="p">]</span></div>
+
+
+
+<span class="c1"># Final calculation</span>
+<div class="viewcode-block" id="estimate">
+<a class="viewcode-back" href="../../api.html#orientpy.utils.estimate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to estimate final azimuth from</span>
+
+<span class="sd">    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,</span>
+<span class="sd">    RELEASED APRIL 2017</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    phi : :class:`~numpy.ndarray`</span>
+<span class="sd">        Input array of estimated azimuth</span>
+<span class="sd">    ind : list</span>
+<span class="sd">        List of index values that satisfy some QC condition</span>
+<span class="sd">        for phi</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    m : float</span>
+<span class="sd">        Mean value of robust, bootstrapped estimates</span>
+
+<span class="sd">    s : float</span>
+<span class="sd">        2 Standard deviations of robust, bootstrapped estimates</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get phi&#39;, where conditions are met</span>
+    <span class="n">phip</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+    <span class="c1"># Re-center at circular mean</span>
+    <span class="n">phip</span> <span class="o">=</span> <span class="n">centerat</span><span class="p">(</span><span class="n">phip</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">cmean</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">360</span><span class="p">))</span>
+
+    <span class="c1"># Remove outliers</span>
+    <span class="n">phipp</span> <span class="o">=</span> <span class="n">outlier</span><span class="p">(</span><span class="n">phip</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span>
+
+    <span class="c1"># bootstrap results for statistic</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">boot</span><span class="p">(</span><span class="n">phipp</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cmean</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">360</span><span class="p">),</span> <span class="mi">2</span><span class="o">*</span><span class="mf">1.96</span><span class="o">*</span><span class="n">cstd</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">360</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Pascal Audet.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
