@@ -165,8 +165,8 @@ def get_dl_calc_arguments(argv=None):
              "(1) HZ, HN, HE; " +
              "(2) Left Handed: HZ, H2 90 CW H1; " +
              "(3) Right Handed: HZ, H2 90 CCW H1 " +
-             "(4) Left Handed Numeric: H3, H2 90 CW H1 " +
-             "[Default 2]")
+             "(4) Left Handed Numeric: H3, H2 90 CW H1. **Note**: " +
+             "This option is not implemented yet. [Default 2]")
 
     # Timing
     Tmparm = parser.add_argument_group(

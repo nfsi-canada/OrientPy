@@ -33,7 +33,7 @@ def get_bng_average_arguments(argv=None):
         help="Station Database to process from.",
         type=str)
     parser.add_argument(
-        "-v", "--verbose",
+        "-V", "--verbose",
         default=2,
         type=int,
         dest="verb",
