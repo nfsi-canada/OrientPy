@@ -4,15 +4,17 @@
 
 import stdb
 import pickle
-import os.path
 import numpy as np
-from orientpy import utils, plotting
-from pathlib import Path
+import copy
+import os
 
+from obspy import UTCDateTime
+
+from orientpy import utils, plotting
+
+from pathlib import Path
 from argparse import ArgumentParser
 from os.path import exists as exist
-from obspy import UTCDateTime
-from numpy import nan
 
 
 def get_dl_average_arguments(argv=None):
@@ -32,7 +34,7 @@ def get_dl_average_arguments(argv=None):
         help="Station Database to process from.",
         type=str)
     parser.add_argument(
-        "-v", "--verbose",
+        "-V", "--verbose",
         default=2,
         type=int,
         dest="verb",
@@ -109,6 +111,18 @@ def get_dl_average_arguments(argv=None):
 
 def main(args=None):
 
+    print()
+    print("#####################################################")
+    print("#      _ _                                          #")
+    print("#   __| | |    __ ___   _____ _ __ __ _  __ _  ___  #")
+    print("#  / _` | |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #")
+    print("# | (_| | |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #")
+    print("#  \__,_|_|___\__,_| \_/ \___|_|  \__,_|\__, |\___| #")
+    print("#        |_____|                        |___/       #")
+    print("#                                                   #")
+    print("#####################################################")
+    print()
+
     if args is None:
         # Run Input Parser
         args = get_dl_average_arguments()
@@ -127,13 +141,12 @@ def main(args=None):
             raise(Exception("Directory does not exist: ", indir, ", aborting"))
 
         # Temporary print locations
-        tlocs = sta.location
+        tlocs = copy.copy(sta.location)
         if len(tlocs) == 0:
             tlocs = ['']
         for il in range(0, len(tlocs)):
             if len(tlocs[il]) == 0:
-                tlocs[il] = "--"
-        sta.location = tlocs
+                tlocs.append("--")
 
         # Update Display
         if args.verb > 1:

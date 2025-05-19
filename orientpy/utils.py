@@ -24,7 +24,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from geographiclib.geodesic import *
-from obspy.clients.fdsn import Client
 from obspy.signal.rotate import rotate_rt_ne, rotate_ne_rt
 from obspy import UTCDateTime, read, Stream, Trace
 from scipy.stats import circmean as cmean
@@ -36,11 +35,11 @@ import math
 
 
 def catclean(cat):
-    """ 
-    This function looks for repeat events in a catalogue of 
+    """
+    This function looks for repeat events in a catalogue of
     earthquakes.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -50,9 +49,9 @@ def catclean(cat):
 
     Returns
     -------
-    reps : :class:`~numpy.ndarray`
-        Array of ID of repeat events in catalogue.
-    
+    rep : :class:`~numpy.ndarray`
+        1D array of repeat events in the catalogue.
+
     """
 
     def close(x1, x2, val):
@@ -110,7 +109,7 @@ def resiz(x1, x2, x3):
     """
     Function to resize arrays to all identical shapes
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -133,7 +132,7 @@ def getf(freq, A):
     """
     Function to extract frequency in array.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -141,12 +140,12 @@ def getf(freq, A):
     freq : float
         Frequency of interest (Hz)
     A : :class:`~numpy.ndarray`
-        Array of frequencies obtained from global dispersion maps
+        Array of frequencies (Hz) obtained from global dispersion maps
 
     Returns
     -------
     v : float
-        Nearest frequency in A
+        Nearest frequency in A (Hz)
 
     """
 
@@ -158,9 +157,9 @@ def getf(freq, A):
 
 def nv(x, v):
     """
-    Function to find nearest value in an np.array.
+    Function to find nearest value in an array.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -182,9 +181,9 @@ def nv(x, v):
 
 def rms(x):
     """
-    Function to calculate root-mean-square of array
+    Function to calculate root-mean-square of array.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -204,9 +203,9 @@ def rms(x):
 
 def mad(x):
     """
-    Function to calculate Median Absolute Deviation
+    Function to calculate Median Absolute Deviation.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -228,7 +227,7 @@ def outlier(x, lim=5.0):
     """
     Function to remove outliers based on MAD threshold
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -239,7 +238,8 @@ def outlier(x, lim=5.0):
     Returns
     -------
     x : :class:`~numpy.ndarray`
-        Shortened array where MAD is lower than `lim`
+        Shortened array where robust standard units are 
+        lower than `lim`
 
     """
 
@@ -248,9 +248,9 @@ def outlier(x, lim=5.0):
 
 def boot(x, bootnum):
     """
-    Function to calculate directional mean value from bootstrap
+    Function to calculate directional mean value from bootstrap.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -277,9 +277,9 @@ def boot(x, bootnum):
 
 def centerat(phi, m=0.):
     """
-    Function to re-center azimuth array to the mean value
+    Function to re-center azimuth array to the mean value.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -318,7 +318,7 @@ def pathvels(lat1, lon1, lat2, lon2,
     """
     Overall function to get path-averaged group velocity.
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -337,10 +337,10 @@ def pathvels(lat1, lon1, lat2, lon2,
     Returns
     -------
     R1 : :class:`~numpy.ndarray`
-        R1 velocity path 
+        R1 velocity path
 
     R2 : :class:`~numpy.ndarray`
-        R2 velocity path 
+        R2 velocity path
 
     """
 
@@ -438,7 +438,7 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
     """
     DORAN-LASKE calculation for one freq, one orbit of surface wave
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -457,10 +457,10 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
     Returns
     -------
     R1 : :class:`~numpy.ndarray`
-        R1 velocity path 
+        R1 velocity path
 
     R2 : :class:`~numpy.ndarray`
-        R2 velocity path 
+        R2 velocity path
 
     """
 
@@ -484,7 +484,7 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
     try:
         tr1 = st.select(component='1')[0].data
         tr2 = st.select(component='2')[0].data
-    except:
+    except Exception:
         tr1 = st.select(component='N')[0].data
         tr2 = st.select(component='E')[0].data
     trZ = st.select(component=zcomp.upper())[0].data
@@ -508,7 +508,7 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
         cc2[k] = cstar[0, 1]
 
     # Get argument of maximum of cc2
-    ia = cc2.argmax()  
+    ia = cc2.argmax()
 
     # Get azimuth and correct for angles above 360
     phi = (baz - float(ia)*dphi) + 180.
@@ -517,71 +517,15 @@ def DLcalc(stream, Rf, LPF, HPF, epi, baz, A, winlen=10., ptype=0, zcomp='Z'):
     if phi >= 360.:
         phi -= 360.
 
-    # # plotting:
-    # # ptype=0, no plot
-    # # ptype=1, Rayleigh plot
-    # # ptype=2, Love plot
-    # if ptype == 1:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt + r1 + X[q]
-    #     ZZ = dat.epoch2num(T)
-    #     Z = dat.num2date(ZZ)
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.plot(Z, vdat, label='Vertical')
-    #     plt.hold("on")
-    #     plt.plot(Z, n, label='BH1')
-    #     plt.legend(loc=4)
-    #     plt.xlabel('Time')
-    #     plt.ylabel('Counts')
-    #     plt.title('D-L Results (%i mHz)' % (Rf))
-    # elif ptype == 2:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt+r1+X[q]
-    #     ZZ = dat.epoch2num(T)
-    #     Z = dat.num2date(ZZ)
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.subplot(121)
-    #     plt.plot(Z, vdat, label='Vertical')
-    #     plt.hold("on")
-    #     plt.plot(Z, n, label='BH1')
-    #     plt.legend(loc=4)
-    #     plt.xlabel('Time')
-    #     plt.suptitle('D-L Results (%i mHz)' % (Rf))
-    #     plt.subplot(122)
-    #     plt.plot(Z, e, label='BH2')
-    #     plt.xlabel('Time')
-    #     plt.ylabel('Counts')
-    #     plt.legend(loc=4)
-    # elif ptype == 3:
-    #     import matplotlib.dates as dat
-    #     X = P[0].times()
-    #     T = np.zeros((len(X)))
-    #     for q in np.arange((len(T))):
-    #         T[q] = dt+r1+X[q]
-    #     n, e = rot2d(rdat, rdat2, ANG/4.)
-    #     plt.figure()
-    #     plt.plot(T, vdat, label='Vertical')
-
-    # if ptype > 0:
-    #     plt.show()
-
     return phi, cc1[ia]
 
 
 # Final calculation
 def estimate(phi, ind):
     """
-    Function to estimate final azimuth from 
+    Function to estimate final azimuth from
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -589,7 +533,7 @@ def estimate(phi, ind):
     phi : :class:`~numpy.ndarray`
         Input array of estimated azimuth
     ind : list
-        List of index values that satisfy some QC condition 
+        List of index values that satisfy some QC condition
         for phi
 
     Returns
@@ -615,5 +559,3 @@ def estimate(phi, ind):
     m = boot(phipp, 5000)
 
     return cmean(m, high=360), 2*1.96*cstd(m, high=360)
-
-

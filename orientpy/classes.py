@@ -24,7 +24,6 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from obspy.clients.fdsn import Client
 from obspy import Trace, Stream, UTCDateTime
 from scipy.stats import circmean as cmean
 from scipy.stats import circstd as cstd
@@ -100,7 +99,7 @@ class Meta(object):
 class Orient(object):
     """
     A Orient object contains Class attributes that associate
-    station information with a single event (i.e., earthquake) 
+    station information with a single event (i.e., earthquake)
     metadata.
 
     Note
@@ -110,12 +109,16 @@ class Orient(object):
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)
     data : :class:`~obspy.core.Stream`
-        Stream object containing the three-component seismograms 
+        Stream object containing the three-component seismograms
+    zcomp : str
+        Vertical Component Identifier. Should be a single character.
+        This is different then 'Z' only for fully unknown component
+        orientation (i.e., components are 1, 2, 3)
 
     """
 
@@ -132,7 +135,7 @@ class Orient(object):
     def add_event(self, event, gacmin=None, gacmax=None,
                   depmax=1000., returned=False):
         """
-        Adds event metadata to Orient object. 
+        Adds event metadata to Orient object.
 
         Parameters
         ----------
@@ -161,7 +164,7 @@ class Orient(object):
         from obspy.core.event.event import Event
 
         if not isinstance(event, Event):
-            raise(Exception("Event has incorrect type"))
+            raise Exception("Event has incorrect type")
 
         # Store as object attributes
         self.meta = Meta(sta=self.sta, event=event,
@@ -171,8 +174,8 @@ class Orient(object):
         if returned:
             return self.meta.accept
 
-    def download_data(self, client, stdata=[], ndval=np.nan, new_sr=None,
-                      t1=None, t2=None, returned=False, verbose=False):
+    def download_data(self, client, new_sr=None, t1=None, t2=None,
+                      returned=False, verbose=False):
         """
         Downloads seismograms based on a time interval.
 
@@ -180,23 +183,19 @@ class Orient(object):
         ----------
         client : :class:`~obspy.client.fdsn.Client`
             Client object
-        stdata : List
-            Station list
-        ndval : float
-            Fill in value for missing data
         new_sr : float
             New sampling rate (Hz)
         t1 : float
-            Start time to consider (sec). Can be float or 
+            Start time to consider (sec). Can be float or
             :class:`~obspy.core.UTCDateTime` object.
         t2 : float
-            End time to consider (sec). Can be float or 
+            End time to consider (sec). Can be float or
             :class:`~obspy.core.UTCDateTime` object.
         returned : bool
             Whether or not to return the ``accept`` attribute
-        zcomp : str
-            Character representing the vertical component. Should be
-            a single character :str:. Default Z
+        verbose : bool
+            Whether or not to print messages to screen during run-time
+
 
         Returns
         -------
@@ -211,7 +210,7 @@ class Orient(object):
         """
 
         if self.meta is None:
-            raise(Exception("Requires event data as attribute - aborting"))
+            raise Exception("Requires event data as attribute - aborting")
 
         if not self.meta.accept:
             return
@@ -220,8 +219,12 @@ class Orient(object):
             # Define start time for request
             tstart = self.meta.time + t1
             tend = self.meta.time + t2
-        except:
-            raise(Exception(" Start and end request times have not been set"))
+
+        except Exception:
+            raise Exception(" Start and end request times have not been set")
+            self.meta.accept = False
+            if returned:
+                return self.meta.accept
 
         # Get waveforms
         if verbose:
@@ -232,13 +235,13 @@ class Orient(object):
         # Download data
         err, stream = io.download_data(
             client=client, sta=self.sta, start=tstart, end=tend,
-            stdata=stdata, ndval=ndval, new_sr=new_sr, zcomp=self.zcomp,
-            verbose=verbose)
+            zcomp=self.zcomp, verbose=verbose)
 
         if err or stream is None:
             print("*  Waveform Request Failed...Skipping")
             self.meta.accept = False
-            return self.meta.accept
+            if returned:
+                return self.meta.accept
 
         # Store as attributes with traces in dictionary
         try:
@@ -248,20 +251,20 @@ class Orient(object):
             self.data = Stream(traces=[trZ, trN, trE])
 
             # Filter Traces and resample
-            if new_sr:
+            if new_sr is not None:
                 self.data.filter('lowpass', freq=0.5*new_sr,
                                  corners=2, zerophase=True)
                 self.data.resample(new_sr)
 
         # If there is no ZNE, perhaps there is Z12?
-        except:
+        except Exception as e:
             tr1 = stream.select(component='1')[0]
             tr2 = stream.select(component='2')[0]
             trZ = stream.select(component=self.zcomp)[0]
             self.data = Stream(traces=[trZ, tr1, tr2])
 
             # Filter Traces and resample
-            if new_sr:
+            if new_sr is not None:
                 self.data.filter('lowpass', freq=0.5*new_sr,
                                  corners=2, zerophase=True)
                 self.data.resample(new_sr)
@@ -269,9 +272,6 @@ class Orient(object):
             if not np.sum([np.std(tr.data) for tr in self.data]) > 0.:
                 print('Error: Data are all zeros')
                 self.meta.accept = False
-
-            # except:
-            #     self.meta.accept = False
 
         if returned:
             return self.meta.accept
@@ -288,16 +288,16 @@ class Orient(object):
 
 class BNG(Orient):
     """
-    A BNG object inherits from :class:`~orientpy.classes.Orient`. 
+    A BNG object inherits from :class:`~orientpy.classes.Orient`.
     This object contains a method to estimate station orientation
-    based on P-wave particle motion.     
+    based on P-wave particle motion.
 
     Notes
     -----
 
-    This class is designed after the method developed by Braunmiller, 
+    This class is designed after the method developed by Braunmiller,
     Nabelek and Ghods (2020) [1]_. It is slightly more flexible, however, 
-    in that it can handle either regional or teleseismic P-wave data 
+    in that it can handle either regional or teleseismic P-wave data
     and provides additional quality-control mesures (e.g., SNR, 1-R/Z).
 
     References
@@ -309,12 +309,12 @@ class BNG(Orient):
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)
     data : :class:`~obspy.core.Stream`
-        Stream object containing the three-component seismograms 
+        Stream object containing the three-component seismograms
 
     """
 
@@ -322,19 +322,18 @@ class BNG(Orient):
 
         Orient.__init__(self, sta, zcomp=zcomp)
 
-
     def calc(self, dphi, dts, tt, bp=None, showplot=False):
         """
         Method to estimate azimuth of component `?H1` (or `?HN`). This
         method minimizes the energy (RMS) of the transverse component of
-        P-wave data within some bandwidth. 
+        P-wave data within some bandwidth.
 
         Parameters
         ----------
         dphi : float
             Azimuth increment for search (deg)
         dts : float
-            Length of time window on either side of 
+            Length of time window on either side of
             predicted P-wave arrival time (sec)
         tt : list
             List of two floats containing the time picks relative
@@ -354,13 +353,13 @@ class BNG(Orient):
             Cross-correlation coefficient between
             vertical and radial component
         meta.snr : float
-            Signal-to-noise ratio of P-wave measured on the 
+            Signal-to-noise ratio of P-wave measured on the
             vertical seismogram
         meta.TR : float
             Measure of the transverse to radial ratio. In reality
             this is 1 - T/R
         meta.RZ : float
-            Measure of the radial to vertical ratio. In reality 
+            Measure of the radial to vertical ratio. In reality
             this is 1 - R/Z
 
         """
@@ -368,39 +367,44 @@ class BNG(Orient):
         # Work on a copy of the waveform data
         stream = self.data.copy()
 
-        #-- Identify components in Stream
+        # Identify components in Stream
         comps_id = [tr.stats.channel[2] for tr in stream]
         test_sets = {
-                        'ZNE':{'Z', 'N', 'E'}, 
-                        'Z12':{'Z', '1', '2'},
-                        'Z23':{'Z', '2', '3'},
-                        '312':{'3', '1', '2'},
-                        '123':{'1', '2', '3'}  # probably should raise an exception if this is the case,
-                    }                          # as no correction is estimated for the vertical component
+                        'ZNE': {'Z', 'N', 'E'},
+                        'Z12': {'Z', '1', '2'},
+                        'Z23': {'Z', '2', '3'},
+                        '312': {'3', '1', '2'},
+                        '123': {'1', '2', '3'}
+                    }
+        # Probably should raise an exception if set is '123',
+        # as no correction is estimated for the vertical component
+
         for test_key in test_sets:
             test_set = test_sets[test_key]
-            if test_set.issubset(set(comps_id)):  # use sets to avoid sorting complications
-                comps_codes = list(test_key) 
+
+            if test_set.issubset(set(comps_id)):
+
+                # Use sets to avoid sorting complications
+                comps_codes = list(test_key)
                 break
-  
-        #-- temporarily modify channel codes, assuming that N/E are not oriented properly
-        channel_code_prefix = stream[0].stats.channel[:2]  # prefix should be the same for all
-                                                           # 3 components by now
+
+        # Temporarily modify channel codes,
+        # assuming that N/E are not oriented properly
+        channel_code_prefix = stream[0].stats.channel[:2]
+
         stream.select(component=comps_codes[1])[0].stats.channel = channel_code_prefix + '1'
         stream.select(component=comps_codes[2])[0].stats.channel = channel_code_prefix + '2'
         stream.select(component=comps_codes[0])[0].stats.channel = channel_code_prefix + self.zcomp.upper()
 
-
         # Filter if specified
-        if bp:
+        if bp is not None:
             stream.filter('bandpass', freqmin=bp[0],
                           freqmax=bp[1], zerophase=True)
 
         # Get data and noise based on symmetric waveform wrt arrival
         start = stream[0].stats.starttime
         stnoise = stream.copy().trim(start, start+dts+tt[0])
-        stdata = stream.copy().trim(start+dts+tt[0],
-                                    start+dts+tt[1])
+        stdata = stream.copy().trim(start+dts+tt[0], start+dts+tt[1])
 
         # Define signal and noise
         tr1 = stdata.select(component='1')[0].copy()
@@ -444,7 +448,7 @@ class BNG(Orient):
         if phi >= 360.:
             phi -= 360.
 
-        # Store the best-fit azimuth 
+        # Store the best-fit azimuth
         self.meta.phi = phi
 
         # If a plot is requested, rotate Z12 to ZNE and then ZRT
@@ -491,9 +495,9 @@ class BNG(Orient):
 
 class DL(Orient):
     """
-    A DL object inherits from :class:`~orientpy.classes.Orient`. This object 
-    contains a method to estimate station orientation based on Rayleigh-wave 
-    particle motion. 
+    A DL object inherits from :class:`~orientpy.classes.Orient`. This object
+    contains a method to estimate station orientation based on Rayleigh-wave
+    particle motion.
 
     Notes
     -----
@@ -510,14 +514,14 @@ class DL(Orient):
     References
     ----------
 
-    .. [2] Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer instrument 
-       orientations via automated Rayleigh-wave arrival-angle measurements, 
-       *Bulletin of the Seismological Society of America*, 107(2), 
-       doi:10.1785/0120160165.
+    .. [2] Doran, A. K., and G. Laske (2017). Ocean-bottom seismometer
+       instrument orientations via automated Rayleigh-wave arrival-angle
+       measurements, *Bulletin of the Seismological Society of America*,
+       107(2), doi:10.1785/0120160165.
 
     Parameters
     ----------
-    sta : object
+    sta : :class:`~stdb.StDbElement`
         Object containing station information - from :mod:`~stdb` database.
     meta : :class:`~orientpy.classes.Meta`
         Object of metadata information for single event (initially set to None)
@@ -530,16 +534,15 @@ class DL(Orient):
 
         Orient.__init__(self, sta, zcomp=zcomp)
 
-
     def calc(self, showplot=False):
         """
         Method to estimate azimuth of component `?H1` (or `?HN`). This
-        method maximizes the normalized covariance between the Hilbert-transformed
-        vertical component and the radial component of Rayleigh-wave data measured
-        at multiple periods. This is done for the shortest (R1) and longest (R2)
-        orbits of fundamental-mode Rayleigh waves. Window selection is done based on
-        average group velocity extracted from a global model of Rayleigh-wave 
-        dispersion. 
+        method maximizes the normalized covariance between the
+        Hilbert-transformed vertical component and the radial component of
+        Rayleigh-wave data measured at multiple periods. This is done for the
+        shortest (R1) and longest (R2) orbits of fundamental-mode Rayleigh
+        waves. Window selection is done based on average group velocity
+        extracted from a global model of Rayleigh-wave dispersion.
 
         Parameters
         ----------
@@ -552,14 +555,14 @@ class DL(Orient):
             List of azimuth of H1 (or HN) component (deg) based on R1, measured
             at different periods
         meta.R1cc : float
-            Cross-correlation coefficient between hilbert-transformed vertical and 
-            radial component for R1, measured at different periods
+            Cross-correlation coefficient between hilbert-transformed vertical
+            and radial component for R1, measured at different periods
         meta.R2phi : list
             List of azimuth of H1 (or HN) component (deg) based on R2, measured
             at different periods
         meta.R2cc : float
-            Cross-correlation coefficient between hilbert-transformed vertical and 
-            radial component for R2, measured at different periods
+            Cross-correlation coefficient between hilbert-transformed vertical
+            and radial component for R2, measured at different periods
 
         """
 
@@ -575,19 +578,19 @@ class DL(Orient):
 
         # Load group velocity maps
         map10 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.10.txt'))
+                                             'dispmaps/R.gv.10.txt'))
         map15 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.15.txt'))
+                                             'dispmaps/R.gv.15.txt'))
         map20 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.20.txt'))
+                                             'dispmaps/R.gv.20.txt'))
         map25 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.25.txt'))
+                                             'dispmaps/R.gv.25.txt'))
         map30 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.30.txt'))
+                                             'dispmaps/R.gv.30.txt'))
         map35 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.35.txt'))
+                                             'dispmaps/R.gv.35.txt'))
         map40 = np.loadtxt(resource_filename('orientpy',
-                                'dispmaps/R.gv.40.txt'))
+                                             'dispmaps/R.gv.40.txt'))
 
         # Get parameters for R2
         Rearth = 6371.25
@@ -599,11 +602,11 @@ class DL(Orient):
 
         # Check data length, data quality
         if utils.checklen(self.data, 4.*60.*60.):
-            raise(Exception("      Error: Length Incorrect"))
-            
+            raise Exception("      Error: Length Incorrect")
+
         # Get path-averaged group velocities
         Ray1, Ray2 = utils.pathvels(
-            self.sta.latitude, self.sta.longitude, 
+            self.sta.latitude, self.sta.longitude,
             self.meta.lat, self.meta.lon,
             map10, map15, map20, map25, map30, map35, map40)
 

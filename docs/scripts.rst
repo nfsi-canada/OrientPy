@@ -13,7 +13,7 @@ All of them use a station database provided as a :class:`~stdb.StDb` dictionary.
 BNG
 +++
 
-``bng_calc_auto``
+``bng_calc``
 *****************
 
 Description
@@ -28,19 +28,24 @@ Each usable station-event seismograms are used to calculate an estimate of stati
 orientation. For each estimate, a number of quality-control parameters are calculated
 to help in the aggregation to produce a final estimate of station orientation.
 
-This automated method will use the same processing parameters for all waveforms 
-(e.g., time window around predicted P-wave arrival, bandpass frequencies, etc.).
-Because the properties of individual seismograms can vary widely for different
-earthquakes, a different script can be used in manual (interactive) mode to improve
-the quality of the estimates (see below).
-
 Usage
 -----
 
 .. code-block::
 
-    $ bng_calc_auto -h
-    usage: bng_calc_auto [arguments] <Station Database>
+    $ bng_calc -h
+
+    ###########################################
+    #  _                              _       #
+    # | |__  _ __   __ _     ___ __ _| | ___  #
+    # | '_ \| '_ \ / _` |   / __/ _` | |/ __| #
+    # | |_) | | | | (_| |  | (_| (_| | | (__  #
+    # |_.__/|_| |_|\__, |___\___\__,_|_|\___| #
+    #              |___/_____|                #
+    #                                         #
+    ###########################################
+
+    usage: bng_calc [arguments] <Station Database>
 
     Program to compute the orientation of the components of a station based on
     those in a station database.
@@ -50,7 +55,7 @@ Usage
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v VERB, --verbose VERB
+      -V VERB, --verbose VERB
                             Enable Level of verbose output during processing. (0)
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
@@ -58,24 +63,22 @@ Usage
       --save-location SAVELOC
                             Specify Save destination. Default is BNG_RESULTS (and
                             sub-directories based on Station Name).
-      --no-save-progress    Do not save progress during processing.
 
     Local Data Settings:
       Settings associated with defining and using a local data base of pre-
       downloaded day-long SAC files.
 
       --local-data LOCALDATA
-                            Specify a comma separated list of paths containing
-                            day-long sac files of data already downloaded. If data
-                            exists for a seismogram is already present on disk, it
-                            is selected preferentially over downloading the data
-                            using the Client interface
-      --no-data-zero        Specify to force missing data to be set as zero,
-                            rather than default behaviour. [Default sets to nan]
-      --no-local-net        Specify to prevent using the Network code in the
-                            search for local data (sometimes for CN stations the
-                            dictionary name for a station may disagree with that
-                            in the filename. [Default Network used]
+                            Specify absolute path to a SeisComP Data Structure (SDS) archive
+                            containing day-long SAC or MSEED files(e.g., --local-
+                            data=/Home/username/Data/SDS). See
+                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html
+                            for details on the SDS format. If this option is used, it takes
+                            precedence over the --server-wf settings.
+      --dtype DTYPE         Specify the data archive file type, either SAC or MSEED. Note the
+                            default behaviour is to search for SAC files. Local archive files
+                            must have extensions of '.SAC' or '.MSEED'. These are case dependent,
+                            so specify the correct case here.
 
     Server Settings:
       Settings associated with which datacenter to log into.
@@ -126,7 +129,8 @@ Usage
                             Coordinate system specification of instrument. (0)
                             Attempt Autodetect between 1 and 2; (1) HZ, HN, HE;
                             (2) Left Handed: HZ, H2 90 CW H1; (3) Right Handed:
-                            HZ, H2 90 CCW H1. [Default 2]
+                            HZ, H2 90 CCW H1. **Note**: this option
+                            is not yet implemented. [Default 2]
 
     Timing Parameters:
       Parameters associated with event timing and window length.
@@ -187,6 +191,17 @@ Usage
 .. code-block::
 
     $ bng_average -h
+
+    ###############################################################
+    #  _                                                          #
+    # | |__  _ __   __ _     __ ___   _____ _ __ __ _  __ _  ___  #
+    # | '_ \| '_ \ / _` |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #
+    # | |_) | | | | (_| |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #
+    # |_.__/|_| |_|\__, |___\__,_| \_/ \___|_|  \__,_|\__, |\___| #
+    #              |___/_____|                        |___/       #
+    #                                                             #
+    ###############################################################
+
     usage: bng_average [arguments] <Station Database>
 
     Program to average the orientations of the seismometer in a station database.
@@ -196,7 +211,7 @@ Usage
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v VERB, --verbose VERB
+      -V VERB, --verbose VERB
                             Enable Level of verbose output during processing. (0)
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
@@ -253,6 +268,17 @@ Usage
 .. code-block::
 
     $ dl_calc -h
+
+    #################################
+    #      _ _              _       #
+    #   __| | |    ___ __ _| | ___  #
+    #  / _` | |   / __/ _` | |/ __| #
+    # | (_| | |  | (_| (_| | | (__  #
+    #  \__,_|_|___\___\__,_|_|\___| #
+    #        |_____|                #
+    #                               #
+    #################################
+
     usage: dl_calc [arguments] <Station Database>
 
     Program to compute the orientation of the components of a station based on
@@ -263,7 +289,7 @@ Usage
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v VERB, --verbose VERB
+      -V VERB, --verbose VERB
                             Enable Level of verbose output during processing. (0)
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
@@ -271,24 +297,22 @@ Usage
       --save-location SAVELOC
                             Specify Save destination. [Default is DL_RESULTS (and
                             sub-directories based on Station Name)]
-      --no-save-progress    Do not save progress during processing.
 
     Local Data Settings:
       Settings associated with defining and using a local data base of pre-
       downloaded day-long SAC files.
 
       --local-data LOCALDATA
-                            Specify a comma separated list of paths containing
-                            day-long sac files of data already downloaded. If data
-                            exists for a seismogram is already present on disk, it
-                            is selected preferentially over downloading the data
-                            using the Client interface
-      --no-data-zero        Specify to force missing data to be set as zero,
-                            rather than default behaviour. [Default sets to nan]
-      --no-local-net        Specify to prevent using the Network code in the
-                            search for local data (sometimes for CN stations the
-                            dictionary name for a station may disagree with that
-                            in the filename. [Default Network used]
+                            Specify absolute path to a SeisComP Data Structure (SDS) archive
+                            containing day-long SAC or MSEED files(e.g., --local-
+                            data=/Home/username/Data/SDS). See
+                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html
+                            for details on the SDS format. If this option is used, it takes
+                            precedence over the --server-wf settings.
+      --dtype DTYPE         Specify the data archive file type, either SAC or MSEED. Note the
+                            default behaviour is to search for SAC files. Local archive files
+                            must have extensions of '.SAC' or '.MSEED'. These are case dependent,
+                            so specify the correct case here.
 
     Server Settings:
       Settings associated with which datacenter to log into.
@@ -334,12 +358,12 @@ Usage
                             process.
       --zcomp ZCOMP         Specify the Vertical Component Channel Identifier.
                             [Default Z].
-      -c NAMECONV, --coord-system NAMECONV
+      --coord-system NAMECONV
                             Coordinate system specification of instrument. (0)
                             Attempt Autodetect between 1 and 2; (1) HZ, HN, HE;
                             (2) Left Handed: HZ, H2 90 CW H1; (3) Right Handed:
                             HZ, H2 90 CCW H1 (4) Left Handed Numeric: H3, H2 90 CW
-                            H1 [Default 2]
+                            H1. **Note**: This option is not implemented yet. [Default 2]
 
     Timing Parameters:
       Parameters associated with event timing and window length.
@@ -382,6 +406,17 @@ Usage
 .. code-block::
 
     $ dl_average -h
+
+    #####################################################
+    #      _ _                                          #
+    #   __| | |    __ ___   _____ _ __ __ _  __ _  ___  #
+    #  / _` | |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #
+    # | (_| | |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #
+    #  \__,_|_|___\__,_| \_/ \___|_|  \__,_|\__, |\___| #
+    #        |_____|                        |___/       #
+    #                                                   #
+    #####################################################
+
     usage: dl_average [arguments] <Station Database>
 
     Program to average the orientations of the seismometer in a station database.
@@ -391,7 +426,7 @@ Usage
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v VERB, --verbose VERB
+      -V VERB, --verbose VERB
                             Enable Level of verbose output during processing. (0)
                             No Output; (1) Output Event Analysis counter; (2)
                             Counter and results. Default 2
@@ -406,7 +441,9 @@ Usage
                             [Default 'png']
       --cc CC               Cross-correlation threshold for final estimate.
                             [Default 0.8]
-
+      --min-mag MINMAG      Specify default minimum magnitude to include in average. [Default
+                            5.5]
+                        
     Station Selection Parameters:
       Parameters to select a specific station.
 

@@ -32,16 +32,19 @@ def test_dl_calc_args():
             dbfile, '--end', 'abcd'])
     # user auth.
     args = dl.get_dl_calc_arguments([
-        dbfile, '-U', 'bla:bla'])
+        dbfile, '--user-auth', 'bla:bla'])
     with pytest.raises(SystemExit):
         dl.get_dl_calc_arguments([
-            dbfile, '-U', 'abcd'])
+            dbfile, '--user-auth', 'abcd'])
     # local data
     args = dl.get_dl_calc_arguments([
         dbfile, '--local-data', 'bla'])
-    # ndval
+    # dtype
     args = dl.get_dl_calc_arguments([
-        dbfile, '--no-data-zero'])
+        dbfile, '--dtype', 'SAC'])
+    with pytest.raises(SystemExit):
+        dl.get_dl_calc_arguments([
+            dbfile, '--dtype', 'bla'])
 
     return args0
 
@@ -59,8 +62,9 @@ def test_dl_average_args():
 
     return args0
 
+
 def test_bng_calc_args():
-    from orientpy.scripts import bng_calc_auto as bng
+    from orientpy.scripts import bng_calc as bng
     # no stdb
     with pytest.raises(SystemExit):
         bng.get_bng_calc_arguments([])
@@ -83,16 +87,19 @@ def test_bng_calc_args():
             dbfile, '--end', 'abcd'])
     # user auth.
     args = bng.get_bng_calc_arguments([
-        dbfile, '-U', 'bla:bla'])
+        dbfile, '--user-auth', 'bla:bla'])
     with pytest.raises(SystemExit):
         bng.get_bng_calc_arguments([
-            dbfile, '-U', 'abcd'])
+            dbfile, '--user-auth', 'abcd'])
     # local data
     args = bng.get_bng_calc_arguments([
         dbfile, '--local-data', 'bla'])
-    # ndval
+    # dtype
     args = bng.get_bng_calc_arguments([
-        dbfile, '--no-data-zero'])
+        dbfile, '--dtype', 'SAC'])
+    with pytest.raises(SystemExit):
+        bng.get_bng_calc_arguments([
+            dbfile, '--dtype', 'bla'])
     # bp
     args = bng.get_bng_calc_arguments([
         dbfile, '--bp', '1.,2.'])

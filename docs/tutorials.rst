@@ -10,7 +10,7 @@ LOBS3 and send the prompt to a logfile
 
 .. code-block::
 
-   $ query_fdsn_stdb -N YH -C ?H? -S LOBS3 YH_list > logfile
+   $ query_fdsn_stdb -N YH -S LOBS3 YH_list > logfile
 
 To check the station info for M08A, use the program ``ls_stdb``:
 
@@ -58,11 +58,21 @@ The parameters to edit in this case are:
 
 .. code-block::
 
-    $ bng_calc_auto --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
+    $ bng_calc --times=-5.,15. --window=60. --bp=0.04,0.1 --min-mag=6. --min-dist=30. YH_list.pkl
 
 An example log printed on the terminal will look like:
 
 .. code-block::
+
+    ###########################################
+    #  _                              _       #
+    # | |__  _ __   __ _     ___ __ _| | ___  #
+    # | '_ \| '_ \ / _` |   / __/ _` | |/ __| #
+    # | |_) | | | | (_| |  | (_| (_| | | (__  #
+    # |_.__/|_| |_|\__, |___\___\__,_|_|\___| #
+    #              |___/_____|                #
+    #                                         #
+    ###########################################
 
     |==============================================|
     |                      LOBS3                   |
@@ -159,6 +169,16 @@ An example log printed on the terminal will look like:
 
 .. code-block::
 
+    ###############################################################
+    #  _                                                          #
+    # | |__  _ __   __ _     __ ___   _____ _ __ __ _  __ _  ___  #
+    # | '_ \| '_ \ / _` |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #
+    # | |_) | | | | (_| |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #
+    # |_.__/|_| |_|\__, |___\__,_| \_/ \___|_|  \__,_|\__, |\___| #
+    #              |___/_____|                        |___/       #
+    #                                                             #
+    ###############################################################
+
     |==============================================|
     |                      LOBS3                   |
     |==============================================|
@@ -206,6 +226,16 @@ minimum earthquake magnitude, which we set to 6.
 An example log printed on the terminal will look like:
 
 .. code-block::
+
+    #################################
+    #      _ _              _       #
+    #   __| | |    ___ __ _| | ___  #
+    #  / _` | |   / __/ _` | |/ __| #
+    # | (_| | |  | (_| (_| | | (__  #
+    #  \__,_|_|___\___\__,_|_|\___| #
+    #        |_____|                #
+    #                               #
+    #################################
 
        Establishing Catalogue Client...
           Done
@@ -290,6 +320,16 @@ the default CC threshold of 0.8 and produce a final plot with the estimate.
 An example log printed on the terminal will look like:
 
 .. code-block::
+
+    #####################################################
+    #      _ _                                          #
+    #   __| | |    __ ___   _____ _ __ __ _  __ _  ___  #
+    #  / _` | |   / _` \ \ / / _ \ '__/ _` |/ _` |/ _ \ #
+    # | (_| | |  | (_| |\ V /  __/ | | (_| | (_| |  __/ #
+    #  \__,_|_|___\__,_| \_/ \___|_|  \__,_|\__, |\___| #
+    #        |_____|                        |___/       #
+    #                                                   #
+    #####################################################
 
     |==============================================|
     |                      LOBS3                   |

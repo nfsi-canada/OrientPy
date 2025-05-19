@@ -11,8 +11,9 @@ dbfile = resource_filename('orientpy',
 curdir = Path.cwd()
 bngdir = curdir / 'BNG_RESULTS'
 
+
 def test_01_bng_calc():
-    from orientpy.scripts import bng_calc_auto as bng
+    from orientpy.scripts import bng_calc as bng
     args0 = bng.get_bng_calc_arguments(
         [dbfile, '--times', ' -5.,15.',
         '--start', '2014-10-01', '--end', '2014-12-01',
@@ -22,11 +23,14 @@ def test_01_bng_calc():
     print(args0)
     print('*'*20)
     bng.main(args=args0)
+
+
 def test_02_bng_average():
     from orientpy.scripts import bng_average as bng
     args0 = bng.get_bng_average_arguments(
         [dbfile, '--keys', 'LOBS3', '--plot', '--save'])
     bng.main(args=args0)
+
 
 def test_03_rmtree():
     shutil.rmtree(bngdir)
