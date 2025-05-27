@@ -18,12 +18,6 @@ from os.path import exists as exist
 
 
 def get_dl_average_arguments(argv=None):
-    """
-    Get Options from :class:`~optparse.OptionParser` objects.
-
-    This function is used for data processing on-the-fly (requires web connection)
-
-    """
 
     parser = ArgumentParser(
         usage="%(prog)s [arguments] <Station Database>",
@@ -79,7 +73,8 @@ def get_dl_average_arguments(argv=None):
         default=5.5,
         type=float,
         dest="minmag",
-        help="Specify default minimum magnitude to include in average. [Default 5.5]")
+        help="Specify default minimum magnitude to include in average. " +
+        "[Default 5.5]")
 
     # Station Selection Parameters
     stparm = parser.add_argument_group(
@@ -96,15 +91,12 @@ def get_dl_average_arguments(argv=None):
     args = parser.parse_args(argv)
 
     # Check inputs
-    #if len(args) != 1: parser.error("Need station database file")
-    # indb=args[0]
     if not exist(args.indb):
         parser.error("Input file " + args.indb + " does not exist")
 
     # create station key list
     if len(args.stkeys) > 0:
         args.stkeys = args.stkeys.split(',')
-
 
     return args
 
@@ -138,7 +130,7 @@ def main(args=None):
         # Input directory
         indir = Path(args.loadloc) / stkey.upper()
         if not indir.exists():
-            raise(Exception("Directory does not exist: ", indir, ", aborting"))
+            raise Exception("Directory does not exist: ", indir, ", aborting")
 
         # Temporary print locations
         tlocs = copy.copy(sta.location)
@@ -164,8 +156,10 @@ def main(args=None):
             print("| Plot Results: ", args.showplot)
             print("|")
 
-
-        R1phi = []; R1cc = []; R2phi = []; R2cc = []
+        R1phi = []
+        R1cc = []
+        R2phi = []
+        R2cc = []
         for folder in os.listdir(indir):
 
             # Load meta data
@@ -191,43 +185,52 @@ def main(args=None):
         val, err = utils.estimate(phi, ind)
 
         # output results to termianl
-        print("|    D-L mean, error, # robust: " +
+        print("|    DL mean, error, # robust: " +
               "{0:.2f}, {1:.2f}, {2}".format(val, err, np.sum(ind)))
-        print("|    D-L CC level: {0:.2f}".format(args.cc))
-        print()
+        print("|    DL CC level: {0:.2f}".format(args.cc))
 
-
-        if np.sum(np.isnan(np.array([val, err])))>0:
+        if np.sum(np.isnan(np.array([val, err]))) > 0:
             continue
-
-
-        #-- Save Text results
-        outfilename = indir / "{0:2s}.{1:s}.dat".format(sta.network,sta.station)
-        if not outfilename.is_file():
-            fid=open(outfilename,'w')
-            fid.writelines("<date>, <time>, <network>, <station>, <chn>, <min-mag>, <# data>, <CC cutoff>, <# robust>, <phi mean>, <phi error>\n")
-        else:
-            fid=open(outfilename,'a')
-
-        nn=UTCDateTime()
-        fid.writelines("{0:s}, {1:s}, {2:2s}, {3:5s}, {4:2s}, {5:3.1f}, {6:5.0f}, {7:4.2f}, {8:5.0f}, {9:6.2f}, {10:5.2f}\n".format(nn.strftime("%Y-%m-%d"),nn.strftime("%H:%M:%S"),
-                        sta.network, sta.station, sta.channel[0:2], args.minmag, len(ind), args.cc, sum(ind), val, err ))
-        fid.close()
 
         if args.showplot or args.saveplot:
 
-            plot = plotting.plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind,
+            plot = plotting.plot_dl_results(
+                stkey, R1phi, R1cc, R2phi, R2cc, ind,
                 val, err, phi, cc, args.cc)
 
             # save figure
             if args.saveplot:
-                figname = indir / ('results_mm{2:.1f}_cc{0:.2f}.{1:s}'.format(args.cc,args.fmt,args.minmag))
+                figname = indir / ('results_mm{2:.1f}_cc{0:.2f}.{1:s}'.format(
+                    args.cc, args.fmt, args.minmag))
                 try:
                     plot.savefig(figname, fmt=args.fmt)
-                except:
+                except Exception:
                     plot.savefig(figname, format=args.fmt)
             if args.showplot:
                 plot.show()
+            else:
+                plot.close()
+
+        # Save to file
+        fileresults = indir / ("{0:2s}.{1:s}.DL_results.csv".format(
+            sta.network, sta.station))
+        print()
+        print("* DL results are saved in:")
+        print("*   "+str(fileresults))
+        print()
+        if not fileresults.is_file():
+            fid = open(fileresults, 'w')
+            fid.writelines("date,time,network,station,chn,min-mag,#data," +
+                           "CC cutoff,# robust,phi mean,phi error\n")
+        else:
+            fid = open(fileresults, 'a')
+        nn = UTCDateTime()
+        fid.writelines(
+            "{0:s}, {1:s}, {2:2s}, {3:5s}, {4:2s}, {5:3.1f}, {6:5.0f}, {7:4.2f}, {8:5.0f}, {9:6.2f}, {10:5.2f}\n".format(
+                nn.strftime("%Y-%m-%d"), nn.strftime("%H:%M:%S"),
+                sta.network, sta.station, sta.channel[0:2], args.minmag,
+                len(ind), args.cc, sum(ind), val, err))
+        fid.close()
 
 
 if __name__ == "__main__":
