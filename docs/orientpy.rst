@@ -88,7 +88,7 @@ Installing from source
 Using local data
 ================
 
-The various scripts packaged with ``OrientPy`` use FDSN web services through and ``ObsPy`` `Client` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a `Client` that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data`` and ``--dtype`` for more details.
+The various scripts packaged with ``OrientPy`` use FDSN web services through an ``ObsPy`` `Client` to load waveform data. For waveform data locally stored on your hard drive, the scripts can use a `Client` that reads a `SeisComP Data Structure <https://docs.obspy.org/packages/autogen/obspy.clients.filesystem.sds.html>`_ archive containing SAC or miniSEED waveform data. Check out the scripts ``bng_calc`` and ``dl_calc`` below and the argument ``--local-data`` and ``--dtype`` for more details.
 
 Station Metadata
 ----------------
