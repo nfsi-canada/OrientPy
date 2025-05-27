@@ -77,7 +77,7 @@ def checklen(st, hrs):
     """
     Function to check if there is enough downloaded data to run program
 
-    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0, 
+    ADRIAN. K. DORAN and GABI LASKE, DLOPy VERSION 1.0,
     RELEASED APRIL 2017
 
     Parameters
@@ -238,7 +238,7 @@ def outlier(x, lim=5.0):
     Returns
     -------
     x : :class:`~numpy.ndarray`
-        Shortened array where robust standard units are 
+        Shortened array where robust standard units are
         lower than `lim`
 
     """
