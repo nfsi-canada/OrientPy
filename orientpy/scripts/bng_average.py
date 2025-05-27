@@ -17,12 +17,6 @@ from os.path import exists as exist
 
 
 def get_bng_average_arguments(argv=None):
-    """
-    Get Options from :class:`~optparse.OptionParser` objects.
-
-    This function is used for data processing on-the-fly (requires web connection)
-
-    """
 
     parser = ArgumentParser(
         usage="%(prog)s [arguments] <Station Database>",
@@ -82,44 +76,41 @@ def get_bng_average_arguments(argv=None):
     # Select QC criteria
     qcparm = parser.add_argument_group(
         title="Quality control parameters",
-        description="Quality control parameters on the estimates for "+
+        description="Quality control parameters on the estimates for " +
         "calculating the average.")
     qcparm.add_argument(
         "--cc",
         dest="cc",
         type=float,
         default=0.5,
-        help="Threshold for cross-correlation betwen vertical and radial "+
+        help="Threshold for cross-correlation betwen vertical and radial " +
         "components. [Default 0.5]")
     qcparm.add_argument(
         "--snr",
         dest="snr",
         type=float,
         default=5.,
-        help="Threshold for signal-to-noise ratio on vertical component, "+
+        help="Threshold for signal-to-noise ratio on vertical component, " +
         "in dB. [Default 5.]")
     qcparm.add_argument(
         "--TR",
         dest="TR",
         type=float,
         default=0.5,
-        help="Threshold for transverse to radial ratio (1 - T/R). "+
+        help="Threshold for transverse to radial ratio (1 - T/R). " +
         "[Default 0.5]")
     qcparm.add_argument(
         "--RZ",
         dest="RZ",
         type=float,
         default=-1.,
-        help="Threshold for radial to vertical ratio (1 - R/Z). "+
+        help="Threshold for radial to vertical ratio (1 - R/Z). " +
         "[Default -1.]")
-
 
     # Parse Arguments
     args = parser.parse_args(argv)
 
     # Check inputs
-    #if len(args) != 1: parser.error("Need station database file")
-    # indb=args[0]
     if not exist(args.indb):
         parser.error("Input file " + args.indb + " does not exist")
 
@@ -144,7 +135,6 @@ def main(args=None):
     print("###############################################################")
     print()
 
-
     if args is None:
         # Run Input Parser
         args = get_bng_average_arguments()
@@ -160,7 +150,7 @@ def main(args=None):
         # Input directory
         indir = Path(args.loadloc) / stkey.upper()
         if not indir.exists():
-            raise(Exception("Directory does not exist: ", indir, ", aborting"))
+            raise Exception("Directory does not exist: ", indir, ", aborting")
 
         # Temporary print locations
         tlocs = copy.copy(sta.location)
@@ -186,8 +176,14 @@ def main(args=None):
             print("| Plot Results: ", args.showplot)
             print("|")
 
+        phi = []
+        cc = []
+        snr = []
+        TR = []
+        RZ = []
+        baz = []
+        mag = []
 
-        phi = []; cc = []; snr = []; TR = []; RZ = []; baz = []; mag = []
         for folder in os.listdir(indir):
 
             # Load meta data
@@ -225,9 +221,8 @@ def main(args=None):
         val, err = utils.estimate(phi, ind)
 
         # output results to termianl
-        print("|    B-N-G mean, error, data included: " +
+        print("|    BNG mean, error, data included: " +
               "{0:.1f}, {1:.1f}, {2}".format(val, err, np.sum(ind)))
-        print()
 
         if np.sum(np.isnan(np.array([val, err]))) > 0:
             continue
@@ -238,8 +233,10 @@ def main(args=None):
                 stkey, snr, cc, TR, RZ, ind)
 
             # save figure
+            postfix = "_cc{0:.2f}_snr{1:.1f}_TR{2:.1f}_RZ{3:.1f}.".format(
+                args.cc, args.snr, args.TR, args.RZ)
             if args.saveplot:
-                figname = indir / ('conditions.' + args.fmt)
+                figname = indir / ("conditions" + postfix + args.fmt)
                 try:
                     plot.savefig(figname, fmt=args.fmt)
                 except Exception:
@@ -247,21 +244,46 @@ def main(args=None):
 
             if args.showplot:
                 plot.show()
+            else:
+                plot.close()
 
             plot = plotting.plot_bng_results(
                 stkey, phi, snr, cc, TR, RZ, baz, mag, ind, val, err)
 
             # save figure
+            postfix = "_cc{0:.2f}_snr{1:.1f}_TR{2:.1f}_RZ{3:.1f}.".format(
+                args.cc, args.snr, args.TR, args.RZ)
             if args.saveplot:
-                figname = indir / ('results.' + args.fmt)
+                figname = indir / ("results" + postfix + args.fmt)
                 try:
                     plot.savefig(figname, fmt=args.fmt)
                 except Exception:
                     plot.savefig(figname, format=args.fmt)
             if args.showplot:
                 plot.show()
+            else:
+                plot.show()
 
-
+        # Save to file
+        fileresults = indir / ("{0:2s}.{1:s}.BNG_results.csv".format(
+            sta.network, sta.station))
+        print()
+        print("* BNG results are saved in:")
+        print("*   "+str(fileresults))
+        print()
+        if not fileresults.is_file():
+            fid = open(fileresults, 'w')
+            fid.writelines("date,time,network,station,chn,CC, SNR," +
+                           "TR,RZ,phi mean,phi error,#data\n")
+        else:
+            fid = open(fileresults, 'a')
+        nn = UTCDateTime()
+        fid.writelines(
+            "{0:s}, {1:s}, {2:2s}, {3:5s}, {4:2s}, {5:3.1f}, {6:3.1f}, {7:3.1f}, {8:3.1f}, {9:6.2f}, {10:5.2f}, {11:.0f}\n".format(
+                nn.strftime("%Y-%m-%d"), nn.strftime("%H:%M:%S"),
+                sta.network, sta.station, sta.channel[0:2], args.cc,
+                args.snr, args.TR, args.RZ, val, val, err, np.sum(ind)))
+        fid.close()
 
 
 if __name__ == "__main__":
