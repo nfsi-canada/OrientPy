@@ -275,8 +275,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
         ax.tick_params(axis='both', labelsize=10)
         ax.set_ylim([val-180., val+180.])
 
-    fig.axes[0].set_ylabel('H1 Orientation \n Angle ($^\circ$)', fontsize=10)
-    fig.axes[3].set_ylabel('H1 Orientation \n Angle ($^\circ$)', fontsize=10)
+    fig.axes[0].set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
+    fig.axes[3].set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
 
     text = "Station "+stkey + \
         r": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
@@ -377,7 +377,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
                 marker='x', label='R1')
     ax1.scatter(R2cc, utils.centerat(R2phi, m=val),
                 marker='+', label='R2')
-    ax1.set_ylabel('H1 Orientation \n Angle ($^\circ$)', fontsize=10)
+    ax1.set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
     ax1.set_xlabel('Cross-correlation value', fontsize=10)
     ax1.set_ylim([val-180., val+180.])
     ax1.set_xlim([0, 1])
