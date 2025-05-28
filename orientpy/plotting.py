@@ -27,8 +27,9 @@ from orientpy import utils
 import numpy as np
 from scipy.stats import gaussian_kde
 
+
 def density_estimate(values, x, alpha):
-    """ 
+    """
     This function estimates the KDE, mode of distribution, and
     95% confidence intervals for the ``values`` variables
     evaluated at locations ``x``
@@ -52,7 +53,7 @@ def density_estimate(values, x, alpha):
         Lower bound of confidence interval
     CI_max : float
         Upper bound of confidence interval
-    
+
     """
     alpha /= 2.
     kernel = gaussian_kde(values)
@@ -63,14 +64,14 @@ def density_estimate(values, x, alpha):
     CI_min = x[cdf < alpha][-1]
     try:
         CI_max = x[cdf > (1.-alpha)][0]
-    except:
+    except Exception:
         CI_max = np.max(x)
 
     return kde, x_max, CI_min, CI_max
 
 
 def plot_bng_waveforms(bng, stream, dts, tt):
-    """ 
+    """
     This function plots the original and rotated waveforms
     following the BNG processing for quality control.
 
@@ -118,7 +119,7 @@ def plot_bng_waveforms(bng, stream, dts, tt):
 
 
 def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
-    """ 
+    """
     This function plots all parameters and the threshold condition for
     contributing to the final estimate.
 
@@ -129,7 +130,7 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
     snr : :class:`~numpy.ndarray`
         Array of signal-to-noise ratio values for each earthquake
     cc : :class:`~numpy.ndarray`
-        Array of cross-correlation values between rotated radial 
+        Array of cross-correlation values between rotated radial
         and vertical components
     TR : :class:`~numpy.ndarray`
         Array of transverse-to-radial component ratios for rotated
@@ -138,7 +139,7 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
         Array of radial-to-vertical component ratios for rotated
         components
     ind : :class:`~numpy.ndarray`
-        Array of boolean (index) values where conditions on previous 
+        Array of boolean (index) values where conditions on previous
         parameters are examined
 
     Returns
@@ -203,8 +204,8 @@ def plot_bng_conditions(stkey, snr, cc, TR, RZ, ind):
 
 
 def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
-                 ind, val, err, alpha=0.05):
-    """ 
+                     ind, val, err, alpha=0.05):
+    """
     This function plots the results of all BNG estimates with final
     estimates from those that pass the conditions.
 
@@ -260,7 +261,7 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
     data = [snr, cc, TR, RZ, baz, mag]
     xlab = ['SNR', 'CC', '1 - T/R', '1 - R/Z',
-            'Back-azimuth ($^\circ$)', 'Magnitude']
+            r'Back-azimuth ($^\circ$)', 'Magnitude']
 
     for item in list(zip(gs0, data, xlab)):
 
@@ -274,11 +275,11 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
         ax.tick_params(axis='both', labelsize=10)
         ax.set_ylim([val-180., val+180.])
 
-    fig.axes[0].set_ylabel('BH1 Orientation \n Angle ($^\circ$)', fontsize=10)
-    fig.axes[3].set_ylabel('BH1 Orientation \n Angle ($^\circ$)', fontsize=10)
+    fig.axes[0].set_ylabel(r'H1 Orientation \n Angle ($^\circ$)', fontsize=10)
+    fig.axes[3].set_ylabel(r'H1 Orientation \n Angle ($^\circ$)', fontsize=10)
 
     text = "Station "+stkey + \
-        ": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
+        r": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
     plt.suptitle(text, fontsize=12)
 
     # KDE plot
@@ -311,8 +312,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
 
 
 def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
-                 err, phi, cc, cc0, alpha=0.05):
-    """ 
+                    err, phi, cc, cc0, alpha=0.05):
+    """
     This function plots the results of all DL estimates with final
     estimates from those that pass the conditions.
 
@@ -321,16 +322,16 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     stkey : str
         Station key
     R1phi : :class:`~numpy.ndarray`
-        Array of azimuth values from each estimate for direct 
+        Array of azimuth values from each estimate for direct
         Rayleigh-wave pass
     R1cc : :class:`~numpy.ndarray`
-        Array of cross-correlation values between rotated radial 
+        Array of cross-correlation values between rotated radial
         and vertical components for direct Rayleigh-wave pass
     R2phi : :class:`~numpy.ndarray`
-        Array of azimuth values from each estimate for complementary 
+        Array of azimuth values from each estimate for complementary
         Rayleigh-wave pass
     R2cc : :class:`~numpy.ndarray`
-        Array of cross-correlation values between rotated radial 
+        Array of cross-correlation values between rotated radial
         and vertical components for complementary Rayleigh-wave pass
     ind : :class:`~numpy.ndarray`
         Array of boolean values where conditions on previous parameters
@@ -340,10 +341,10 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     err : float
         Final error estimate on azimuth
     phi : :class:`~numpy.ndarray`
-        All azimuth estimates from both R1 (direct pass) and R2 
+        All azimuth estimates from both R1 (direct pass) and R2
         (complementary pass)
     cc : :class:`~numpy.ndarray`
-        All cross-correlation estimates from both R1 (direct pass) and 
+        All cross-correlation estimates from both R1 (direct pass) and
         R2 (complementary pass)
     cc0 : float
         Threshold cross-correlation value
@@ -376,7 +377,7 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
                 marker='x', label='R1')
     ax1.scatter(R2cc, utils.centerat(R2phi, m=val),
                 marker='+', label='R2')
-    ax1.set_ylabel('BH1 Orientation \n Angle ($^\circ$)', fontsize=10)
+    ax1.set_ylabel(r'H1 Orientation \n Angle ($^\circ$)', fontsize=10)
     ax1.set_xlabel('Cross-correlation value', fontsize=10)
     ax1.set_ylim([val-180., val+180.])
     ax1.set_xlim([0, 1])
@@ -405,9 +406,9 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
 
     # Add text as title
     text = "Station "+stkey + \
-        ": $\phi$ = {0:.1f} $\pm$ {1:.1f}  (n={2:.0f}, cc={3:.2f})".format(val, err, sum(ind),cc0)
+        r": $\phi$ = {0:.1f} $\pm$ {1:.1f}  (n={2:.0f}, cc={3:.2f})".format(
+            val, err, sum(ind), cc0)
     plt.suptitle(text, fontsize=12)
     gs.tight_layout(f, rect=[0, 0, 1, 0.95])
 
     return plt
-    
