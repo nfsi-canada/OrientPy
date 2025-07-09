@@ -275,8 +275,8 @@ def plot_bng_results(stkey, phi, snr, cc, TR, RZ, baz, mag,
         ax.tick_params(axis='both', labelsize=10)
         ax.set_ylim([val-180., val+180.])
 
-    fig.axes[0].set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
-    fig.axes[3].set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
+    fig.axes[0].set_ylabel(r'H1 Azimuth ($^\circ$)', fontsize=10)
+    fig.axes[3].set_ylabel(r'H1 Azimuth ($^\circ$)', fontsize=10)
 
     text = "Station "+stkey + \
         r": $\phi$ = {0:.1f} $\pm$ {1:.1f}".format(val, err)
@@ -374,10 +374,15 @@ def plot_dl_results(stkey, R1phi, R1cc, R2phi, R2cc, ind, val,
     ax1.axvline(cc0, c='k', ls='--', lw=1.)
     ax1.axhline(val, lw=1, ls='-', c='k')
     ax1.scatter(R1cc, utils.centerat(R1phi, m=val),
-                marker='x', label='R1')
+                marker='x', label='R1, CC<'+str(cc0), c='C0')
     ax1.scatter(R2cc, utils.centerat(R2phi, m=val),
-                marker='+', label='R2')
-    ax1.set_ylabel('H1 Azimuth \n Angle ($^\circ$)', fontsize=10)
+                marker='+', label='R2, CC<'+str(cc0), c='C0')
+    ax1.scatter(R1cc[R1cc > cc0], utils.centerat(R1phi[R1cc > cc0], m=val),
+                marker='x', label='R1, CC>'+str(cc0), c='C1')
+    ax1.scatter(R2cc[R2cc > cc0], utils.centerat(R2phi[R2cc > cc0], m=val),
+                marker='+', label='R2, CC>'+str(cc0), c='C1')
+
+    ax1.set_ylabel(r'H1 Azimuth ($^\circ$)', fontsize=10)
     ax1.set_xlabel('Cross-correlation value', fontsize=10)
     ax1.set_ylim([val-180., val+180.])
     ax1.set_xlim([0, 1])
