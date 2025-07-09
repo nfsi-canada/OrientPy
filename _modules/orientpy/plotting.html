@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>orientpy.plotting &mdash; Home 0.2.1 documentation</title>
+  <title>orientpy.plotting &mdash; Home 0.2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=37f418d5"></script>
+      <script src="../../_static/documentation_options.js?v=000c92bf"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -121,10 +121,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
 
+
 <div class="viewcode-block" id="density_estimate">
 <a class="viewcode-back" href="../../api.html#orientpy.plotting.density_estimate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">density_estimate</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function estimates the KDE, mode of distribution, and</span>
 <span class="sd">    95% confidence intervals for the ``values`` variables</span>
 <span class="sd">    evaluated at locations ``x``</span>
@@ -148,7 +149,7 @@
 <span class="sd">        Lower bound of confidence interval</span>
 <span class="sd">    CI_max : float</span>
 <span class="sd">        Upper bound of confidence interval</span>
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">alpha</span> <span class="o">/=</span> <span class="mf">2.</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
@@ -159,7 +160,7 @@
     <span class="n">CI_min</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">cdf</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">CI_max</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">cdf</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">alpha</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="n">CI_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">kde</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">CI_min</span><span class="p">,</span> <span class="n">CI_max</span></div>
@@ -169,7 +170,7 @@
 <div class="viewcode-block" id="plot_bng_waveforms">
 <a class="viewcode-back" href="../../api.html#orientpy.plotting.plot_bng_waveforms">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_bng_waveforms</span><span class="p">(</span><span class="n">bng</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">dts</span><span class="p">,</span> <span class="n">tt</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function plots the original and rotated waveforms</span>
 <span class="sd">    following the BNG processing for quality control.</span>
 
@@ -220,7 +221,7 @@
 <div class="viewcode-block" id="plot_bng_conditions">
 <a class="viewcode-back" href="../../api.html#orientpy.plotting.plot_bng_conditions">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_bng_conditions</span><span class="p">(</span><span class="n">stkey</span><span class="p">,</span> <span class="n">snr</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">TR</span><span class="p">,</span> <span class="n">RZ</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function plots all parameters and the threshold condition for</span>
 <span class="sd">    contributing to the final estimate.</span>
 
@@ -231,7 +232,7 @@
 <span class="sd">    snr : :class:`~numpy.ndarray`</span>
 <span class="sd">        Array of signal-to-noise ratio values for each earthquake</span>
 <span class="sd">    cc : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of cross-correlation values between rotated radial </span>
+<span class="sd">        Array of cross-correlation values between rotated radial</span>
 <span class="sd">        and vertical components</span>
 <span class="sd">    TR : :class:`~numpy.ndarray`</span>
 <span class="sd">        Array of transverse-to-radial component ratios for rotated</span>
@@ -240,7 +241,7 @@
 <span class="sd">        Array of radial-to-vertical component ratios for rotated</span>
 <span class="sd">        components</span>
 <span class="sd">    ind : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of boolean (index) values where conditions on previous </span>
+<span class="sd">        Array of boolean (index) values where conditions on previous</span>
 <span class="sd">        parameters are examined</span>
 
 <span class="sd">    Returns</span>
@@ -308,8 +309,8 @@
 <div class="viewcode-block" id="plot_bng_results">
 <a class="viewcode-back" href="../../api.html#orientpy.plotting.plot_bng_results">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_bng_results</span><span class="p">(</span><span class="n">stkey</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">snr</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">TR</span><span class="p">,</span> <span class="n">RZ</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span>
-                 <span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+                     <span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function plots the results of all BNG estimates with final</span>
 <span class="sd">    estimates from those that pass the conditions.</span>
 
@@ -365,7 +366,7 @@
 
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">snr</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">TR</span><span class="p">,</span> <span class="n">RZ</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">mag</span><span class="p">]</span>
     <span class="n">xlab</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SNR&#39;</span><span class="p">,</span> <span class="s1">&#39;CC&#39;</span><span class="p">,</span> <span class="s1">&#39;1 - T/R&#39;</span><span class="p">,</span> <span class="s1">&#39;1 - R/Z&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;Back-azimuth ($^\circ$)&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnitude&#39;</span><span class="p">]</span>
+            <span class="sa">r</span><span class="s1">&#39;Back-azimuth ($^\circ$)&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnitude&#39;</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gs0</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">xlab</span><span class="p">)):</span>
 
@@ -379,11 +380,11 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">val</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="n">val</span><span class="o">+</span><span class="mf">180.</span><span class="p">])</span>
 
-    <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;BH1 Orientation </span><span class="se">\n</span><span class="s1"> Angle ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;BH1 Orientation </span><span class="se">\n</span><span class="s1"> Angle ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;H1 Azimuth ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;H1 Azimuth ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
     <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Station &quot;</span><span class="o">+</span><span class="n">stkey</span> <span class="o">+</span> \
-        <span class="s2">&quot;: $\phi$ = </span><span class="si">{0:.1f}</span><span class="s2"> $\pm$ </span><span class="si">{1:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="sa">r</span><span class="s2">&quot;: $\phi$ = </span><span class="si">{0:.1f}</span><span class="s2"> $\pm$ </span><span class="si">{1:.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
     <span class="c1"># KDE plot</span>
@@ -419,8 +420,8 @@
 <div class="viewcode-block" id="plot_dl_results">
 <a class="viewcode-back" href="../../api.html#orientpy.plotting.plot_dl_results">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_dl_results</span><span class="p">(</span><span class="n">stkey</span><span class="p">,</span> <span class="n">R1phi</span><span class="p">,</span> <span class="n">R1cc</span><span class="p">,</span> <span class="n">R2phi</span><span class="p">,</span> <span class="n">R2cc</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span>
-                 <span class="n">err</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">cc0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+                    <span class="n">err</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">cc0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function plots the results of all DL estimates with final</span>
 <span class="sd">    estimates from those that pass the conditions.</span>
 
@@ -429,16 +430,16 @@
 <span class="sd">    stkey : str</span>
 <span class="sd">        Station key</span>
 <span class="sd">    R1phi : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of azimuth values from each estimate for direct </span>
+<span class="sd">        Array of azimuth values from each estimate for direct</span>
 <span class="sd">        Rayleigh-wave pass</span>
 <span class="sd">    R1cc : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of cross-correlation values between rotated radial </span>
+<span class="sd">        Array of cross-correlation values between rotated radial</span>
 <span class="sd">        and vertical components for direct Rayleigh-wave pass</span>
 <span class="sd">    R2phi : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of azimuth values from each estimate for complementary </span>
+<span class="sd">        Array of azimuth values from each estimate for complementary</span>
 <span class="sd">        Rayleigh-wave pass</span>
 <span class="sd">    R2cc : :class:`~numpy.ndarray`</span>
-<span class="sd">        Array of cross-correlation values between rotated radial </span>
+<span class="sd">        Array of cross-correlation values between rotated radial</span>
 <span class="sd">        and vertical components for complementary Rayleigh-wave pass</span>
 <span class="sd">    ind : :class:`~numpy.ndarray`</span>
 <span class="sd">        Array of boolean values where conditions on previous parameters</span>
@@ -448,10 +449,10 @@
 <span class="sd">    err : float</span>
 <span class="sd">        Final error estimate on azimuth</span>
 <span class="sd">    phi : :class:`~numpy.ndarray`</span>
-<span class="sd">        All azimuth estimates from both R1 (direct pass) and R2 </span>
+<span class="sd">        All azimuth estimates from both R1 (direct pass) and R2</span>
 <span class="sd">        (complementary pass)</span>
 <span class="sd">    cc : :class:`~numpy.ndarray`</span>
-<span class="sd">        All cross-correlation estimates from both R1 (direct pass) and </span>
+<span class="sd">        All cross-correlation estimates from both R1 (direct pass) and</span>
 <span class="sd">        R2 (complementary pass)</span>
 <span class="sd">    cc0 : float</span>
 <span class="sd">        Threshold cross-correlation value</span>
@@ -481,10 +482,15 @@
     <span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cc0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R1cc</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">centerat</span><span class="p">(</span><span class="n">R1phi</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">val</span><span class="p">),</span>
-                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R1&#39;</span><span class="p">)</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R1, CC&lt;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc0</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R2cc</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">centerat</span><span class="p">(</span><span class="n">R2phi</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">val</span><span class="p">),</span>
-                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R2&#39;</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;BH1 Orientation </span><span class="se">\n</span><span class="s1"> Angle ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R2, CC&lt;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc0</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R1cc</span><span class="p">[</span><span class="n">R1cc</span> <span class="o">&gt;</span> <span class="n">cc0</span><span class="p">],</span> <span class="n">utils</span><span class="o">.</span><span class="n">centerat</span><span class="p">(</span><span class="n">R1phi</span><span class="p">[</span><span class="n">R1cc</span> <span class="o">&gt;</span> <span class="n">cc0</span><span class="p">],</span> <span class="n">m</span><span class="o">=</span><span class="n">val</span><span class="p">),</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R1, CC&gt;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc0</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R2cc</span><span class="p">[</span><span class="n">R2cc</span> <span class="o">&gt;</span> <span class="n">cc0</span><span class="p">],</span> <span class="n">utils</span><span class="o">.</span><span class="n">centerat</span><span class="p">(</span><span class="n">R2phi</span><span class="p">[</span><span class="n">R2cc</span> <span class="o">&gt;</span> <span class="n">cc0</span><span class="p">],</span> <span class="n">m</span><span class="o">=</span><span class="n">val</span><span class="p">),</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;R2, CC&gt;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc0</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;H1 Azimuth ($^\circ$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cross-correlation value&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">val</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span> <span class="n">val</span><span class="o">+</span><span class="mf">180.</span><span class="p">])</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -513,13 +519,13 @@
 
     <span class="c1"># Add text as title</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Station &quot;</span><span class="o">+</span><span class="n">stkey</span> <span class="o">+</span> \
-        <span class="s2">&quot;: $\phi$ = </span><span class="si">{0:.1f}</span><span class="s2"> $\pm$ </span><span class="si">{1:.1f}</span><span class="s2">  (n=</span><span class="si">{2:.0f}</span><span class="s2">, cc=</span><span class="si">{3:.2f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span><span class="n">cc0</span><span class="p">)</span>
+        <span class="sa">r</span><span class="s2">&quot;: $\phi$ = </span><span class="si">{0:.1f}</span><span class="s2"> $\pm$ </span><span class="si">{1:.1f}</span><span class="s2">  (n=</span><span class="si">{2:.0f}</span><span class="s2">, cc=</span><span class="si">{3:.2f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">val</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span> <span class="n">cc0</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="n">gs</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">plt</span></div>
 
-    
 </pre></div>
 
            </div>
