@@ -102,8 +102,7 @@ You can now use a stationXML (`.xml`) file instead of the StDb `.pkl` format.
 Alternatively, you can convert the stationXML file to an StDb `.pkl` file
 by running the command ``gen_stdb station.xml`` (these options are only
 available on StDb version 0.2.7. If you don't have a station `XML` file but you have
-a dataless SEED file, you can convert it first to XML using `this
-tools <https://seiscode.iris.washington.edu/projects/stationxml-converter>`_.
+a dataless SEED file, you can convert it first to XML using `this tools <https://seiscode.iris.washington.edu/projects/stationxml-converter>`_.
 
 Waveform Data
 -------------
