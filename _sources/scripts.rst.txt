@@ -51,7 +51,8 @@ Usage
     those in a station database.
 
     positional arguments:
-      indb                  Station Database to process from.
+      indb                  Station Database to process from. Available formats are: 
+                            StDb (.pkl or .csv) or stationXML (.xml)
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -65,23 +66,20 @@ Usage
                             sub-directories based on Station Name).
 
     Local Data Settings:
-      Settings associated with defining and using a local data base of pre-
-      downloaded day-long SAC files.
+      Settings associated with a SeisComP database for locally archived data.
 
-      --local-data LOCALDATA
-                            Specify absolute path to a SeisComP Data Structure (SDS) archive
-                            containing day-long SAC or MSEED files(e.g., --local-
-                            data=/Home/username/Data/SDS). See
-                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html
-                            for details on the SDS format. If this option is used, it takes
-                            precedence over the --server-wf settings.
+      --SDS-path LOCALDATA  Specify absolute path to a SeisComP Data Structure (SDS) archive containing
+                            day-long SAC or MSEED files(e.g., --SDS-path=/Home/username/Data/SDS). See
+                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html for
+                            details on the SDS format. If this option is used, it takes precedence over
+                            the --server-wf settings.
       --dtype DTYPE         Specify the data archive file type, either SAC or MSEED. Note the
                             default behaviour is to search for SAC files. Local archive files
                             must have extensions of '.SAC' or '.MSEED'. These are case dependent,
                             so specify the correct case here.
 
     Server Settings:
-      Settings associated with which datacenter to log into.
+      Settings associated with FDSN datacenters for archived data.
 
       --server-cat SERVER_CAT
                             Catalogue server setting: Key string for recognized
@@ -207,7 +205,8 @@ Usage
     Program to average the orientations of the seismometer in a station database.
 
     positional arguments:
-      indb                  Station Database to process from.
+      indb                  Station Database to process from. Available formats are: 
+                            StDb (.pkl or .csv) or stationXML (.xml)
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -285,7 +284,8 @@ Usage
     those in a station database.
 
     positional arguments:
-      indb                  Station Database to process from.
+      indb                  Station Database to process from. Available formats are: 
+                            StDb (.pkl or .csv) or stationXML (.xml)
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -299,23 +299,20 @@ Usage
                             sub-directories based on Station Name)]
 
     Local Data Settings:
-      Settings associated with defining and using a local data base of pre-
-      downloaded day-long SAC files.
+      Settings associated with a SeisComP database for locally archived data.
 
-      --local-data LOCALDATA
-                            Specify absolute path to a SeisComP Data Structure (SDS) archive
-                            containing day-long SAC or MSEED files(e.g., --local-
-                            data=/Home/username/Data/SDS). See
-                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html
-                            for details on the SDS format. If this option is used, it takes
-                            precedence over the --server-wf settings.
+      --SDS-path LOCALDATA  Specify absolute path to a SeisComP Data Structure (SDS) archive containing
+                            day-long SAC or MSEED files(e.g., --SDS-path=/Home/username/Data/SDS). See
+                            https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html for
+                            details on the SDS format. If this option is used, it takes precedence over
+                            the --server-wf settings.
       --dtype DTYPE         Specify the data archive file type, either SAC or MSEED. Note the
                             default behaviour is to search for SAC files. Local archive files
                             must have extensions of '.SAC' or '.MSEED'. These are case dependent,
                             so specify the correct case here.
 
     Server Settings:
-      Settings associated with which datacenter to log into.
+      Settings associated with FDSN datacenters for archived data.
 
       --server-cat SERVER_CAT
                             Catalogue server setting: Key string for recognized
@@ -422,7 +419,8 @@ Usage
     Program to average the orientations of the seismometer in a station database.
 
     positional arguments:
-      indb                  Station Database to process from.
+      indb                  Station Database to process from. Available formats are: 
+                            StDb (.pkl or .csv) or stationXML (.xml)
 
     optional arguments:
       -h, --help            show this help message and exit
