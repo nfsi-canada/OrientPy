@@ -5,7 +5,7 @@ requires = ["meson-python>0.15.0", "numpy >= 1.25.0"]
 
 [project]
 name = "orientpy"
-version = "0.2.1"
+version = "0.2.2"
 description = "Seismic station orientation tools"
 authors = [
     { name = "Pascal Audet", email = "pascal.audet@uottawa.ca" }
@@ -15,7 +15,7 @@ maintainers = [
 ]
 requires-python = ">=3.9"
 readme = "README.md"
-dependencies = ["numpy>=1.25", "obspy"]
+dependencies = ["numpy>=1.25", "obspy", "geographiclib"]
 classifiers = [
     "Development Status :: 5 - Stable",
     "Environment :: Console",

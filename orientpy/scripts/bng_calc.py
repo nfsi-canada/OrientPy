@@ -30,7 +30,8 @@ def get_bng_calc_arguments(argv=None):
                     "of a station based on those in a station database.")
     parser.add_argument(
         "indb",
-        help="Station Database to process from.",
+        help="Station Database to process from. Available formats are: " +
+             "StDb (.pkl or .csv) or stationXML (.xml)",
         type=str)
     parser.add_argument(
         "-V", "--verbose",
@@ -57,18 +58,17 @@ def get_bng_calc_arguments(argv=None):
     # Use local data directory
     Dtparm = parser.add_argument_group(
         title="Local Data Settings",
-        description="Settings associated with defining " +
-                    "and using a local data base of pre-downloaded " +
-                    "day-long SAC or MSEED files.")
+        description="Settings associated with a SeisComP database " +
+                    "for locally archived data.")
     Dtparm.add_argument(
-        "--local-data",
+        "--SDS-path",
         action="store",
         type=str,
         dest="localdata",
         default=None,
         help="Specify absolute path to a SeisComP Data Structure (SDS) " +
              "archive containing day-long SAC or MSEED files" +
-             "(e.g., --local-data=/Home/username/Data/SDS). " +
+             "(e.g., --SDS-path=/Home/username/Data/SDS). " +
              "See https://www.seiscomp.de/seiscomp3/doc/applications/slarchive/SDS.html " +
              "for details on the SDS format. If this option is used, it takes " +
              "precedence over the --server-wf settings.")
@@ -87,7 +87,7 @@ def get_bng_calc_arguments(argv=None):
     # Server Settings
     Svparm = parser.add_argument_group(
         title="Server Settings",
-        description="Settings associated with which datacenter to log into.")
+        description="Settings associated with FDSN datacenters for archived data.")
     Svparm.add_argument(
         "--server-cat",
         action="store",
@@ -283,6 +283,12 @@ def get_bng_calc_arguments(argv=None):
     if not exist(args.indb):
         parser.error("Input file " + args.indb + " does not exist")
 
+    # Check Extension
+    ext = args.indb.split('.')[-1]
+
+    if ext not in ['pkl', 'xml', 'csv']:
+        parser.error("Must supply a station list in .pkl, .csv or .xml format ")
+
     # Create station key list
     if len(args.stkeys) > 0:
         args.stkeys = args.stkeys.split(',')
@@ -321,18 +327,6 @@ def get_bng_calc_arguments(argv=None):
                 args.userauth = tt
         else:
             args.userauth = [None, None]
-
-    # # Parse Local Data directories
-    # if len(args.localdata) > 0:
-    #     args.localdata = args.localdata.split(',')
-    # else:
-    #     args.localdata = []
-
-    # # Check NoData Value
-    # if args.ndval:
-    #     args.ndval = 0.0
-    # else:
-    #     args.ndval = nan
 
     # Check Datatype specification
     if args.dtype.upper() not in ['MSEED', 'SAC']:

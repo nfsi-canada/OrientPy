@@ -1,5 +1,5 @@
 project('orientpy', 'c',
-  version : '0.2.1',
+  version : '0.2.2',
   license: 'MIT',
   meson_version: '>=0.64.0',
 )

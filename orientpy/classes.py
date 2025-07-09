@@ -296,16 +296,17 @@ class BNG(Orient):
     -----
 
     This class is designed after the method developed by Braunmiller,
-    Nabelek and Ghods (2020) [1]_. It is slightly more flexible, however, 
+    Nabelek and Ghods (2020) [1]_. It is slightly more flexible, however,
     in that it can handle either regional or teleseismic P-wave data
     and provides additional quality-control mesures (e.g., SNR, 1-R/Z).
 
     References
     ----------
 
-    .. [1] Braunmiller, J., Nabelek, J., and Ghods, A., 2020, Sensor orientation 
-       of Iranian broadband seismic stations from P-wave particle motion, 
-       *Seismological Research Letters*, doi:10.1785/0220200019.
+    .. [1] Braunmiller, J., Nabelek, J., and Ghods, A., 2020, Sensor
+       orientation of Iranian broadband seismic stations from P-wave
+       particle motion, *Seismological Research Letters*,
+       doi:10.1785/0220200019.
 
     Parameters
     ----------
