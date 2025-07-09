@@ -25,7 +25,8 @@ def get_dl_average_arguments(argv=None):
         "in a station database.")
     parser.add_argument(
         "indb",
-        help="Station Database to process from.",
+        help="Station Database to process from. Available formats are: " +
+        "StDb (.pkl or .csv) or stationXML (.xml)",
         type=str)
     parser.add_argument(
         "-V", "--verbose",
