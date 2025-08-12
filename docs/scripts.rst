@@ -308,7 +308,7 @@ Usage
                             the --server-wf settings.
       --dtype DTYPE         Specify the data archive file type, either SAC or MSEED. Note the
                             default behaviour is to search for SAC files. Local archive files
-                            should not include the extension of '.SAC' or '.MSEED'. These are case dependent,
+                            should not include the extension '.SAC' or '.MSEED'. These are case dependent,
                             so specify the correct case here.
 
     Server Settings:
