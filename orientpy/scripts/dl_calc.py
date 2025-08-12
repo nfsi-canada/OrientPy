@@ -79,7 +79,7 @@ def get_dl_calc_arguments(argv=None):
         default='MSEED',
         help="Specify the data archive file type, either SAC " +
              " or MSEED. Note the default behaviour is to search for " +
-             "SAC files. Local archive files must have extensions of " +
+             "SAC files. Local archive files should not include the extension " +
              "'.SAC'  or '.MSEED'. These are case dependent, so specify " +
              "the correct case here.")
 
