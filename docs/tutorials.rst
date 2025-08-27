@@ -52,8 +52,8 @@ program will automatically use either the P or PP waves to extract the waveforms
 The parameters to edit in this case are:
 ``--times=-5.,15.`` to extract data from -5 to 15 seconds following P-wave arrival;
 ``--window=60.`` to include 60 seconds of data; 
-``--minmax=6.`` to limit the number of events to consider;
-``--mindist=30.`` for the minimum epicentral distance for teleseismic P; and
+``--min-mag=6.`` to limit the number of events to consider;
+``--min-dist=30.`` for the minimum epicentral distance for teleseismic P; and
 ``--bp=0.04,0.1`` to focus on the long-period P waves
 
 .. code-block::

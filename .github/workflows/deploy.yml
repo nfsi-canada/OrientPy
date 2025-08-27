@@ -68,7 +68,7 @@ jobs:
           cd ..
 
       - name: Deploy 🚀
-        if: matrix.python-version == '3.12' 
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.python-version == '3.12' 
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
