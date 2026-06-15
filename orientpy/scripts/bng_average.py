@@ -283,7 +283,7 @@ def main(args=None):
             "{0:s}, {1:s}, {2:2s}, {3:5s}, {4:2s}, {5:3.1f}, {6:3.1f}, {7:3.1f}, {8:3.1f}, {9:6.2f}, {10:5.2f}, {11:.0f}\n".format(
                 nn.strftime("%Y-%m-%d"), nn.strftime("%H:%M:%S"),
                 sta.network, sta.station, sta.channel[0:2], args.cc,
-                args.snr, args.TR, args.RZ, val, val, err, np.sum(ind)))
+                args.snr, args.TR, args.RZ, val, err, np.sum(ind)))
         fid.close()
 
 
